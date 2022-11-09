@@ -1,10 +1,9 @@
-import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { userAPI } from 'store/services/UserService';
+import userSlice from 'store/services/UserSlice';
 
 export const store = configureStore({
-  reducer: {
-    [userAPI.reducerPath]: userAPI.reducer,
-  },
+  reducer: { user: userSlice, [userAPI.reducerPath]: userAPI.reducer },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userAPI.middleware),
 });
 

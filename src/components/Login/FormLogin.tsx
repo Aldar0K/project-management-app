@@ -14,8 +14,7 @@ const FormLogin: FC = () => {
       password: data.password,
     };
     await authorizationUser(userLogData).unwrap();
-    // await navigate('/', { replace: true });
-    console.log('result', result);
+    // navigate('/', { replace: true });
   };
 
   return (

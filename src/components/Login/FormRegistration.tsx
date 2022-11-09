@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const FormRegistration: FC = () => {
   const { register, handleSubmit } = useForm();
-  const [regUser, { data: result }] = userAPI.useRegUserMutation();
+  const [regUser] = userAPI.useRegUserMutation();
   const [authorizationUser, { data: res }] = userAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
 
@@ -15,7 +15,6 @@ const FormRegistration: FC = () => {
       return;
     }
 
-    data.email = data.email.toLowerCase();
     const userRegData: IUserAuthorization = {
       name: data.name,
       login: data.login,
@@ -28,8 +27,7 @@ const FormRegistration: FC = () => {
       password: data.password,
     };
     await authorizationUser(userLogData).unwrap();
-    await navigate('/', { replace: true });
-    console.log('token', res);
+    navigate('/', { replace: true });
   };
 
   return (

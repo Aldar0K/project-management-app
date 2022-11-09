@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { setId, setToken } from './UserSlice';
 
 export interface IUser {
   name?: string;
@@ -20,7 +21,7 @@ export const userAPI = createApi({
   tagTypes: ['User'],
   endpoints: (build) => ({
     getUser: build.query({
-      query: () => '/',
+      query: (id) => `/user/${id}`,
     }),
     regUser: build.mutation<IUser, IUserAuthorization>({
       query: (userInfo) => ({
@@ -28,7 +29,14 @@ export const userAPI = createApi({
         method: 'POST',
         body: userInfo,
       }),
-      invalidatesTags: [{ type: 'User' }],
+      async onQueryStarted({ password }, { dispatch, queryFulfilled }) {
+        try {
+          const resultToken = await queryFulfilled;
+          dispatch(setId(resultToken.data));
+        } catch (e) {
+          console.error('userApi Authorization error', e);
+        }
+      },
     }),
     authorizationUser: build.mutation<IToken, IUserAuthorization>({
       query: (userInfo) => ({
@@ -39,11 +47,18 @@ export const userAPI = createApi({
       async onQueryStarted({ password }, { dispatch, queryFulfilled }) {
         try {
           const resultToken = await queryFulfilled;
-          // dispatch(setEntityAction(resultToken.data));
+          dispatch(setToken(resultToken.data));
         } catch (e) {
-          console.error('userApi createUser error', e);
+          console.error('userApi Authorization error', e);
         }
       },
+    }),
+    deleteUser: build.mutation({
+      query: (id) => ({
+        url: `users/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'User' }],
     }),
   }),
 });
