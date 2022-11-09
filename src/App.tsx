@@ -1,7 +1,8 @@
+import GlobalRoute from 'components/route';
 import React from 'react';
 
 const App = () => {
-  return <h1>Project Management App</h1>;
+  return <GlobalRoute />;
 };
 
 export default App;
