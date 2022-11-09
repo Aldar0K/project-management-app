@@ -1,4 +1,4 @@
-import GlobalRoute from 'components/route';
+import GlobalRoute from 'components/GlobalRoute';
 import React from 'react';
 
 const App = () => {

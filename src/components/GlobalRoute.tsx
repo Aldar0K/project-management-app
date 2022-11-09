@@ -4,7 +4,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import ErrorPage from '../pages/ErrorPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import Header from './header';
+import Header from './Header';
 
 const GlobalRoute = () => {
   return (
