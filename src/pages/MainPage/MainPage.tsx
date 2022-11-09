@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const WelcomePage = () => {
+const MainPage = () => {
   return (
     <div>
       <h1>Welcome</h1>
@@ -10,4 +10,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default MainPage;
