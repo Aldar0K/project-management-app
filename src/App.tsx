@@ -1,7 +1,14 @@
+import GlobalRoute from 'components/GlobalRoute';
+import Header from 'components/Header/Header';
 import React from 'react';
 
 const App = () => {
-  return <h3>Project Management App</h3>;
+  return (
+    <>
+      <Header />
+      <GlobalRoute />
+    </>
+  );
 };
 
 export default App;
