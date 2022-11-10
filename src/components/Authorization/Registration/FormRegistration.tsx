@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
-import { IUserAuthorization, userAPI } from 'store';
+import { userAPI } from 'store';
 import { useNavigate } from 'react-router-dom';
+import { IUserAuthorization } from 'models';
 
 const FormRegistration: FC = () => {
   const { register, handleSubmit } = useForm();

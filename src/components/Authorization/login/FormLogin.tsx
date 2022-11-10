@@ -1,12 +1,11 @@
+import { IUserAuthorization } from 'models';
 import React, { FC } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { IUserAuthorization, userAPI } from 'store';
+import { userAPI } from 'store';
 
 const FormLogin: FC = () => {
   const { register, handleSubmit } = useForm();
   const [authorizationUser, { data: result }] = userAPI.useAuthorizationUserMutation();
-  const navigate = useNavigate();
 
   const submitForm = async (data: FieldValues) => {
     const userLogData: IUserAuthorization = {
@@ -14,7 +13,6 @@ const FormLogin: FC = () => {
       password: data.password,
     };
     await authorizationUser(userLogData).unwrap();
-    // navigate('/', { replace: true });
   };
 
   return (

@@ -1,27 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { Decoder } from './Decoder';
-import { setId, setToken } from './UserSlice';
+import { IUser, IUserAuthorization, IToken } from 'models';
+import { Decoder } from '../../utils/Decoder';
+import { setId, setToken } from '../slices/UserSlice';
 
-export interface IUser {
-  name?: string;
-  login: string;
-  id: string;
-  password?: string;
-}
-export interface IDecoder {
-  userId: string;
-  login: string;
-  iat: number | null;
-}
-export interface IUserAuthorization {
-  name?: string;
-  login: string;
-  password: string;
-}
-
-export interface IToken {
-  token: string;
-}
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://protected-dusk-84289.herokuapp.com' }),
@@ -41,7 +22,7 @@ export const userAPI = createApi({
           const resultID = await queryFulfilled;
           dispatch(setId(resultID.data.id));
         } catch (e) {
-          console.error('userApi Authorization error', e);
+          console.error('userApi Registration error', e);
         }
       },
     }),

@@ -1,5 +1,5 @@
-import { IDecoder } from './UserService';
 import jwt_decode from 'jwt-decode';
+import { IDecoder } from 'models';
 
 export const Decoder = (token: string) => {
   let decoded: IDecoder = {

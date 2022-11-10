@@ -1,12 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { store, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
 import { userAPI } from 'store/services/UserService';
 import { FormLogin } from './FormLogin';
 
 const Login = () => {
-  const [_, { isLoading: isLoading, error: error, data: user }] =
-    userAPI.useAuthorizationUserMutation();
+  const [_, { isLoading: isLoading, error: error }] = userAPI.useAuthorizationUserMutation();
   const { token } = useAppSelector((state) => state.user);
   return (
     <div>

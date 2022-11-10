@@ -1,25 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IDecoder, useAppSelector, userAPI } from 'store';
-import jwt_decode from 'jwt-decode';
-import { Decoder } from 'store/services/Decoder';
-
-const tokendec = 'eyJ0eXAiO.../// jwt token';
+import { useAppDispatch, useAppSelector, userAPI } from 'store';
+import { Decoder } from 'utils/Decoder';
+import { removeUser } from 'store/slices/UserSlice';
 
 const MainPage = () => {
   const [deleteUser] = userAPI.useDeleteUserMutation();
   const { token } = useAppSelector((state) => state.user);
-
+  const dicpatch = useAppDispatch();
   const handleDeleteUser = async () => {
-    const ID = Decoder(token);
-    await deleteUser(ID).unwrap();
+    if (token) {
+      const ID = Decoder(token);
+      await deleteUser(ID).unwrap();
+    }
   };
-
+  const handleLogoutUser = async () => {
+    if (token) {
+      dicpatch(removeUser());
+    }
+  };
   return (
     <div>
       <h1>Welcome</h1>
       <button type="submit" className="button" onClick={handleDeleteUser}>
         Delete user
+      </button>
+      <button type="submit" className="button" onClick={handleLogoutUser}>
+        logout
       </button>
       <Link to="/login"> login </Link>
     </div>
