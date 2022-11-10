@@ -11,13 +11,15 @@ const MainPage = () => {
   const handleDeleteUser = async () => {
     if (token) {
       const ID = Decoder(token);
-      await deleteUser(ID).unwrap();
+      await deleteUser(ID.userId).unwrap();
       dicpatch(removeUser());
+      localStorage.removeItem('token');
     }
   };
   const handleLogoutUser = async () => {
     if (token) {
       dicpatch(removeUser());
+      localStorage.removeItem('token');
     }
   };
   return (
