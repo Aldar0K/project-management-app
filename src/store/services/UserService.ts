@@ -1,10 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { Decoder } from './Decoder';
 import { setId, setToken } from './UserSlice';
 
 export interface IUser {
   name?: string;
   login: string;
   id: string;
+  password?: string;
+}
+export interface IDecoder {
+  userId: string;
+  login: string;
+  iat: number | null;
 }
 export interface IUserAuthorization {
   name?: string;
@@ -31,8 +38,8 @@ export const userAPI = createApi({
       }),
       async onQueryStarted({ password }, { dispatch, queryFulfilled }) {
         try {
-          const resultToken = await queryFulfilled;
-          dispatch(setId(resultToken.data));
+          const resultID = await queryFulfilled;
+          dispatch(setId(resultID.data.id));
         } catch (e) {
           console.error('userApi Authorization error', e);
         }
@@ -47,7 +54,9 @@ export const userAPI = createApi({
       async onQueryStarted({ password }, { dispatch, queryFulfilled }) {
         try {
           const resultToken = await queryFulfilled;
-          dispatch(setToken(resultToken.data));
+          dispatch(setToken(resultToken.data.token));
+          const ID = Decoder(resultToken.data.token);
+          dispatch(setId(ID));
         } catch (e) {
           console.error('userApi Authorization error', e);
         }

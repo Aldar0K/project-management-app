@@ -4,7 +4,7 @@ const initialState = {
   email: '',
   token: '',
   id: '',
-  pass: '',
+  password: '',
 };
 
 const userSlice = createSlice({
@@ -15,10 +15,10 @@ const userSlice = createSlice({
       state.email = action.payload;
     },
     setUser(state, action) {
-      state.pass = action.payload;
+      state.password = action.payload;
     },
     setPass(state, action) {
-      state.pass = action.payload;
+      state.password = action.payload;
     },
     setToken(state, action) {
       state.token = action.payload;
@@ -30,7 +30,7 @@ const userSlice = createSlice({
       state.email = '';
       state.token = '';
       state.id = ''; //null
-      state.pass = ''; //null
+      state.password = ''; //null
     },
   },
 });
