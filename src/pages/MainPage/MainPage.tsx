@@ -12,6 +12,7 @@ const MainPage = () => {
     if (token) {
       const ID = Decoder(token);
       await deleteUser(ID).unwrap();
+      dicpatch(removeUser());
     }
   };
   const handleLogoutUser = async () => {

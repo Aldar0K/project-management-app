@@ -1,12 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { IUser, IUserAuthorization, IToken } from 'models';
 import { Decoder } from '../../utils/Decoder';
-import { setId, setToken } from '../slices/UserSlice';
+import { removeUser, setId, setToken } from '../slices/UserSlice';
+import { commonApi } from './common.api';
 
-export const userAPI = createApi({
-  reducerPath: 'userAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://protected-dusk-84289.herokuapp.com' }),
-  tagTypes: ['User'],
+export const userAPI = commonApi.injectEndpoints({
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `/user/${id}`,
