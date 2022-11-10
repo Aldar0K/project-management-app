@@ -7,7 +7,7 @@ import { IUserAuthorization } from 'models';
 const FormRegistration: FC = () => {
   const { register, handleSubmit } = useForm();
   const [regUser] = userAPI.useRegUserMutation();
-  const [authorizationUser, { data: res }] = userAPI.useAuthorizationUserMutation();
+  const [authorizationUser] = userAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
 
   const submitForm = async (data: FieldValues) => {

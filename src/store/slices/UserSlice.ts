@@ -1,21 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Decoder } from 'utils/Decoder';
 
-const initialState = {
-  email: '',
+let initialStateWithToken = {
+  login: '',
   token: '',
   id: '',
   password: '',
 };
 
+if (localStorage.getItem('token')) {
+  const userDecodedInfo = Decoder(localStorage.getItem('token') as string);
+  initialStateWithToken = {
+    login: userDecodedInfo.login,
+    token: localStorage.getItem('token') as string,
+    id: userDecodedInfo.userId,
+    password: '',
+  };
+}
+
+const initialState = initialStateWithToken;
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setEmail(state, action) {
-      state.email = action.payload;
+    setLogin(state, action) {
+      state.login = action.payload;
     },
     setUser(state, action) {
-      state.password = action.payload;
+      return { ...action.payload };
     },
     setPass(state, action) {
       state.password = action.payload;
@@ -27,13 +40,13 @@ const userSlice = createSlice({
       state.id = action.payload;
     },
     removeUser(state) {
-      state.email = '';
+      state.login = '';
       state.token = '';
-      state.id = ''; //null
-      state.password = ''; //null
+      state.id = '';
+      state.password = '';
     },
   },
 });
 
-export const { setToken, setUser, setEmail, removeUser, setPass, setId } = userSlice.actions;
+export const { setToken, setUser, setLogin, removeUser, setPass, setId } = userSlice.actions;
 export default userSlice.reducer;

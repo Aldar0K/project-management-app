@@ -5,7 +5,7 @@ import { userAPI } from 'store';
 
 const FormLogin: FC = () => {
   const { register, handleSubmit } = useForm();
-  const [authorizationUser, { data: result }] = userAPI.useAuthorizationUserMutation();
+  const [authorizationUser] = userAPI.useAuthorizationUserMutation();
 
   const submitForm = async (data: FieldValues) => {
     const userLogData: IUserAuthorization = {

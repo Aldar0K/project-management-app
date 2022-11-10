@@ -11,5 +11,5 @@ export const Decoder = (token: string) => {
     decoded = jwt_decode(token);
   }
 
-  return decoded.userId;
+  return decoded;
 };
