@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-  return <h1>Project Management App</h1>;
+  return <h3>Project Management App</h3>;
 };
 
 export default App;
