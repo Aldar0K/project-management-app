@@ -1,0 +1,43 @@
+@import '../../styles/constants.scss';
+
+.container {
+  display: flex;
+  position: relative;
+
+  flex-direction: column;
+}
+
+.input {
+  padding: .75em;
+
+  background: $color-light;
+
+  font-size: .875rem;
+  line-height: 1rem;
+  color: $color-additional;
+
+  border: .25em solid $color-primary;
+  border-radius: .5em;
+
+  &_error {
+    border-color: $color-error;
+    color: $color-error;
+
+    &::placeholder {
+      color: $color-error;
+    }
+  }
+
+  &:disabled {
+    opacity: 50%;
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
+.errorIcon {
+  position: absolute;
+
+  top: 10px;
+  right: -30px;
+}
