@@ -1,0 +1,76 @@
+@import './constants.scss';
+
+html {
+  font-size: 1em;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $color-light;
+
+  font-family: 'Glory', 'Times', sans-serif;
+  font-size: 1rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+  color: $color-additional;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-primary;
+}
+
+h4 {
+  font-size: 1.125;
+  line-height: 1.25rem;
+  font-weight: 400;
+  color: $color-additional;
+}
+
+p, 
+span {
+  font-size: 1rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+  color: $color-additional;
+}
+
+#root {
+  display: flex;
+  min-height: 100%;
+
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 16px;
+
+  max-width: $desktop-width;
+}
