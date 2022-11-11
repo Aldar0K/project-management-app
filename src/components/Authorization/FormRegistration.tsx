@@ -40,7 +40,8 @@ const FormRegistration: FC = () => {
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && <h1>error maybe this login is already taken</h1>}
+      {error && <h1>{JSON.stringify(error)}</h1>}
+      {/* {error && <h1>error maybe this login is already taken</h1>} */}
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">
           <label htmlFor="text">Name</label>

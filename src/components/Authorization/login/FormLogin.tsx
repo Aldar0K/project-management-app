@@ -26,7 +26,7 @@ const FormLogin: FC = () => {
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && <h1>error user is not registered</h1>}
+      {error && <h1>{JSON.stringify(error)}</h1>}
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">
           <label htmlFor="login">Login</label>
