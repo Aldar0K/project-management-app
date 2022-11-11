@@ -36,11 +36,15 @@ const FormRegistration: FC = () => {
     await authorizationUser(userLogData).unwrap();
     navigate('/', { replace: true });
   };
+  let element = <h1></h1>;
+  if (error && 'data' in error) {
+    element = <h1>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</h1>;
+  }
 
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && <h1>{JSON.stringify(error)}</h1>}
+      {error && <h1>{element}</h1>}
       {/* {error && <h1>error maybe this login is already taken</h1>} */}
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">
@@ -52,7 +56,7 @@ const FormRegistration: FC = () => {
             required
           />
           <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.name ? 'name must be at least 2 characters' : ''}
+            {errors.name ? `${errors.name.message}` : ''}
           </div>
         </div>
         <div className="form-group">
@@ -64,7 +68,7 @@ const FormRegistration: FC = () => {
             required
           />
           <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.login ? 'login must be at least 2 characters' : ''}
+            {errors.login ? `${errors.login.message}` : ''}
           </div>
         </div>
 
@@ -77,7 +81,7 @@ const FormRegistration: FC = () => {
             required
           />
           <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.password ? 'password must be at least 6 characters' : ''}
+            {errors.password ? `${errors.password.message}` : ''}
           </div>
         </div>
         <div className="form-group">

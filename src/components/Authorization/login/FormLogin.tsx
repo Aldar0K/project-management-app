@@ -1,19 +1,21 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { IUserAuthorization } from 'models';
 import React, { FC } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { userAPI } from 'store';
-import { validation } from 'utils/Validation';
 
 const FormLogin: FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(validation) });
+  } = useForm();
 
-  const [authorizationUser, { isLoading: isLoading, error: error }] =
-    userAPI.useAuthorizationUserMutation();
+  const [authorizationUser, { isLoading, error }] = userAPI.useAuthorizationUserMutation();
+
+  let element = <h1></h1>;
+  if (error && 'data' in error) {
+    element = <h1>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</h1>;
+  }
 
   const submitForm = async (data: FieldValues) => {
     const userLogData: IUserAuthorization = {
@@ -26,31 +28,16 @@ const FormLogin: FC = () => {
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && <h1>{JSON.stringify(error)}</h1>}
+      {/* {error && <h1>{JSON.stringify(error)}</h1>} */}
+      {error && <h1>{element}</h1>}
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">
           <label htmlFor="login">Login</label>
-          <input
-            type="text"
-            className={`form-input ${errors.login ? 'is-invalid' : ''}`}
-            {...register('login')}
-            required
-          />
-          <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.login ? 'login must be at least 2 characters' : ''}
-          </div>
+          <input type="text" className="form-input" {...register('login')} required />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className={`form-input ${errors.password ? 'is-invalid' : ''}`}
-            {...register('password')}
-            required
-          />
-          <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.password ? 'password must be at least 6 characters' : ''}
-          </div>
+          <input type="password" className="form-input" {...register('password')} required />
         </div>
         <button type="submit" className="button">
           Login

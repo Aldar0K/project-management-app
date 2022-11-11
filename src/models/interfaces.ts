@@ -18,3 +18,11 @@ export interface IUserAuthorization {
 export interface IToken {
   token: string;
 }
+
+export interface IError {
+  data: {
+    message: string;
+    stack: string;
+  };
+  status: number;
+}
