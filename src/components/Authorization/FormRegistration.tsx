@@ -21,14 +21,17 @@ const FormRegistration: FC = () => {
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
-  let element = <p></p>;
+  const [isErrorMessage, setErrorMwssage] = useState('');
 
-  // useEffect(() => {
-  //   if (error && 'data' in error) {
-  //     element = <p>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</p>;
-  //   }
-  //   setModalActive(true);
-  // }, []);
+  useEffect(() => {
+    if (error && 'data' in error) {
+      setErrorMwssage(error.data.message);
+
+      setModalActive(true);
+    } else {
+      setModalActive(false);
+    }
+  }, [error]);
 
   const submitForm = async (data: FieldValues) => {
     //  let confirmPasswordError = '';
@@ -52,20 +55,14 @@ const FormRegistration: FC = () => {
     navigate('/', { replace: true });
   };
 
-  if (error && 'data' in error) {
-    element = <p>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</p>;
-  }
-
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && (
+      {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
-          <h2>{element}</h2>
+          <h2>{isErrorMessage}</h2>
         </ErrorModal>
       )}
-
-      {error && <h1>{element}</h1>}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
         <Input
           type="text"

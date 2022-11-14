@@ -1,7 +1,8 @@
 import Button from 'components/atoms/Button';
+import ErrorModal from 'components/atoms/errorModal';
 import Input from 'components/atoms/Input';
 import { IUserAuthorization } from 'models';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthorizationAPI } from 'store';
@@ -14,12 +15,19 @@ const FormLogin: FC = () => {
     formState: { errors },
   } = useForm();
 
+  const [isModalActive, setModalActive] = useState(false);
+  const [isErrorMessage, setErrorMwssage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
 
-  let element = <h1></h1>;
-  if (error && 'data' in error) {
-    element = <h1>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</h1>;
-  }
+  useEffect(() => {
+    if (error && 'data' in error) {
+      setErrorMwssage(error.data.message);
+
+      setModalActive(true);
+    } else {
+      setModalActive(false);
+    }
+  }, [error]);
 
   const submitForm = async (data: FieldValues) => {
     const userLogData: IUserAuthorization = {
@@ -32,8 +40,11 @@ const FormLogin: FC = () => {
   return (
     <div>
       {isLoading && <h1>Loading...</h1>}
-      {/* {error && <h1>{JSON.stringify(error)}</h1>} */}
-      {error && <h1>{element}</h1>}
+      {isModalActive && (
+        <ErrorModal onClose={() => setModalActive(false)}>
+          <h2>{isErrorMessage}</h2>
+        </ErrorModal>
+      )}
       <form className={styles.container} onSubmit={handleSubmit(submitForm)}>
         <h3> Log in</h3>
         <Input
