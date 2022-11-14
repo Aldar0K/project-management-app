@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { IUserAuthorization } from 'models';
 import { validation } from 'utils/Validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import styles from './authorization.module.scss';
+
 const FormRegistration: FC = () => {
   const {
     register,
@@ -43,10 +45,9 @@ const FormRegistration: FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {isLoading && <h1>Loading...</h1>}
       {error && <h1>{element}</h1>}
-      {/* {error && <h1>error maybe this login is already taken</h1>} */}
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="form-group">
           <label htmlFor="text">Name</label>
