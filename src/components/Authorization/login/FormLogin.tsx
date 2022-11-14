@@ -1,7 +1,7 @@
 import { IUserAuthorization } from 'models';
 import React, { FC } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { userAPI } from 'store';
+import { AuthorizationAPI } from 'store';
 
 const FormLogin: FC = () => {
   const {
@@ -10,7 +10,7 @@ const FormLogin: FC = () => {
     formState: { errors },
   } = useForm();
 
-  const [authorizationUser, { isLoading, error }] = userAPI.useAuthorizationUserMutation();
+  const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
 
   let element = <h1></h1>;
   if (error && 'data' in error) {

@@ -3,12 +3,14 @@ import {
   createApi,
   FetchArgs,
   fetchBaseQuery,
-} from '@reduxjs/toolkit/dist/query/react';
-import { IError } from 'models';
+  FetchBaseQueryMeta,
+} from '@reduxjs/toolkit/query/react';
+import { IError, IUser } from 'models';
 
 import { RootState } from 'store/store';
 
-export const BASE_URL = 'https://protected-dusk-84289.herokuapp.com';
+export const BASE_URL = 'https://pma-backend-2-0.onrender.com';
+// export const BASE_URL = 'https://protected-dusk-84289.herokuapp.com';
 
 export const commonApi = createApi({
   reducerPath: 'api',
@@ -22,7 +24,13 @@ export const commonApi = createApi({
       }
       return headers;
     },
-  }) as BaseQueryFn<string | FetchArgs, unknown, IError>,
+  }) as BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    IError,
+    Record<string, unknown>,
+    FetchBaseQueryMeta
+  >,
   tagTypes: ['User'],
   endpoints: (_) => ({}),
 });

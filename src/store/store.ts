@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { userAPI } from 'store/services/UserService';
+import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { UsersAPI } from 'store/services/UserService';
 import userSlice from 'store/slices/UserSlice';
 import { commonApi } from './services/common.api';
 
@@ -7,9 +8,10 @@ export const store = configureStore({
   reducer: {
     user: userSlice,
     [commonApi.reducerPath]: commonApi.reducer,
-    [userAPI.reducerPath]: userAPI.reducer,
+    [AuthorizationAPI.reducerPath]: AuthorizationAPI.reducer,
+    [UsersAPI.reducerPath]: UsersAPI.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userAPI.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

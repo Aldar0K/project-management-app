@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
-import { userAPI } from 'store';
+import { AuthorizationAPI } from 'store';
 import { useNavigate } from 'react-router-dom';
 import { IUserAuthorization } from 'models';
 import { validation } from 'utils/Validation';
@@ -12,8 +12,9 @@ const FormRegistration: FC = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validation) });
 
-  const [regUser, { error, isLoading }] = userAPI.useRegUserMutation();
-  const [authorizationUser] = userAPI.useAuthorizationUserMutation();
+  const [regUser, { error, isLoading, data }] = AuthorizationAPI.useRegUserMutation();
+  console.log(data);
+  const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
 
   const submitForm = async (data: FieldValues) => {
