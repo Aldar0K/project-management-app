@@ -1,37 +1,29 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, userAPI } from 'store';
 import { Decoder } from 'utils/Decoder';
 import { removeUser } from 'store/slices/UserSlice';
 
 const MainPage = () => {
-  const [deleteUser] = userAPI.useDeleteUserMutation();
-  const { token } = useAppSelector((state) => state.user);
-  const dicpatch = useAppDispatch();
-  const handleDeleteUser = async () => {
-    if (token) {
-      const ID = Decoder(token);
-      await deleteUser(ID).unwrap();
-      dicpatch(removeUser());
-    }
+
+  const { t, i18n } = useTranslation();
+
+  const handleLangChange = (event: React.FormEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(event.currentTarget.value);
   };
-  const handleLogoutUser = async () => {
-    if (token) {
-      dicpatch(removeUser());
-    }
-  };
+
   return (
     <div>
-      <h1>Welcome</h1>
-      <button type="submit" className="button" onClick={handleDeleteUser}>
-        Delete user
-      </button>
-      <button type="submit" className="button" onClick={handleLogoutUser}>
-        logout
-      </button>
+      <h1>{t('welcome.title')}</h1>
+      <select onClick={(e) => handleLangChange(e)}>
+        <option value="en">En</option>
+        <option value="ru">Ru</option>
+      </select>
       <Link to="/login"> login </Link>
     </div>
   );
 };
 
 export default MainPage;
+
