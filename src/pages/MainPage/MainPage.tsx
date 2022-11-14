@@ -40,6 +40,9 @@ const MainPage = () => {
       <button type="submit" className="button" onClick={handleGetAllUser}>
         AllGetUser
       </button>
+
+      <h1>Boards page</h1>
+
       <Link to="/login"> login </Link>
     </div>
   );

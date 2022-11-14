@@ -44,13 +44,14 @@ h4 {
   font-size: 1.125;
   line-height: 1.25rem;
   font-weight: 400;
+  text-transform: uppercase;
   color: $color-additional;
 }
 
 p, 
 span {
-  font-size: 1rem;
-  line-height: 1.125rem;
+  font-size: .875rem;
+  line-height: 1rem;
   font-weight: 400;
   color: $color-additional;
 }

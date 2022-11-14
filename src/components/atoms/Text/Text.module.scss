@@ -1,0 +1,19 @@
+@import 'styles/constants.scss';
+
+.big {
+  font-size: 1rem;
+  line-height: 1.125rem;
+  color: $color-additional;
+}
+
+.small {
+  font-size: .875rem;
+  line-height: 1rem;
+  color: $color-additional;
+}
+
+.error {
+  font-size: .875rem;
+  line-height: 1rem;
+  color: $color-error;
+}

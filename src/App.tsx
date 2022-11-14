@@ -1,6 +1,7 @@
-import GlobalRoute from 'components/GlobalRoute';
-import Header from 'components/Header/Header';
 import React from 'react';
+
+import Header from 'components/Header';
+import GlobalRoute from 'components/GlobalRoute';
 
 const App = () => {
   return (
