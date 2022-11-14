@@ -32,7 +32,7 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
           dispatch(setToken(resultToken.data.token));
           localStorage.setItem('token', resultToken.data.token);
           const userDecodedInfo = Decoder(resultToken.data.token);
-          dispatch(setId(userDecodedInfo.userId));
+          dispatch(setId(userDecodedInfo.id));
           dispatch(setLogin(userDecodedInfo.login));
         } catch (e) {
           console.error('userApi Authorization error', e);
@@ -48,5 +48,3 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
     }),
   }),
 });
-
-export const { useRegUserMutation, useAuthorizationUserMutation } = AuthorizationAPI;

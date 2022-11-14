@@ -4,8 +4,17 @@ export interface IUser {
   id: string;
   password?: string;
 }
+
+export interface IInitialState {
+  login: string;
+  token: string;
+  id: string;
+  password?: string;
+  allUser?: IUser[];
+}
+
 export interface IDecoder {
-  userId: string;
+  id: string;
   login: string;
   iat: number | null;
 }
@@ -25,4 +34,12 @@ export interface IError {
     stack: string;
   };
   status: number;
+}
+
+// Boards
+export interface IBoard {
+  _id?: string;
+  title: string;
+  owner: string;
+  users: string[];
 }

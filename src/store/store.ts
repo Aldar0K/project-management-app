@@ -8,8 +8,8 @@ export const store = configureStore({
   reducer: {
     user: userSlice,
     [commonApi.reducerPath]: commonApi.reducer,
-    [AuthorizationAPI.reducerPath]: AuthorizationAPI.reducer,
-    [UsersAPI.reducerPath]: UsersAPI.reducer,
+    // [AuthorizationAPI.reducerPath]: AuthorizationAPI.reducer,
+    // [UsersAPI.reducerPath]: UsersAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonApi.middleware),
 });

@@ -1,11 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { AuthorizationAPI } from 'store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IUserAuthorization } from 'models';
 import { validation } from 'utils/Validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './authorization.module.scss';
+import Input from 'components/atoms/Input';
+import Button from 'components/atoms/Button';
+import ErrorModal from 'components/atoms/errorModal/ErrorModal';
 
 const FormRegistration: FC = () => {
   const {
@@ -14,12 +17,21 @@ const FormRegistration: FC = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validation) });
 
-  const [regUser, { error, isLoading, data }] = AuthorizationAPI.useRegUserMutation();
-  console.log(data);
+  const [regUser, { error, isLoading }] = AuthorizationAPI.useRegUserMutation();
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
+  const [isModalActive, setModalActive] = useState(false);
+  let element = <p></p>;
+
+  // useEffect(() => {
+  //   if (error && 'data' in error) {
+  //     element = <p>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</p>;
+  //   }
+  //   setModalActive(true);
+  // }, []);
 
   const submitForm = async (data: FieldValues) => {
+    //  let confirmPasswordError = '';
     if (data.password !== data.confirmPassword) {
       alert('Password mismatch'); // тут надо дописать красивый блок
       return;
@@ -39,60 +51,83 @@ const FormRegistration: FC = () => {
     await authorizationUser(userLogData).unwrap();
     navigate('/', { replace: true });
   };
-  let element = <h1></h1>;
+
   if (error && 'data' in error) {
-    element = <h1>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</h1>;
+    element = <p>{JSON.stringify(error.data.message).replace(/^.|.$/g, '')}</p>;
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       {isLoading && <h1>Loading...</h1>}
-      {error && <h1>{element}</h1>}
-      <form onSubmit={handleSubmit(submitForm)}>
-        <div className="form-group">
-          <label htmlFor="text">Name</label>
-          <input
-            type="name"
-            {...register('name')}
-            className={`form-input ${errors.name ? 'is-invalid' : ''}`}
-            required
-          />
-          <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.name ? `${errors.name.message}` : ''}
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="login">Login</label>
-          <input
-            type="text"
-            className={`form-input ${errors.login ? 'is-invalid' : ''}`}
-            {...register('login')}
-            required
-          />
-          <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.login ? `${errors.login.message}` : ''}
-          </div>
-        </div>
+      {error && (
+        <ErrorModal onClose={() => setModalActive(false)}>
+          <h2>{element}</h2>
+        </ErrorModal>
+      )}
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className={`form-input ${errors.password ? 'is-invalid' : ''}`}
-            {...register('password')}
-            required
-          />
-          <div style={{ fontSize: 14, color: 'red' }} className="invalid-feedback">
-            {errors.password ? `${errors.password.message}` : ''}
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input type="password" className="form-input" {...register('confirmPassword')} required />
-        </div>
-        <button type="submit" className="button">
-          Registration
-        </button>
+      {error && <h1>{element}</h1>}
+      <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
+        <Input
+          type="text"
+          name="name"
+          placeholder="name"
+          register={register}
+          rules={{
+            required: true,
+            minLength: 2,
+            pattern: /^[A-Za-z0-9]+$/i,
+          }}
+          showError={!!errors.name}
+          errorMessage={errors.name ? `${errors.name.message}` : ''}
+          disabled={false}
+        />
+        <Input
+          type="text"
+          name="login"
+          placeholder="login"
+          register={register}
+          rules={{
+            required: true,
+            minLength: 2,
+            pattern: /^[A-Za-z0-9]+$/i,
+          }}
+          showError={!!errors.login}
+          errorMessage={errors.login ? `${errors.login.message}` : ''}
+          disabled={false}
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="password"
+          register={register}
+          rules={{
+            required: true,
+            minLength: 6,
+            pattern: /^[A-Za-z0-9]+$/i,
+          }}
+          showError={!!errors.password}
+          errorMessage={errors.password ? `${errors.password.message}` : ''}
+          disabled={false}
+        />
+
+        <Input
+          type="password"
+          name="confirmPassword"
+          placeholder="confirm password"
+          register={register}
+          rules={{
+            required: true,
+            minLength: 6,
+            pattern: /^[A-Za-z0-9]+$/i,
+          }}
+          showError={!!errors.confirmPassword}
+          // errorMessage={errors.password ? `${errors.password.message}` : ''}
+          disabled={false}
+        />
+        <Button text="Sign up" type="primary" big={true} onClick={() => {}} />
+        <Link to="/login">
+          <Button text="return to login" type="secondary" big={true} onClick={() => {}} />
+        </Link>
       </form>
     </div>
   );

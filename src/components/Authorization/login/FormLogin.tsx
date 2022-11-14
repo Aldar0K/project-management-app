@@ -46,7 +46,7 @@ const FormLogin: FC = () => {
             minLength: 3,
             pattern: /^[A-Za-z0-9]+$/i,
           }}
-          showError={!!errors.name}
+          showError={!!errors.login}
           errorMessage="The field must contain at least 3 characters"
           disabled={false}
         />
@@ -60,7 +60,7 @@ const FormLogin: FC = () => {
             minLength: 6,
             pattern: /^[A-Za-z0-9]+$/i,
           }}
-          showError={!!errors.name}
+          showError={!!errors.password}
           errorMessage="The field must contain at least 3 characters"
           disabled={false}
         />

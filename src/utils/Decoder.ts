@@ -3,7 +3,7 @@ import { IDecoder } from 'models';
 
 export const Decoder = (token: string) => {
   let decoded: IDecoder = {
-    userId: '',
+    id: '',
     login: '',
     iat: null,
   };

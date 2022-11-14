@@ -5,7 +5,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryMeta,
 } from '@reduxjs/toolkit/query/react';
-import { IError, IUser } from 'models';
+import { IError } from 'models';
 
 import { RootState } from 'store/store';
 
