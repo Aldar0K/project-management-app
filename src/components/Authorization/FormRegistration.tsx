@@ -21,11 +21,11 @@ const FormRegistration: FC = () => {
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
-  const [isErrorMessage, setErrorMwssage] = useState('');
+  const [isErrorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (error && 'data' in error) {
-      setErrorMwssage(error.data.message);
+      setErrorMessage(error.data.message);
 
       setModalActive(true);
     } else {

@@ -16,12 +16,12 @@ const FormLogin: FC = () => {
   } = useForm();
 
   const [isModalActive, setModalActive] = useState(false);
-  const [isErrorMessage, setErrorMwssage] = useState('');
+  const [isErrorMessage, setErrorMessage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
 
   useEffect(() => {
     if (error && 'data' in error) {
-      setErrorMwssage(error.data.message);
+      setErrorMessage(error.data.message);
 
       setModalActive(true);
     } else {
