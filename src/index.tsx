@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import './styles/style.scss';
 import { store } from './store';
 import 'utils/i18n';
 import App from './App';
