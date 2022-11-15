@@ -1,0 +1,54 @@
+@import 'styles/constants.scss';
+
+.footer {
+  background-color: $color-background-dark;
+}
+
+.container {
+  display: flex;
+
+  padding: .5rem 1rem;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.githubs {
+  display: flex;
+
+  gap: 1.5rem;
+}
+
+.github {
+  color: $color-light;
+
+  font-size: 1.2rem;
+}
+
+.data {
+  display: flex;
+
+  align-items: center;
+  gap: .5rem;
+}
+
+.icon {
+  color: $color-light;
+
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.date {
+  color: $color-light;
+
+  font-size: 1.2rem;
+}
+
+@media (max-width: $mobile-width) {
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1rem;
+  }
+}
