@@ -47,7 +47,7 @@ const Input: React.FC<InputProps> = ({
         </span>
       )}
       {showError && (
-        <span title={errorMessage} className={styles.errorIcon}>
+        <span data-title={errorMessage} className={styles.errorIcon}>
           <Icon type="error" width="24" />
         </span>
       )}
