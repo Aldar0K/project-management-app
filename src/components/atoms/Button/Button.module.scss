@@ -10,13 +10,18 @@
   font-family: 'Glory';
   font-style: normal;
   font-weight: 700;
-  font-size: .875rem;
+  // font-size: .875rem;
+  font-size: 2rem;
   line-height: 1em;
   border-radius: .5em;
 
   cursor: pointer;
   user-select: none;
   transition: .3s all ease;
+
+  &:disabled {
+    opacity: 50%;
+  }
 
   &_primary {
     background: $color-primary;
@@ -28,6 +33,15 @@
     &:active{
       background: #3f3f3f;
     }
+
+    &:disabled {
+      &:hover{
+        background: $color-primary;
+      }
+      &:active{
+        background: $color-primary;
+      }
+    }
   }
 
   &_secondary {
@@ -35,10 +49,19 @@
     color: $color-light;
 
     &:hover{
-      background: $color-primary;
+      background: #5e5e5e;
     }
     &:active{
-      background: #313131;
+      background: #4b4b4b;
+    }
+
+    &:disabled {
+      &:hover{
+        background: $color-additional;
+      }
+      &:active{
+        background: $color-additional;
+      }
     }
   }
 
@@ -55,14 +78,38 @@
     &:active{
       background: #dbdad9;
     }
+
+    &:disabled {
+      &:hover{
+        background: $color-light;
+      }
+      &:active{
+        background: $color-light;
+      }
+    }
   }
 
-  &_transparent {
+  &_transparentLight {
+    background: transparent;
+    color: $color-light;
+
+    &:hover{
+      color: #e7e6e5;
+    }
+    &:active{
+      color: #d6d5d4;
+    }
+  }
+
+  &_transparentDark {
     background: transparent;
     color: $color-primary;
 
     &:hover{
-      text-decoration: underline;
+      color: #555454;
+    }
+    &:active{
+      color: #858484;
     }
   }
 

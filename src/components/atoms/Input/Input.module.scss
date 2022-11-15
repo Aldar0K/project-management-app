@@ -47,4 +47,28 @@
 
   top: 10px;
   right: -30px;
+
+  transition: .3s all ease;
+  
+  &:hover:after {
+    opacity: 1;
+    visibility: visible;
+    transition: all 1s ease .3s;
+  }
+  
+  &:after {
+    position: absolute;
+  
+    min-width: 9rem;
+    padding: .7rem;
+    
+    background-color: $color-light;    
+    
+    color: $color-error;
+    font-size: 1rem;
+    text-align: center;
+    
+    content: attr(data-title);
+    visibility: hidden;
+  }
 }
