@@ -1,4 +1,4 @@
-@import '../../styles/constants.scss';
+@import 'styles/constants.scss';
 
 .button {
   display: flex;
@@ -15,6 +15,7 @@
   border-radius: .5em;
 
   cursor: pointer;
+  user-select: none;
   transition: .3s all ease;
 
   &_primary {

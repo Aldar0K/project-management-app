@@ -1,0 +1,16 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
+  width: 300px;
+  margin:50px auto 0;
+  background: #F5F1EF;
+  box-shadow: 5px 6px 60px rgba(128, 128, 128, 0.5);
+  border-radius: 16px;
+}
+
+
+
