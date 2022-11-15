@@ -45,7 +45,7 @@ const WelcomePage = () => {
   // записываем в состояние всех юзеров
   const handleGetAllUser = async () => {
     dicpatch(setAllUser(dataAll));
-    console.log(dataSingle);
+    console.log(ID);
   };
 
   return (
