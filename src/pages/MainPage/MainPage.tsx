@@ -1,22 +1,10 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector, AuthorizationAPI } from 'store';
 
 const MainPage = () => {
-  const { t, i18n } = useTranslation();
-
-  const handleLangChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(event.currentTarget.value);
-  };
-
   return (
     <div>
-      <h1>{t('welcome.title')}</h1>
-      <select onClick={(e) => handleLangChange(e)}>
-        <option value="en">En</option>
-        <option value="ru">Ru</option>
-      </select>
+      <h1>Boards page</h1>
       <Link to="/login"> login </Link>
     </div>
   );
