@@ -1,15 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { AuthorizationAPI } from 'store/services/AuthorizationService';
-import { UsersAPI } from 'store/services/UserService';
+import boardSlice from 'store/slices/BoardSlice';
 import userSlice from 'store/slices/UserSlice';
 import { commonApi } from './services/common.api';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    boardSlice: boardSlice,
     [commonApi.reducerPath]: commonApi.reducer,
-    // [AuthorizationAPI.reducerPath]: AuthorizationAPI.reducer,
-    // [UsersAPI.reducerPath]: UsersAPI.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonApi.middleware),
 });
