@@ -9,6 +9,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import ErrorModal from 'components/atoms/errorModal/ErrorModal';
 import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { setName, useAppDispatch } from 'store';
 
 const FormRegistration: FC = () => {
   const {
@@ -21,7 +22,7 @@ const FormRegistration: FC = () => {
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
-
+  const dicpatch = useAppDispatch();
   const [isErrorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const FormRegistration: FC = () => {
   }, [error]);
 
   const submitForm = async (data: FieldValues) => {
-    //  let confirmPasswordError = '';
     if (data.password !== data.confirmPassword) {
       alert('Password mismatch'); // тут надо дописать красивый блок
       return;
@@ -51,6 +51,7 @@ const FormRegistration: FC = () => {
       login: data.login,
       password: data.password,
     };
+    dicpatch(setName(data.name));
     await authorizationUser(userLogData).unwrap();
     navigate('/', { replace: true });
   };

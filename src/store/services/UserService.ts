@@ -8,8 +8,8 @@ export const UsersAPI = commonApi.injectEndpoints({
       // providesTags: (result) => ['User'],
     }),
 
-    getUserById: build.query<IUser, string>({
-      query: (id) => ({ url: `users/${id}` }),
-    }),
+    // getUserById: build.query<IUser, string>({
+    //   query: (id) => ({ url: `users/${id}` }),
+    // }),
   }),
 });

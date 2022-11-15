@@ -36,7 +36,6 @@ const WelcomePage = () => {
   const ID = Decoder(token);
   const [deleteUser] = AuthorizationAPI.useDeleteUserMutation();
   const { data: dataAll } = UsersAPI.useGetAllUsersQuery();
-  const { data: dataSingle } = UsersAPI.useGetUserByIdQuery(ID.id);
   const dicpatch = useAppDispatch();
 
   const handleDeleteUser = async () => {

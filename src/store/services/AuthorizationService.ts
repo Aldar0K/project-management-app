@@ -33,7 +33,6 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
           localStorage.setItem('token', resultToken.data.token);
           const userDecodedInfo = Decoder(resultToken.data.token);
           dispatch(setId(userDecodedInfo.id));
-          // dispatch(setLogin(userDecodedInfo.login));
         } catch (e) {
           console.error('userApi Authorization error', e);
         }

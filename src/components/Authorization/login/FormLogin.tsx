@@ -4,7 +4,8 @@ import Input from 'components/atoms/Input';
 import { IUserAuthorization } from 'models';
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch, setName } from 'store';
 import { AuthorizationAPI } from 'store/services/AuthorizationService';
 import styles from '../authorization.module.scss';
 
@@ -14,10 +15,13 @@ const FormLogin: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate();
+  const { id } = useAppSelector((state) => state.user);
   const [isModalActive, setModalActive] = useState(false);
   const [isErrorMessage, setErrorMessage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
+  const { data: userFromServer } = AuthorizationAPI.useGetUserByIdQuery(id);
+  const dicpatch = useAppDispatch();
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -34,6 +38,8 @@ const FormLogin: FC = () => {
       password: data.password,
     };
     await authorizationUser(userLogData).unwrap();
+    navigate('/', { replace: true });
+    dicpatch(setName(userFromServer?.name));
   };
 
   return (
@@ -73,8 +79,7 @@ const FormLogin: FC = () => {
           disabled={false}
         />
         <Button text="Sign in" type="primary" big={true} onClick={() => {}} />
-        <Link to="/registration">
-          {' '}
+        <Link to="/login">
           <Button text="Create a new account" type="secondary" big={true} onClick={() => {}} />{' '}
         </Link>
       </form>
