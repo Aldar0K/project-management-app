@@ -21,10 +21,10 @@
  .modal {
   position: relative;
    width: 35%;
-   height: 45%;
+   height: 35%;
    background-color: $color-light;
    align-items: center;
-  gap: 1rem;
+   border-radius: 16px;
  }
 
  .textDiv{

@@ -2,9 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector, AuthorizationAPI } from 'store';
-import { Decoder } from 'utils/Decoder';
-import { removeUser } from 'store/slices/UserSlice';
-import { UsersAPI } from 'store/services/UserService';
 
 const MainPage = () => {
   const { t, i18n } = useTranslation();

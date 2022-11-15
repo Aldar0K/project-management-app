@@ -60,7 +60,7 @@ const FormRegistration: FC = () => {
       {isLoading && <h1>Loading...</h1>}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
-          <h2>{isErrorMessage}</h2>
+          <h3>{isErrorMessage}</h3>
         </ErrorModal>
       )}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
