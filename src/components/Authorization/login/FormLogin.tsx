@@ -5,7 +5,7 @@ import { IUserAuthorization } from 'models';
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { AuthorizationAPI } from 'store';
+import { AuthorizationAPI } from 'store/services/AuthorizationService';
 import styles from '../authorization.module.scss';
 
 const FormLogin: FC = () => {
@@ -41,7 +41,7 @@ const FormLogin: FC = () => {
       {isLoading && <h1>Loading...</h1>}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
-          <h2>{isErrorMessage}</h2>
+          <h3>{isErrorMessage}</h3>
         </ErrorModal>
       )}
       <form className={styles.container} onSubmit={handleSubmit(submitForm)}>

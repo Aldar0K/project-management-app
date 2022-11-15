@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
-import { AuthorizationAPI } from 'store';
 import { Link, useNavigate } from 'react-router-dom';
 import { IUserAuthorization } from 'models';
 import { validation } from 'utils/Validation';
@@ -9,6 +8,7 @@ import styles from './authorization.module.scss';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import ErrorModal from 'components/atoms/errorModal/ErrorModal';
+import { AuthorizationAPI } from 'store/services/AuthorizationService';
 
 const FormRegistration: FC = () => {
   const {
@@ -21,12 +21,12 @@ const FormRegistration: FC = () => {
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
-  const [isErrorMessage, setErrorMwssage] = useState('');
+
+  const [isErrorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (error && 'data' in error) {
-      setErrorMwssage(error.data.message);
-
+      setErrorMessage(error.data.message);
       setModalActive(true);
     } else {
       setModalActive(false);
@@ -60,7 +60,7 @@ const FormRegistration: FC = () => {
       {isLoading && <h1>Loading...</h1>}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
-          <h2>{isErrorMessage}</h2>
+          <h3>{isErrorMessage}</h3>
         </ErrorModal>
       )}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
