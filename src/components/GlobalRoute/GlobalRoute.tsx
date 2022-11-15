@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import WelcomePage from 'pages/WelcomePage';
 import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
@@ -10,7 +9,7 @@ const GlobalRoute = () => {
   return (
     <>
       {' '}
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           {/* <Route path="/main" element={<MainPage />} /> */}
@@ -18,7 +17,7 @@ const GlobalRoute = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegisterPage />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 };
