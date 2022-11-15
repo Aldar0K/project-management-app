@@ -1,0 +1,22 @@
+@import 'styles/constants.scss';
+
+.header {
+  background-color: $color-primary;
+}
+
+.container {
+  display: flex;
+
+  padding: 1rem 1rem;
+
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.link {
+  margin-right: auto;
+}
+
+.title {
+  color: $color-light;
+}
