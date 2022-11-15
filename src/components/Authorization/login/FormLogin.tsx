@@ -53,11 +53,10 @@ const FormLogin: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 3,
-            pattern: /^[A-Za-z0-9]+$/i,
+            minLength: 2,
           }}
           showError={!!errors.login}
-          errorMessage="The field must contain at least 3 characters"
+          errorMessage="The field must contain at least 2 characters"
           disabled={false}
         />
         <Input
@@ -68,10 +67,9 @@ const FormLogin: FC = () => {
           rules={{
             required: true,
             minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.password}
-          errorMessage="The field must contain at least 3 characters"
+          errorMessage="The field must contain at least 6 characters"
           disabled={false}
         />
         <Button text="Sign in" type="primary" big={true} onClick={() => {}} />

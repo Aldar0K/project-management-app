@@ -6,7 +6,7 @@ export interface IUser {
 }
 
 export interface IInitialState {
-  login: string;
+  name: string;
   token: string;
   id: string;
   password?: string;

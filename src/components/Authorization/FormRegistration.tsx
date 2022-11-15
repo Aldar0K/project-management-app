@@ -71,8 +71,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 2,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.name}
           errorMessage={errors.name ? `${errors.name.message}` : ''}
@@ -85,8 +83,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 2,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.login}
           errorMessage={errors.login ? `${errors.login.message}` : ''}
@@ -99,8 +95,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.password}
           errorMessage={errors.password ? `${errors.password.message}` : ''}
@@ -114,11 +108,8 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.confirmPassword}
-          // errorMessage={errors.password ? `${errors.password.message}` : ''}
           disabled={false}
         />
         <Button text="Sign up" type="primary" big={true} onClick={() => {}} />

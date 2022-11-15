@@ -1,6 +1,6 @@
 import { IUser, IUserAuthorization, IToken } from 'models';
 import { Decoder } from '../../utils/Decoder';
-import { setId, setLogin, setToken } from '../slices/UserSlice';
+import { setId, setName, setToken } from '../slices/UserSlice';
 import { commonApi } from './common.api';
 
 export const AuthorizationAPI = commonApi.injectEndpoints({
@@ -33,9 +33,20 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
           localStorage.setItem('token', resultToken.data.token);
           const userDecodedInfo = Decoder(resultToken.data.token);
           dispatch(setId(userDecodedInfo.id));
-          dispatch(setLogin(userDecodedInfo.login));
+          // dispatch(setLogin(userDecodedInfo.login));
         } catch (e) {
           console.error('userApi Authorization error', e);
+        }
+      },
+    }),
+    getUserById: build.query<IUser, string>({
+      query: (id) => ({ url: `users/${id}` }),
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(setName(result.data.name));
+        } catch (e) {
+          console.error('userApi getByID error', e);
         }
       },
     }),
