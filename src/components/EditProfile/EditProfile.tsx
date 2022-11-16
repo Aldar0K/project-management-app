@@ -25,13 +25,13 @@ const EditProfile = () => {
   const dicpatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
-  const [isErrorMessage, setErrorMessage] = useState('');
+  const [isMessage, setMessage] = useState('');
 
   setValue('name', nameState);
   setValue('login', loginState);
   useEffect(() => {
     if (error && 'data' in error) {
-      setErrorMessage(error.data.message);
+      setMessage(error.data.message);
       setModalActive(true);
     } else {
       setModalActive(false);
@@ -40,7 +40,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (errorDel && 'data' in errorDel) {
-      setErrorMessage(errorDel.data.message);
+      setMessage(errorDel.data.message);
       setModalActive(true);
     } else {
       setModalActive(false);
@@ -63,7 +63,7 @@ const EditProfile = () => {
     };
     await updateUser(userNewData).unwrap();
     setModalActive(true);
-    setErrorMessage('Data updated successfully');
+    setMessage('Data updated successfully');
   };
   const handleUpdateUser = async () => {};
 
@@ -73,7 +73,7 @@ const EditProfile = () => {
       {isLoading && <h1>Loading...</h1>}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
-          <h3>{isErrorMessage}</h3>
+          <h3>{isMessage}</h3>
         </ErrorModal>
       )}
 
