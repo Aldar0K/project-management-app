@@ -65,6 +65,7 @@ const FormRegistration: FC = () => {
         </ErrorModal>
       )}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
+        <h3>Sing up</h3>
         <Input
           type="text"
           name="name"
