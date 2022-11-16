@@ -1,6 +1,15 @@
 {
-    "welcome": {
+    "Navigation": {
+        "signIn": "Вход",
+        "signUp": "Регистрация"
+    },
+    "Authors": {
+        "dmitry": "Дмитрий",
+        "aldar": "Алдар",
+        "anna": "Анна"
+    },
+    "WelcomePage": {
         "title": "Добро пожаловать!"
     },
-    "main": {}
+    "MainPage": {}
 }

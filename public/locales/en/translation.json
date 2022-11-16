@@ -1,6 +1,15 @@
 {
-    "welcome": {
-        "title": "Welcome"
+    "Navigation": {
+        "signIn": "Sign In",
+        "signUp": "Sign Up"
     },
-    "main": {}
+    "Authors": {
+        "dmitry": "Dmitry",
+        "aldar": "Aldar",
+        "anna": "Anna"
+    },
+    "WelcomePage": {
+        "title": "Welcome!"
+    },
+    "MainPage": {}
 }
