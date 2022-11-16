@@ -16,6 +16,32 @@ export default WelcomePage;
 // код для теста логина и некоторых апиметодов
 // import React from 'react';
 // import { Link } from 'react-router-dom';
+// import { useTranslation } from 'react-i18next';
+
+// const WelcomePage = () => {
+//   const { t, i18n } = useTranslation();
+
+//   const handleLangChange = (event: React.FormEvent<HTMLSelectElement>) => {
+//     i18n.changeLanguage(event.currentTarget.value);
+//   };
+
+//   return (
+//     <div>
+//       <h1>{t('welcome.title')}</h1>
+//       <select onClick={(e) => handleLangChange(e)}>
+//         <option value="ru">Ru</option>
+//         <option value="en">En</option>
+//       </select>
+//       <Link to="/login"> login </Link>
+//     </div>
+//   );
+// };
+
+// export default WelcomePage;
+
+// код для теста логина и некоторых апиметодовъ
+// import React from 'react';
+// import { Link } from 'react-router-dom';
 // import { useAppDispatch, useAppSelector, AuthorizationAPI } from 'store';
 // import { Decoder } from 'utils/Decoder';
 // import { removeUser, setAllUser } from 'store/slices/UserSlice';
@@ -26,7 +52,6 @@ export default WelcomePage;
 //   const ID = Decoder(token);
 //   const [deleteUser] = AuthorizationAPI.useDeleteUserMutation();
 //   const { data: dataAll } = UsersAPI.useGetAllUsersQuery();
-//   const { data: dataSingle } = UsersAPI.useGetUserByIdQuery(ID.id);
 //   const dicpatch = useAppDispatch();
 
 //   const handleDeleteUser = async () => {
@@ -46,7 +71,7 @@ export default WelcomePage;
 //   // записываем в состояние всех юзеров
 //   const handleGetAllUser = async () => {
 //     dicpatch(setAllUser(dataAll));
-//     console.log(dataSingle);
+//     console.log(ID);
 //   };
 
 //   return (
@@ -62,6 +87,7 @@ export default WelcomePage;
 //         AllGetUser
 //       </button>
 //       <Link to="/login"> login </Link>
+//       <Link to="/editProfile"> Edit Profile </Link>
 //     </div>
 //   );
 // };

@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
-import { AuthorizationAPI } from 'store';
 import { Link, useNavigate } from 'react-router-dom';
 import { IUserAuthorization } from 'models';
 import { validation } from 'utils/Validation';
@@ -9,6 +8,8 @@ import styles from './authorization.module.scss';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import ErrorModal from 'components/atoms/errorModal/ErrorModal';
+import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { setName, useAppDispatch } from 'store';
 
 const FormRegistration: FC = () => {
   const {
@@ -21,12 +22,12 @@ const FormRegistration: FC = () => {
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
+  const dicpatch = useAppDispatch();
   const [isErrorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (error && 'data' in error) {
       setErrorMessage(error.data.message);
-
       setModalActive(true);
     } else {
       setModalActive(false);
@@ -34,7 +35,6 @@ const FormRegistration: FC = () => {
   }, [error]);
 
   const submitForm = async (data: FieldValues) => {
-    //  let confirmPasswordError = '';
     if (data.password !== data.confirmPassword) {
       alert('Password mismatch'); // тут надо дописать красивый блок
       return;
@@ -51,6 +51,7 @@ const FormRegistration: FC = () => {
       login: data.login,
       password: data.password,
     };
+    dicpatch(setName(data.name));
     await authorizationUser(userLogData).unwrap();
     navigate('/', { replace: true });
   };
@@ -64,6 +65,7 @@ const FormRegistration: FC = () => {
         </ErrorModal>
       )}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
+        <h3>Sing up</h3>
         <Input
           type="text"
           name="name"
@@ -71,8 +73,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 2,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.name}
           errorMessage={errors.name ? `${errors.name.message}` : ''}
@@ -85,8 +85,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 2,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.login}
           errorMessage={errors.login ? `${errors.login.message}` : ''}
@@ -99,8 +97,6 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.password}
           errorMessage={errors.password ? `${errors.password.message}` : ''}
@@ -114,11 +110,8 @@ const FormRegistration: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.confirmPassword}
-          // errorMessage={errors.password ? `${errors.password.message}` : ''}
           disabled={false}
         />
         <Button text="Sign up" type="primary" big={true} onClick={() => {}} />

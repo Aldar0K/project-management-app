@@ -4,8 +4,9 @@ import Input from 'components/atoms/Input';
 import { IUserAuthorization } from 'models';
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { AuthorizationAPI } from 'store';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { Decoder } from 'utils/Decoder';
 import styles from '../authorization.module.scss';
 
 const FormLogin: FC = () => {
@@ -14,15 +15,17 @@ const FormLogin: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
   const [isErrorMessage, setErrorMessage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
+  let id = '';
+
+  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
 
   useEffect(() => {
     if (error && 'data' in error) {
       setErrorMessage(error.data.message);
-
       setModalActive(true);
     } else {
       setModalActive(false);
@@ -34,7 +37,11 @@ const FormLogin: FC = () => {
       login: data.login,
       password: data.password,
     };
-    await authorizationUser(userLogData).unwrap();
+    const response = await authorizationUser(userLogData).unwrap();
+    console.log(response);
+    id = Decoder(response.token).id;
+    trigger(id);
+    navigate('/', { replace: true });
   };
 
   return (
@@ -54,11 +61,10 @@ const FormLogin: FC = () => {
           register={register}
           rules={{
             required: true,
-            minLength: 3,
-            pattern: /^[A-Za-z0-9]+$/i,
+            minLength: 2,
           }}
           showError={!!errors.login}
-          errorMessage="The field must contain at least 3 characters"
+          errorMessage="The field must contain at least 2 characters"
           disabled={false}
         />
         <Input
@@ -69,15 +75,13 @@ const FormLogin: FC = () => {
           rules={{
             required: true,
             minLength: 6,
-            pattern: /^[A-Za-z0-9]+$/i,
           }}
           showError={!!errors.password}
-          errorMessage="The field must contain at least 3 characters"
+          errorMessage="The field must contain at least 6 characters"
           disabled={false}
         />
         <Button text="Sign in" type="primary" big={true} onClick={() => {}} />
         <Link to="/registration">
-          {' '}
           <Button text="Create a new account" type="secondary" big={true} onClick={() => {}} />{' '}
         </Link>
       </form>
