@@ -1,0 +1,18 @@
+@import 'styles/constants.scss';
+
+.container {
+  padding: .3rem;
+}
+
+.list {
+  display: flex;
+
+  gap: 1rem;
+}
+
+.link {
+  font-size: 1.125rem;
+  text-transform: uppercase;
+
+  color: $color-light;
+}
