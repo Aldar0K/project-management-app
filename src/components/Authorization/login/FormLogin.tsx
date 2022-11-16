@@ -56,7 +56,7 @@ const FormLogin: FC = () => {
         <h3> Log in</h3>
         <Input
           type="text"
-          name="login"
+          name="Login"
           placeholder="login"
           register={register}
           rules={{
