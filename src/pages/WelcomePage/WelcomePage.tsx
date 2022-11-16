@@ -6,7 +6,7 @@ const WelcomePage = () => {
 
   return (
     <div>
-      <h1>{t('welcome.title')}</h1>
+      <h1>{t('WelcomePage.title')}</h1>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './LangSwitch.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const LangSwitch = () => {
   const { i18n } = useTranslation();
@@ -12,7 +12,11 @@ const LangSwitch = () => {
 
   return (
     <>
-      <select className={styles.switch} value={i18n.language} onChange={(e) => handleLangChange(e)}>
+      <select
+        className={styles.container}
+        value={i18n.language}
+        onChange={(e) => handleLangChange(e)}
+      >
         <option value="ru">Ru</option>
         <option value="en">En</option>
       </select>

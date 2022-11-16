@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.container}`}>
@@ -14,13 +17,13 @@ const Footer = () => {
         </a>
         <div className={styles.githubs}>
           <a className={styles.github} href="https://github.com/Lebedev-023046" target="blank">
-            Dmitry
+            {t('Authors.dmitry')}
           </a>
           <a className={styles.github} href="https://github.com/Aldar0K" target="blank">
-            Aldar
+            {t('Authors.aldar')}
           </a>
           <a className={styles.github} href="https://github.com/flyether" target="blank">
-            Anna
+            {t('Authors.anna')}
           </a>
         </div>
         <div className={styles.data}>
