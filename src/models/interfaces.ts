@@ -1,12 +1,17 @@
 export interface IUser {
   name?: string;
-  login: string;
-  id: string;
+  login?: string;
+  _id?: string;
   password?: string;
+}
+export interface IUserUpdate {
+  id: string;
+  body: IUser;
 }
 
 export interface IInitialState {
   name: string;
+  login: string;
   token: string;
   id: string;
   password?: string;

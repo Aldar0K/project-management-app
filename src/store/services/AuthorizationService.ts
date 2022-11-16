@@ -1,6 +1,6 @@
-import { IUser, IUserAuthorization, IToken } from 'models';
+import { IUser, IUserAuthorization, IToken, IUserUpdate } from 'models';
 import { Decoder } from '../../utils/Decoder';
-import { setId, setName, setToken } from '../slices/UserSlice';
+import { setId, setLogin, setName, setToken } from '../slices/UserSlice';
 import { commonApi } from './common.api';
 
 export const AuthorizationAPI = commonApi.injectEndpoints({
@@ -14,7 +14,7 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
       async onQueryStarted({}, { dispatch, queryFulfilled }) {
         try {
           const resultID = await queryFulfilled;
-          dispatch(setId(resultID.data.id));
+          dispatch(setId(resultID.data._id));
         } catch (e) {
           console.error('userApi Registration error', e);
         }
@@ -38,12 +38,30 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
         }
       },
     }),
+    updateUser: build.mutation<IUser, IUserUpdate>({
+      query: ({ id, body }) => ({
+        url: `users/${id}`,
+        method: 'PUT',
+        body: body,
+      }),
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(setId(result.data._id));
+          dispatch(setName(result.data.name));
+        } catch (e) {
+          console.error('userApi Update user error', e);
+        }
+      },
+    }),
     getUserById: build.query<IUser, string>({
       query: (id) => ({ url: `users/${id}` }),
       async onQueryStarted({}, { dispatch, queryFulfilled }) {
         try {
           const result = await queryFulfilled;
+          console.log('user id', result);
           dispatch(setName(result.data.name));
+          dispatch(setLogin(result.data.login));
         } catch (e) {
           console.error('userApi getByID error', e);
         }

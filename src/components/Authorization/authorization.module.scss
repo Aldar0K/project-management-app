@@ -10,7 +10,12 @@
   background: #F5F1EF;
   box-shadow: 5px 6px 60px rgba(128, 128, 128, 0.5);
   border-radius: 16px;
+  text-align: center;
 }
 
 
-
+.divButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

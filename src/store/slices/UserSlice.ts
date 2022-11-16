@@ -4,19 +4,20 @@ import { Decoder } from 'utils/Decoder';
 
 let initialStateWithToken: IInitialState = {
   name: '',
+  login: '',
   token: '',
   id: '',
-
   allUser: [],
 };
 
 if (localStorage.getItem('token')) {
   const userDecodedInfo = Decoder(localStorage.getItem('token') as string);
   initialStateWithToken = {
-    name: userDecodedInfo.login,
+    name: '',
     token: localStorage.getItem('token') as string,
     id: userDecodedInfo.id,
     allUser: [],
+    login: userDecodedInfo.login,
   };
 }
 
@@ -28,6 +29,9 @@ const userSlice = createSlice({
   reducers: {
     setName(state, action) {
       state.name = action.payload;
+    },
+    setLogin(state, action) {
+      state.login = action.payload;
     },
     setAllUser(state, action) {
       state.allUser = action.payload;
@@ -43,6 +47,7 @@ const userSlice = createSlice({
     },
     removeUser(state) {
       state.name = '';
+      state.login = '';
       state.token = '';
       state.id = '';
       state.password = '';
@@ -50,5 +55,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, setName, removeUser, setId, setAllUser } = userSlice.actions;
+export const { setToken, setUser, setName, removeUser, setId, setAllUser, setLogin } =
+  userSlice.actions;
 export default userSlice.reducer;

@@ -13,7 +13,7 @@ function ErrorModal(props: IModalProps) {
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal}>
         <div className={styles.textDiv}> {children}</div>
-        <Button text="Sign up" type="primary" big={false} onClick={onClose} />
+        <Button text="Close" type="primary" big={false} onClick={onClose} />
       </div>
     </div>
   );

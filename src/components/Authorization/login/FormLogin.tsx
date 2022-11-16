@@ -5,8 +5,8 @@ import { IUserAuthorization } from 'models';
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch, setName } from 'store';
 import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { Decoder } from 'utils/Decoder';
 import styles from '../authorization.module.scss';
 
 const FormLogin: FC = () => {
@@ -16,12 +16,12 @@ const FormLogin: FC = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-  const { id } = useAppSelector((state) => state.user);
   const [isModalActive, setModalActive] = useState(false);
   const [isErrorMessage, setErrorMessage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
-  const { data: userFromServer } = AuthorizationAPI.useGetUserByIdQuery(id);
-  const dicpatch = useAppDispatch();
+  let id = '';
+
+  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -37,9 +37,11 @@ const FormLogin: FC = () => {
       login: data.login,
       password: data.password,
     };
-    await authorizationUser(userLogData).unwrap();
+    const response = await authorizationUser(userLogData).unwrap();
+    console.log(response);
+    id = Decoder(response.token).id;
+    trigger(id);
     navigate('/', { replace: true });
-    dicpatch(setName(userFromServer?.name));
   };
 
   return (
@@ -79,7 +81,7 @@ const FormLogin: FC = () => {
           disabled={false}
         />
         <Button text="Sign in" type="primary" big={true} onClick={() => {}} />
-        <Link to="/login">
+        <Link to="/registration">
           <Button text="Create a new account" type="secondary" big={true} onClick={() => {}} />{' '}
         </Link>
       </form>

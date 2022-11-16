@@ -71,6 +71,7 @@ const WelcomePage = () => {
         AllGetUser
       </button>
       <Link to="/login"> login </Link>
+      <Link to="/editProfile"> Edit Profile </Link>
     </div>
   );
 };
