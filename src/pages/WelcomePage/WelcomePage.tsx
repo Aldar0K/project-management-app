@@ -5,7 +5,7 @@ const WelcomePage = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div style={{ height: 1000 }}>
       <h1>{t('WelcomePage.title')}</h1>
     </div>
   );

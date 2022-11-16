@@ -12,7 +12,7 @@ const Footer = () => {
           <img
             src="https://rs.school/images/rs_school_js.svg"
             alt="rs_school_js.svg"
-            width="115px"
+            width="100px"
           />
         </a>
         <div className={styles.githubs}>
