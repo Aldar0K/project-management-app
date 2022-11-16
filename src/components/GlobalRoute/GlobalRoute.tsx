@@ -4,6 +4,7 @@ import WelcomePage from 'pages/WelcomePage';
 import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
+import EditProfilePage from 'pages/EditProfilePage';
 
 const GlobalRoute = () => {
   return (
