@@ -10,6 +10,7 @@ import Button from 'components/atoms/Button';
 import ErrorModal from 'components/atoms/errorModal/ErrorModal';
 import { AuthorizationAPI } from 'store/services/AuthorizationService';
 import { setName, useAppDispatch } from 'store';
+import { useTranslation } from 'react-i18next';
 
 const FormRegistration: FC = () => {
   const {
@@ -18,6 +19,7 @@ const FormRegistration: FC = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validation) });
 
+  const { t } = useTranslation();
   const [regUser, { error, isLoading }] = AuthorizationAPI.useRegUserMutation();
   const [authorizationUser] = AuthorizationAPI.useAuthorizationUserMutation();
   const navigate = useNavigate();
@@ -65,11 +67,11 @@ const FormRegistration: FC = () => {
         </ErrorModal>
       )}
       <form onSubmit={handleSubmit(submitForm)} className={styles.container}>
-        <h3>Sing up</h3>
+        <h3>{t('Navigation.signUp')}</h3>
         <Input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder={t('RegistrationPage.name') as string}
           register={register}
           rules={{
             required: true,
@@ -81,7 +83,7 @@ const FormRegistration: FC = () => {
         <Input
           type="text"
           name="login"
-          placeholder="Login"
+          placeholder={t('LoginPage.login') as string}
           register={register}
           rules={{
             required: true,
@@ -93,7 +95,7 @@ const FormRegistration: FC = () => {
         <Input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder={t('LoginPage.password') as string}
           register={register}
           rules={{
             required: true,
@@ -106,7 +108,7 @@ const FormRegistration: FC = () => {
         <Input
           type="password"
           name="confirmPassword"
-          placeholder="confirm password"
+          placeholder={t('RegistrationPage.confirmPassword') as string}
           register={register}
           rules={{
             required: true,
@@ -114,9 +116,14 @@ const FormRegistration: FC = () => {
           showError={!!errors.confirmPassword}
           disabled={false}
         />
-        <Button text="Sign up" type="primary" big={true} onClick={() => {}} />
+        <Button text={t('Navigation.signUp')} type="primary" big={true} onClick={() => {}} />
         <Link to="/login">
-          <Button text="return to login" type="secondary" big={true} onClick={() => {}} />
+          <Button
+            text={t('RegistrationPage.return')}
+            type="secondary"
+            big={true}
+            onClick={() => {}}
+          />
         </Link>
       </form>
     </div>

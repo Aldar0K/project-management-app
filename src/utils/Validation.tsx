@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { t } from 'i18next';
 
 export const validation = Yup.object().shape({
   login: Yup.string()
