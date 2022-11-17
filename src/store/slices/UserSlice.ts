@@ -12,6 +12,7 @@ let initialStateWithToken: IInitialState = {
 
 if (localStorage.getItem('token')) {
   const userDecodedInfo = Decoder(localStorage.getItem('token') as string);
+
   initialStateWithToken = {
     name: '',
     token: localStorage.getItem('token') as string,
