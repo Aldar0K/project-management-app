@@ -26,7 +26,7 @@ const Navigation = () => {
           <li className={styles.item}>
             <Button
               text={t('Navigation.signOut')}
-              type="secondary"
+              type="bordered"
               big={false}
               onClick={handleSignout}
             />
@@ -37,7 +37,7 @@ const Navigation = () => {
               <Link to="/login" className={styles.link}>
                 <Button
                   text={t('Navigation.signIn')}
-                  type="secondary"
+                  type="bordered"
                   big={false}
                   onClick={handleSignout}
                 />
@@ -47,7 +47,7 @@ const Navigation = () => {
               <Link to="/registration" className={styles.link}>
                 <Button
                   text={t('Navigation.signUp')}
-                  type="secondary"
+                  type="bordered"
                   big={false}
                   onClick={handleSignout}
                 />

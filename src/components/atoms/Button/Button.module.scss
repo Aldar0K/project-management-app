@@ -27,10 +27,10 @@
     color: $color-light;
 
     &:hover{
-      background: #313131;
+      background: #073b66;
     }
     &:active{
-      background: #3f3f3f;
+      background: #063357;
     }
 
     &:disabled {
@@ -48,10 +48,10 @@
     color: $color-light;
 
     &:hover{
-      background: #5e5e5e;
+      background: #0a3d56;
     }
     &:active{
-      background: #4b4b4b;
+      background: #093449;
     }
 
     &:disabled {
@@ -72,10 +72,10 @@
     border: .25em solid $color-primary;
 
     &:hover{
-      background: #e7e5e4;
+      background: #cfe9f4;
     }
     &:active{
-      background: #dbdad9;
+      background: #bedbe8;
     }
 
     &:disabled {
@@ -93,10 +93,10 @@
     color: $color-light;
 
     &:hover{
-      color: #e7e6e5;
+      color: #cfe9f4;
     }
     &:active{
-      color: #d6d5d4;
+      color: #bedbe8;
     }
   }
 
@@ -105,10 +105,10 @@
     color: $color-primary;
 
     &:hover{
-      color: #555454;
+      color: #073b66;
     }
     &:active{
-      color: #858484;
+      color: #063357;
     }
   }
 
