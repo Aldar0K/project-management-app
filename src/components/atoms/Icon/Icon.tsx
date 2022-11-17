@@ -1,5 +1,5 @@
-import { IconTypes } from 'models/types';
 import React from 'react';
+import { IconTypes } from 'models/types';
 import { COLOR_PRIMARY, COLOR_ERROR, COLOR_SUCCESS } from '../../../constants';
 
 interface IconProps {
@@ -205,6 +205,20 @@ const Icon: React.FC<IconProps> = ({ type, width, height = width, color = COLOR_
               <rect width="12" height="9.94" fill="white" />
             </clipPath>
           </defs>
+        </svg>
+      );
+    case 'logo':
+      return (
+        <svg
+          width={!!width ? width : 16}
+          height={!!height ? height : 18}
+          viewBox="0 0 16 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="16" height="18" rx="4" fill="#def5ff" />
+          <path d="M3 3H7V15H3V3Z" fill={color} />
+          <path d="M9 3H13V11H9V3Z" fill={color} />
         </svg>
       );
     default:
