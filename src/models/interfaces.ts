@@ -48,3 +48,14 @@ export interface IBoard {
   owner: string;
   users: string[];
 }
+
+export interface IBoardData {
+  title: string;
+  owner: string;
+  users: string[];
+}
+
+export interface IBoardParams {
+  data: { title: string; owner: string; users: string[] };
+  id: string;
+}

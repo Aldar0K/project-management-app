@@ -7,7 +7,7 @@ import styles from '../authorization.module.scss';
 const Login = () => {
   const { token } = useAppSelector((state) => state.user);
   return (
-    <div className={styles.divBody}>
+    <div>
       {token && <Navigate to="/" replace={true} />}
       <FormLogin />
     </div>
