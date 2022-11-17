@@ -80,8 +80,8 @@ const FormRegistration: FC = () => {
         />
         <Input
           type="text"
-          name="Login"
-          placeholder="login"
+          name="login"
+          placeholder="Login"
           register={register}
           rules={{
             required: true,
