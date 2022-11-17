@@ -1,5 +1,30 @@
+@import 'styles/constants.scss';
+
 .container {
   padding: .3rem;
+}
+
+.select,
+.option {
+  font-weight: 700;
+  line-height: 1em;
+  border-radius: .5em;
+  color: $color-primary;
+}
+
+.select {
+  padding: .7em;
+
+  background: $color-light;
+  border: 0.25em solid $color-primary;
 
   font-size: 1rem;
+
+  cursor: pointer;
+  user-select: none;
+  transition: .3s all ease;
+}
+
+.option {
+  font-size: 1.25rem;
 }
