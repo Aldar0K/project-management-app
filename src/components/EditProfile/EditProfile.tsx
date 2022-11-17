@@ -82,7 +82,7 @@ const EditProfile = () => {
         <Input
           type="text"
           name="name"
-          placeholder="name"
+          placeholder="Name"
           register={register}
           rules={{
             required: true,
@@ -93,7 +93,7 @@ const EditProfile = () => {
         />
         <Input
           type="text"
-          name="login"
+          name="Login"
           placeholder="login"
           register={register}
           rules={{
@@ -107,7 +107,7 @@ const EditProfile = () => {
         <Input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder="Password"
           register={register}
           rules={{
             required: true,

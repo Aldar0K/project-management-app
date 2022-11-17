@@ -5,9 +5,16 @@ import styles from './Header.module.scss';
 import Heading from 'components/atoms/Heading';
 import LangSwitch from 'components/LangSwitch';
 import Navigation from 'components/Navigation';
+import { AuthorizationAPI, useAppSelector } from 'store';
 
 const Header = () => {
   const [top, setTop] = useState(false);
+  const { id } = useAppSelector((state) => state.user);
+  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
+
+  useEffect(() => {
+    if (id) trigger(id);
+  }, [id, trigger]);
 
   useEffect(() => {
     const handleScroll = () => {
