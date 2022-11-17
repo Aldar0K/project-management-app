@@ -1,7 +1,8 @@
 {
     "Navigation": {
         "signIn": "Sign In",
-        "signUp": "Sign Up"
+        "signUp": "Sign Up",
+        "signOut": "Sign out"
     },
     "Authors": {
         "dmitry": "Dmitry",

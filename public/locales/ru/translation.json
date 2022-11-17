@@ -1,7 +1,8 @@
 {
     "Navigation": {
         "signIn": "Вход",
-        "signUp": "Регистрация"
+        "signUp": "Регистрация",
+        "signOut": "Выйти"
     },
     "Authors": {
         "dmitry": "Дмитрий",

@@ -16,7 +16,7 @@
 .container {
   display: flex;
 
-  padding: 1rem 1rem;
+  padding: .5rem 1rem;
 
   align-items: center;
   gap: 1rem;
@@ -24,7 +24,7 @@
   transition: 0.2s;
 
   &_scroll {
-    padding: .5rem 1rem;
+    padding: 0 1rem;
   }
 }
 
