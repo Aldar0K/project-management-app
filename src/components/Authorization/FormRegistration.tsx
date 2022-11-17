@@ -38,7 +38,9 @@ const FormRegistration: FC = () => {
 
   const submitForm = async (data: FieldValues) => {
     if (data.password !== data.confirmPassword) {
-      alert('Password mismatch'); // тут надо дописать красивый блок
+      const a = t('Error.passNoConf');
+      setErrorMessage(a);
+      setModalActive(true);
       return;
     }
 

@@ -34,7 +34,7 @@
         "logMax": "Login must not exceed 20 characters",
         "nameReq": "Name is required",
         "logReq": "login is required",
-        "passReq": "Password is required ",
+        "passNoConf": "Passwords do not match",
         "nameMin": "Name must be at least 2 characters",
         "nameMax": "Name must not exceed 20 characters",
         "passMin": "Password must be at least 6 characters"
