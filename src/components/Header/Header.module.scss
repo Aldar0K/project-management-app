@@ -1,6 +1,7 @@
 @import 'styles/constants.scss';
 
 .header {
+  position: fixed;
   width: 100%;
   
   background-color: $color-primary;
@@ -8,7 +9,6 @@
   transition: 0.2s;
   
   &_scroll {
-    position: fixed;
     background-color: $color-additional;
   }
 }

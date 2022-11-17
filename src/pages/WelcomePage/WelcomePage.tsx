@@ -10,7 +10,12 @@ const WelcomePage = () => {
   return (
     <main className="main">
       <div className={`container ${styles.container}`}>
-        <Heading text={t('WelcomePage.title')} level={1} />
+        <section className={styles.hero}>
+          <div className={`container ${styles.container}`}></div>
+          <Heading text={t('WelcomePage.title')} level={1} />
+        </section>
+        <section className={styles.team}></section>
+        <section className={styles.rss}></section>
       </div>
     </main>
   );
