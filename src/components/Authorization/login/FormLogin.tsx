@@ -38,7 +38,6 @@ const FormLogin: FC = () => {
       password: data.password,
     };
     const response = await authorizationUser(userLogData).unwrap();
-    console.log(response);
     id = Decoder(response.token).id;
     trigger(id);
     navigate('/', { replace: true });
@@ -57,7 +56,7 @@ const FormLogin: FC = () => {
         <Input
           type="text"
           name="login"
-          placeholder="login"
+          placeholder="Login"
           register={register}
           rules={{
             required: true,

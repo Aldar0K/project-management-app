@@ -69,7 +69,7 @@ const FormRegistration: FC = () => {
         <Input
           type="text"
           name="name"
-          placeholder="name"
+          placeholder="Name"
           register={register}
           rules={{
             required: true,
@@ -81,7 +81,7 @@ const FormRegistration: FC = () => {
         <Input
           type="text"
           name="login"
-          placeholder="login"
+          placeholder="Login"
           register={register}
           rules={{
             required: true,

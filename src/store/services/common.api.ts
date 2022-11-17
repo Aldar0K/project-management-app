@@ -31,6 +31,6 @@ export const commonApi = createApi({
     Record<string, unknown>,
     FetchBaseQueryMeta
   >,
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Board', 'BoardColumns', 'Column', 'ColumnTasks', 'Task'],
   endpoints: (_) => ({}),
 });

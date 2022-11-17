@@ -59,7 +59,6 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
       async onQueryStarted({}, { dispatch, queryFulfilled }) {
         try {
           const result = await queryFulfilled;
-          console.log('user id', result);
           dispatch(setName(result.data.name));
           dispatch(setLogin(result.data.login));
         } catch (e) {
