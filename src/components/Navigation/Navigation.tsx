@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navigation.module.scss';
-import { removeUser, useAppDispatch, useAppSelector } from 'store';
+import { removeUser, useAppDispatch, AuthorizationAPI, useAppSelector } from 'store';
 import Button from 'components/atoms/Button';
+import Heading from 'components/atoms/Heading';
 
 const Navigation = () => {
   const { t } = useTranslation();
 
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  const { id, name } = useAppSelector((state) => state.user);
+  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
+
+  useEffect(() => {
+    if (id) trigger(id);
+  }, [id, trigger]);
 
   const handleSignout = async () => {
     if (token) {
@@ -23,14 +31,19 @@ const Navigation = () => {
     <nav className={styles.container}>
       <ul className={styles.list}>
         {token ? (
-          <li className={styles.item}>
-            <Button
-              text={t('Navigation.signOut')}
-              type="bordered"
-              big={false}
-              onClick={handleSignout}
-            />
-          </li>
+          <>
+            <li className={styles.item}>
+              <Heading text={name} level={3} className={styles.name} />
+            </li>
+            <li className={styles.item}>
+              <Button
+                text={t('Navigation.signOut')}
+                type="bordered"
+                big={false}
+                onClick={handleSignout}
+              />
+            </li>
+          </>
         ) : (
           <>
             <li className={styles.item}>

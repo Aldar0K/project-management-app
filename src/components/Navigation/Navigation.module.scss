@@ -11,6 +11,11 @@
 }
 
 .item {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
   font-size: 1.125rem;
   text-transform: uppercase;
 
@@ -19,4 +24,10 @@
 
 .link {
   color: inherit;
+}
+
+.name {
+  padding: .3rem;
+
+  color: $color-light;
 }
