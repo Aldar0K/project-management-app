@@ -1,16 +1,16 @@
 import * as Yup from 'yup';
-import { t } from 'i18next';
+import i18next, { t } from 'i18next';
 
 export const validation = Yup.object().shape({
   login: Yup.string()
-    .required('login is required')
-    .min(2, 'login must be at least 2 characters')
-    .max(20, 'login must not exceed 20 characters'),
+    .required(i18next.t(`Error.logReq` as const) as string)
+    .min(2, i18next.t(`Error.logMin` as const) as string)
+    .max(20, i18next.t(`Error.logMax` as const) as string),
   name: Yup.string()
-    .required('name is required')
-    .min(2, 'name must be at least 2 characters')
-    .max(20, 'name must not exceed 20 characters'),
+    .required(i18next.t(`Error.nameReq` as const) as string)
+    .min(2, i18next.t(`Error.nameMin` as const) as string)
+    .max(20, i18next.t(`Error.nameMax` as const) as string),
   password: Yup.string()
-    .required('password is required')
-    .min(6, 'password must be at least 6 characters'),
+    .required(i18next.t(`Error.passReq` as const) as string)
+    .min(6, i18next.t(`Error.passMin` as const) as string),
 });

@@ -37,7 +37,8 @@
         "passNoConf": "Passwords do not match",
         "nameMin": "Name must be at least 2 characters",
         "nameMax": "Name must not exceed 20 characters",
-        "passMin": "Password must be at least 6 characters"
+        "passMin": "Password must be at least 6 characters",
+        "passReq": "Password is required"
         
     }
 }
