@@ -5,9 +5,15 @@ import styles from './Header.module.scss';
 import Heading from 'components/atoms/Heading';
 import LangSwitch from 'components/LangSwitch';
 import Navigation from 'components/Navigation';
+import { AuthorizationAPI, setName, useAppDispatch, useAppSelector } from 'store';
 
 const Header = () => {
   const [top, setTop] = useState(false);
+  const { id } = useAppSelector((state) => state.user);
+  const { data } = AuthorizationAPI.useGetUserByIdQuery(id);
+  const dicpatch = useAppDispatch();
+
+  dicpatch(setName(data?.name));
 
   useEffect(() => {
     const handleScroll = () => {
