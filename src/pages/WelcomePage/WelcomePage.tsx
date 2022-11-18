@@ -7,11 +7,9 @@ import Team from 'components/Team';
 const WelcomePage = () => {
   return (
     <main className="main">
-      <div className={`container ${styles.container}`}>
-        <Hero />
-        <Team />
-        <section className={styles.rss}></section>
-      </div>
+      <Hero />
+      <Team />
+      <section className={styles.rss}></section>
     </main>
   );
 };

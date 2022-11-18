@@ -16,11 +16,11 @@ const Footer = () => {
           />
         </a>
         <div className={styles.githubs}>
-          <a className={styles.github} href="https://github.com/flyether" target="blank">
-            {t('Team.anna')}
-          </a>
           <a className={styles.github} href="https://github.com/Lebedev-023046" target="blank">
             {t('Team.dmitry')}
+          </a>
+          <a className={styles.github} href="https://github.com/flyether" target="blank">
+            {t('Team.anna')}
           </a>
           <a className={styles.github} href="https://github.com/Aldar0K" target="blank">
             {t('Team.aldar')}

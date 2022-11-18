@@ -5,16 +5,18 @@
         "signOut": "Выйти"
     },
     "Team": {
-        "title": "Наша команда"
-    },
-    "Authors": {
+        "title": "Наша команда",
         "dmitry": "Дмитрий",
         "aldar": "Алдар",
-        "anna": "Анна"
+        "anna": "Анна",
+        "dmitryImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "aldarImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "annaImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?"
     },
     "WelcomePage": {
         "title": "Orgapp упрощает командную работу!",
-        "text": "Мы создали удобное приложение для планирования ваших проектов. Отслеживайте прогресс выполнения задач, завершайте их в срок, грамотно распределяйте работу между членами вашей команды!"
+        "text": "Мы создали удобное приложение для планирования ваших проектов. Отслеживайте прогресс выполнения задач, завершайте их в срок, грамотно распределяйте работу между членами вашей команды!",
+        "button": "Начать работу"
     },
     "MainPage": {}
 }
