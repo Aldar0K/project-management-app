@@ -7,9 +7,10 @@
 .container {
   display: flex;
 
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
 
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 2rem;
 }
@@ -51,4 +52,6 @@
 .links {
   display: flex;
   width: 100%;
+
+  gap: .5rem;
 }

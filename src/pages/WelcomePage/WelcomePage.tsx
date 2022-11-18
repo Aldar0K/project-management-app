@@ -1,15 +1,15 @@
 import React from 'react';
 
-import styles from './WelcomePage.module.scss';
 import Hero from 'components/Hero';
 import Team from 'components/Team';
+import Course from 'components/Course';
 
 const WelcomePage = () => {
   return (
     <main className="main">
       <Hero />
       <Team />
-      <section className={styles.rss}></section>
+      <Course />
     </main>
   );
 };

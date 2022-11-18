@@ -11,6 +11,12 @@
 
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: $width-mobile) {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .githubs {
@@ -33,6 +39,10 @@
   justify-content: end;
   align-items: center;
   gap: .5rem;
+
+  @media (max-width: $width-mobile) {
+    justify-content: center;
+  }
 }
 
 .icon {
@@ -46,12 +56,4 @@
   color: $color-light;
 
   font-size: 1.2rem;
-}
-
-@media (max-width: $mobile-width) {
-  .container {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 1rem;
-  }
 }
