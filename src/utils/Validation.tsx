@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import i18next, { t } from 'i18next';
+import i18next from 'i18next';
 
 export const validation = Yup.object().shape({
   login: Yup.string()
