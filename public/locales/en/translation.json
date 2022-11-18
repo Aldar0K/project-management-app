@@ -4,7 +4,8 @@
         "signUp": "Sign Up",
         "signOut": "Sign out"
     },
-    "Authors": {
+    "Team": {
+        "title": "Our team",
         "dmitry": "Dmitry",
         "aldar": "Aldar",
         "anna": "Anna"

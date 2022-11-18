@@ -11,7 +11,7 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
-      <section className={styles.container}>
+      <div className={styles.container}>
         <div className={styles.content}>
           <Heading className={styles.heading} text={t('WelcomePage.title')} level={1} />
           <Text className={styles.text} type="big" text={t('WelcomePage.text')} />
@@ -19,7 +19,7 @@ const Hero = () => {
         <div className={styles.image}>
           <img src={heroImg} alt="hero-image" />
         </div>
-      </section>
+      </div>
     </section>
   );
 };

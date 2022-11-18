@@ -6,6 +6,7 @@ import Heading from 'components/atoms/Heading';
 import LangSwitch from 'components/LangSwitch';
 import Navigation from 'components/Navigation';
 import Icon from 'components/atoms/Icon';
+import { COLOR_ADDITIONAL, COLOR_PRIMARY } from '../../constants';
 
 const Header = () => {
   const [top, setTop] = useState(false);
@@ -34,7 +35,7 @@ const Header = () => {
         }`}
       >
         <Link to="/" className={styles.link}>
-          <Icon type="logo" width="36" />
+          <Icon type="logo" width="36" color={top ? COLOR_ADDITIONAL : COLOR_PRIMARY} />
           <Heading text="Orgapp" level={2} className={styles.title} />
         </Link>
         <LangSwitch />

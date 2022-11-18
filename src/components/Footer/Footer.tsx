@@ -16,14 +16,14 @@ const Footer = () => {
           />
         </a>
         <div className={styles.githubs}>
+          <a className={styles.github} href="https://github.com/flyether" target="blank">
+            {t('Team.anna')}
+          </a>
           <a className={styles.github} href="https://github.com/Lebedev-023046" target="blank">
-            {t('Authors.dmitry')}
+            {t('Team.dmitry')}
           </a>
           <a className={styles.github} href="https://github.com/Aldar0K" target="blank">
-            {t('Authors.aldar')}
-          </a>
-          <a className={styles.github} href="https://github.com/flyether" target="blank">
-            {t('Authors.anna')}
+            {t('Team.aldar')}
           </a>
         </div>
         <div className={styles.data}>
