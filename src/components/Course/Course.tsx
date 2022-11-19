@@ -9,7 +9,7 @@ const Course = () => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.rss}>
+    <section className={styles.course}>
       <div className={`container ${styles.container}`}>
         <Heading level={2} text={t('Course.title')} className={styles.heading}></Heading>
         <Text className={styles.text} type="big" text={t('Course.text')} />
