@@ -1,10 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import WelcomePage from 'pages/WelcomePage';
 import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import EditProfilePage from 'pages/EditProfilePage';
+import BoardPage from 'pages/BoardPage';
 
 const GlobalRoute = () => {
   return (
@@ -12,6 +14,7 @@ const GlobalRoute = () => {
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         {/* <Route path="/main" element={<MainPage />} /> */}
+        <Route path="/boards/:id" element={<BoardPage />} />
         <Route path="/editProfile" element={<EditProfilePage />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/login" element={<LoginPage />} />
