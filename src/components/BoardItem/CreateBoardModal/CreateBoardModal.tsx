@@ -64,7 +64,7 @@ const CreateBoardModal = () => {
       const { isFocused } = state;
       return {
         ...styles,
-        backgroundColor: '#F5F1EF',
+        backgroundColor: '#def5ff',
         border: 'none',
         boxShadow: isFocused ? 'none' : 'inherit',
       };
