@@ -6,10 +6,14 @@ import { useAppSelector } from 'store';
 const RegisterPage = () => {
   const { token } = useAppSelector((state) => state.user);
   return (
-    <div>
-      {token && <Navigate to="/" replace={true} />}
-      <FormRegistration />
-    </div>
+    <main className="main">
+      {/* <div className={`container ${styles.container}`}> */}
+      <div>
+        {token && <Navigate to="/" replace={true} />}
+        <FormRegistration />
+      </div>
+      {/* </div> */}
+    </main>
   );
 };
 export default RegisterPage;

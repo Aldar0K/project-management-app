@@ -3,6 +3,7 @@ import React from 'react';
 const ErrorPage = () => {
   return (
     <main
+      className="main"
       style={{
         padding: '1rem',
       }}

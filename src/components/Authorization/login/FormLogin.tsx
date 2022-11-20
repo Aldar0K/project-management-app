@@ -4,6 +4,7 @@ import Input from 'components/atoms/Input';
 import { IUserAuthorization } from 'models';
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthorizationAPI } from 'store/services/AuthorizationService';
 import { Decoder } from 'utils/Decoder';
@@ -20,6 +21,7 @@ const FormLogin: FC = () => {
   const [isErrorMessage, setErrorMessage] = useState('');
   const [authorizationUser, { isLoading, error }] = AuthorizationAPI.useAuthorizationUserMutation();
   let id = '';
+  const { t } = useTranslation();
 
   const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
 
@@ -52,36 +54,36 @@ const FormLogin: FC = () => {
         </ErrorModal>
       )}
       <form className={styles.container} onSubmit={handleSubmit(submitForm)}>
-        <h3> Log in</h3>
+        <h3> {t('LoginPage.signIn')}</h3>
         <Input
           type="text"
           name="login"
-          placeholder="Login"
+          placeholder={t('LoginPage.login') as string}
           register={register}
           rules={{
             required: true,
             minLength: 2,
           }}
           showError={!!errors.login}
-          errorMessage="The field must contain at least 2 characters"
+          errorMessage={t('Error.logMin') as string}
           disabled={false}
         />
         <Input
           type="password"
           name="password"
-          placeholder="password"
+          placeholder={t('LoginPage.password') as string}
           register={register}
           rules={{
             required: true,
             minLength: 6,
           }}
           showError={!!errors.password}
-          errorMessage="The field must contain at least 6 characters"
+          errorMessage={t('Error.passMin') as string}
           disabled={false}
         />
-        <Button text="Sign in" type="primary" big={true} onClick={() => {}} />
+        <Button text={t('LoginPage.signIn')} type="primary" big={true} onClick={() => {}} />
         <Link to="/registration">
-          <Button text="Create a new account" type="secondary" big={true} onClick={() => {}} />{' '}
+          <Button text={t('LoginPage.create')} type="secondary" big={true} onClick={() => {}} />{' '}
         </Link>
       </form>
     </div>
