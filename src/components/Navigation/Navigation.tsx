@@ -13,12 +13,7 @@ const Navigation = () => {
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
-  const { id, name } = useAppSelector((state) => state.user);
-  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
-
-  useEffect(() => {
-    if (id) trigger(id);
-  }, [id, trigger]);
+  const { name } = useAppSelector((state) => state.user);
 
   const handleSignout = async () => {
     if (token) {

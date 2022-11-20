@@ -4,7 +4,9 @@ import React from 'react';
 const EditProfilePage = () => {
   return (
     <main className="main">
-      <EditProfile />
+      <div className="container">
+        <EditProfile />
+      </div>
     </main>
   );
 };
