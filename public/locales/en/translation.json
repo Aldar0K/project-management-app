@@ -1,15 +1,55 @@
 {
     "Navigation": {
         "signIn": "Sign In",
-        "signUp": "Sign Up"
+        "signUp": "Sign Up",
+        "signOut": "Sign out"
     },
-    "Authors": {
+    "Team": {
+        "title": "Our team",
         "dmitry": "Dmitry",
         "aldar": "Aldar",
-        "anna": "Anna"
+        "anna": "Anna",
+        "dmitryImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "aldarImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "annaImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?"
+    },
+    "Course": {
+        "title": "Course",
+        "text": "This app was designed and implemented as part of the React framework course by Rolling Scopes School"
     },
     "WelcomePage": {
-        "title": "Welcome!"
+        "title": "Orgapp simplifies teamwork!",
+        "text": "We have created a convenient application for planning your projects. Track the progress of tasks, complete them on time, distribute the work among your team members correctly!",
+        "button": "Get started"
     },
-    "MainPage": {}
+    "MainPage": {},
+    "LoginPage": {
+        "signIn": "Sign In",
+        "login": "Login",
+        "create": "Create a new account",
+        "password": "Password"
+    },
+    "RegistrationPage": {
+        "name": "Name",
+        "return": "Return to login",
+        "confirmPassword": "Confirm password"
+    },
+    "EditProfile":{
+        "editProfile": "Edit profile",
+        "delUser": "Delete User",
+        "upUser": "Update User",
+        "upMessage": "Your data has been successfully updated"
+    },
+    "Error":{
+        "logMin": "Login must be at least 2 characters",
+        "logMax": "Login must not exceed 20 characters",
+        "nameReq": "Name is required",
+        "logReq": "login is required",
+        "passNoConf": "Passwords do not match",
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must not exceed 20 characters",
+        "passMin": "Password must be at least 6 characters",
+        "passReq": "Password is required"
+        
+    }
 }

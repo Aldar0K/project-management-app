@@ -1,15 +1,55 @@
 {
     "Navigation": {
         "signIn": "Вход",
-        "signUp": "Регистрация"
+        "signUp": "Регистрация",
+        "signOut": "Выйти"
     },
-    "Authors": {
+    "Team": {
+        "title": "Наша команда",
         "dmitry": "Дмитрий",
         "aldar": "Алдар",
-        "anna": "Анна"
+        "anna": "Анна",
+        "dmitryImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "aldarImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
+        "annaImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?"
+    },
+    "Course": {
+        "title": "Курс",
+        "text": "Это приложение было предложено и выполнено в рамках курса по фреймворку React от Rolling Scopes School"
     },
     "WelcomePage": {
-        "title": "Добро пожаловать!"
+        "title": "Orgapp упрощает командную работу!",
+        "text": "Мы создали удобное приложение для планирования ваших проектов. Отслеживайте прогресс выполнения задач, завершайте их в срок, грамотно распределяйте работу между членами вашей команды!",
+        "button": "Начать работу"
     },
-    "MainPage": {}
+    "MainPage": {},
+    "LoginPage": {
+        "signIn": "Вход",
+        "login": "Логин",
+        "password": "Пароль",
+        "create": "Создайте новый аккаунт"
+    },
+    "RegistrationPage": {
+        "name": "Имя",
+        "return": "Вернуться ко входу в аккаунт",
+        "confirmPassword": "Повторить пароль"
+    },
+    "EditProfile":{
+        "editProfile": "Редактировать профиль",
+        "delUser": "Удалить ",
+        "upUser": "Обновить ",
+        "upMessage": "Ваши данные успешно обновлены"
+    },
+    "Error":{
+        "logMin": "логин должен быть не менее 2 символов",
+        "logMax": "логин не должен превышать 20 символов",
+        "nameReq": "Требуется имя",
+        "logReq": "Требуется логин",
+        "passNoConf": "Пароли не совпадают ",
+        "nameMin": "имя должно быть не менее 2 символов",
+        "nameMax": "имя не должно превышать 20 символов ",
+        "passMin": "пароль должен быть не менее 6 символов",
+        "passReq": "Требуется пароль "
+        
+    }
 }

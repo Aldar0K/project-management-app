@@ -3,21 +3,22 @@ import { IInitialState } from 'models';
 import { Decoder } from 'utils/Decoder';
 
 let initialStateWithToken: IInitialState = {
+  name: '',
   login: '',
   token: '',
   id: '',
-  password: '',
   allUser: [],
 };
 
 if (localStorage.getItem('token')) {
   const userDecodedInfo = Decoder(localStorage.getItem('token') as string);
+
   initialStateWithToken = {
-    login: userDecodedInfo.login,
+    name: '',
     token: localStorage.getItem('token') as string,
     id: userDecodedInfo.id,
-    password: '',
     allUser: [],
+    login: userDecodedInfo.login,
   };
 }
 
@@ -27,6 +28,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setName(state, action) {
+      state.name = action.payload;
+    },
     setLogin(state, action) {
       state.login = action.payload;
     },
@@ -36,9 +40,6 @@ const userSlice = createSlice({
     setUser(state, action) {
       return { ...action.payload };
     },
-    setPass(state, action) {
-      state.password = action.payload;
-    },
     setToken(state, action) {
       state.token = action.payload;
     },
@@ -46,6 +47,7 @@ const userSlice = createSlice({
       state.id = action.payload;
     },
     removeUser(state) {
+      state.name = '';
       state.login = '';
       state.token = '';
       state.id = '';
@@ -54,6 +56,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, setLogin, removeUser, setPass, setId, setAllUser } =
+export const { setToken, setUser, setName, removeUser, setId, setAllUser, setLogin } =
   userSlice.actions;
 export default userSlice.reducer;

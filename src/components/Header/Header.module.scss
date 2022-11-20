@@ -1,6 +1,7 @@
 @import 'styles/constants.scss';
 
 .header {
+  position: fixed;
   width: 100%;
   
   background-color: $color-primary;
@@ -8,7 +9,6 @@
   transition: 0.2s;
   
   &_scroll {
-    position: fixed;
     background-color: $color-additional;
   }
 }
@@ -16,20 +16,26 @@
 .container {
   display: flex;
 
-  padding: 1rem 1rem;
+  padding: .5rem 1rem;
 
   align-items: center;
-  gap: 1rem;
+  gap: .5rem;
 
   transition: 0.2s;
 
   &_scroll {
-    padding: .5rem 1rem;
+    padding: 0 1rem;
   }
 }
 
 .link {
+  display: flex;
+
   margin-right: auto;
+
+  justify-content: center;
+  justify-content: center;
+  gap: .5rem;
 }
 
 .title {

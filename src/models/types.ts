@@ -6,4 +6,8 @@ export type IconTypes =
   | 'success'
   | 'dot-menu'
   | 'password-show'
-  | 'password-hide';
+  | 'password-hide'
+  | 'logo'
+  | 'github'
+  | 'telegram'
+  | 'linkedin';

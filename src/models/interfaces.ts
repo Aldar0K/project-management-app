@@ -1,11 +1,16 @@
 export interface IUser {
   name?: string;
-  login: string;
-  id: string;
+  login?: string;
+  _id?: string;
   password?: string;
+}
+export interface IUserUpdate {
+  id: string;
+  body: IUser;
 }
 
 export interface IInitialState {
+  name: string;
   login: string;
   token: string;
   id: string;
@@ -42,4 +47,15 @@ export interface IBoard {
   title: string;
   owner: string;
   users: string[];
+}
+
+export interface IBoardData {
+  title: string;
+  owner: string;
+  users: string[];
+}
+
+export interface IBoardParams {
+  data: { title: string; owner: string; users: string[] };
+  id: string;
 }
