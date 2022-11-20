@@ -5,6 +5,7 @@ import Input from 'components/atoms/Input';
 import { IUserUpdate } from 'models';
 import React, { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { AuthorizationAPI, removeUser, useAppDispatch, useAppSelector } from 'store';
 import { validation } from 'utils/Validation';
@@ -18,6 +19,7 @@ const EditProfile = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(validation) });
 
+  const { t } = useTranslation();
   const { token, id, name: nameState, login: loginState } = useAppSelector((state) => state.user);
   const [deleteUser, { error: errorDel, isLoading: isLoadingDel }] =
     AuthorizationAPI.useDeleteUserMutation();
@@ -63,7 +65,8 @@ const EditProfile = () => {
     };
     await updateUser(userNewData).unwrap();
     setModalActive(true);
-    setMessage('Data updated successfully');
+    const a = t('EditProfile.editProfile');
+    setMessage(a);
   };
   const handleUpdateUser = async () => {};
 
@@ -78,49 +81,60 @@ const EditProfile = () => {
       )}
 
       <form className={styles.container} onSubmit={handleSubmit(submitForm)}>
-        <h3> Edit Profile</h3>
+        <h3> {t('EditProfile.editProfile')}</h3>
         <Input
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder={t('RegistrationPage.name') as string}
           register={register}
           rules={{
             required: true,
+            minLength: 2,
           }}
           showError={!!errors.name}
-          errorMessage={errors.name ? `${errors.name.message}` : ''}
+          errorMessage={t('Error.nameMin') as string}
           disabled={false}
         />
         <Input
           type="text"
-          name="Login"
-          placeholder="login"
+          name="login"
+          placeholder={t('LoginPage.login') as string}
           register={register}
           rules={{
             required: true,
             minLength: 2,
           }}
           showError={!!errors.login}
-          errorMessage="The field must contain at least 2 characters"
+          errorMessage={t('Error.logMin') as string}
           disabled={false}
         />
         <Input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder={t('LoginPage.password') as string}
           register={register}
           rules={{
             required: true,
             minLength: 6,
           }}
           showError={!!errors.password}
-          errorMessage="The field must contain at least 6 characters"
+          errorMessage={t('Error.passMin') as string}
           disabled={false}
         />
         <div className={styles.divButtons}>
           {' '}
-          <Button text="Delite User" type="primary" big={false} onClick={handleDeleteUser} />
-          <Button text="Update User" type="secondary" big={false} onClick={handleUpdateUser} />
+          <Button
+            text={t('EditProfile.delUser')}
+            type="primary"
+            big={false}
+            onClick={handleDeleteUser}
+          />
+          <Button
+            text={t('EditProfile.upUser')}
+            type="secondary"
+            big={false}
+            onClick={handleUpdateUser}
+          />
         </div>
       </form>
     </div>

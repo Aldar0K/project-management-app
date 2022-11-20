@@ -11,5 +11,34 @@
     "WelcomePage": {
         "title": "Welcome!"
     },
-    "MainPage": {}
+    "MainPage": {},
+    "LoginPage": {
+        "signIn": "Sign In",
+        "login": "Login",
+        "create": "Create a new account",
+        "password": "Password"
+    },
+    "RegistrationPage": {
+        "name": "Name",
+        "return": "Return to login",
+        "confirmPassword": "Confirm password"
+    },
+    "EditProfile":{
+        "editProfile": "Edit profile",
+        "delUser": "Delete User",
+        "upUser": "Update User",
+        "upMessage": "Your data has been successfully updated"
+    },
+    "Error":{
+        "logMin": "Login must be at least 2 characters",
+        "logMax": "Login must not exceed 20 characters",
+        "nameReq": "Name is required",
+        "logReq": "login is required",
+        "passNoConf": "Passwords do not match",
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must not exceed 20 characters",
+        "passMin": "Password must be at least 6 characters",
+        "passReq": "Password is required"
+        
+    }
 }
