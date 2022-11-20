@@ -11,16 +11,16 @@ const LangSwitch = () => {
   };
 
   return (
-    <>
-      <select
-        className={styles.container}
-        value={i18n.language}
-        onChange={(e) => handleLangChange(e)}
-      >
-        <option value="ru">Ru</option>
-        <option value="en">En</option>
+    <div className={styles.container}>
+      <select className={styles.select} value={i18n.language} onChange={(e) => handleLangChange(e)}>
+        <option className={styles.option} value="ru">
+          Ru
+        </option>
+        <option className={styles.option} value="en">
+          En
+        </option>
       </select>
-    </>
+    </div>
   );
 };
 

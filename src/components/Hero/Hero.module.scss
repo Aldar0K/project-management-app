@@ -1,0 +1,38 @@
+.hero {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+
+  height: calc(100vh - 4.685625rem);
+
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.content {
+  display: flex;
+
+  max-width: 40rem;
+  width: 100%;
+
+  flex-direction: column;
+  justify-self: center;
+  align-items: flex-start;
+  gap: .75rem;
+
+  user-select: none;
+}
+
+.image {
+  max-width: 600px;
+  min-width: 100px;
+
+  user-select: none;
+}
+
+.image img {
+  width: 100%;
+}
