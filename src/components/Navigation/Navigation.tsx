@@ -1,25 +1,73 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navigation.module.scss';
+import { removeUser, useAppDispatch, AuthorizationAPI, useAppSelector } from 'store';
+import Button from 'components/atoms/Button';
+import Heading from 'components/atoms/Heading';
 
 const Navigation = () => {
   const { t } = useTranslation();
 
+  const { token } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const { id, name } = useAppSelector((state) => state.user);
+  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
+
+  useEffect(() => {
+    if (id) trigger(id);
+  }, [id, trigger]);
+
+  const handleSignout = async () => {
+    if (token) {
+      dispatch(removeUser());
+      localStorage.removeItem('token');
+    }
+  };
+
   return (
     <nav className={styles.container}>
       <ul className={styles.list}>
-        <li className={styles.item}>
-          <Link to="/login" className={styles.link}>
-            {t('Navigation.signIn')}
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/registration" className={styles.link}>
-            {t('Navigation.signUp')}
-          </Link>
-        </li>
+        {token ? (
+          <>
+            <li className={styles.item}>
+              <Heading text={name} level={3} className={styles.name} />
+            </li>
+            <li className={styles.item}>
+              <Button
+                text={t('Navigation.signOut')}
+                type="bordered"
+                big={false}
+                onClick={handleSignout}
+              />
+            </li>
+          </>
+        ) : (
+          <>
+            <li className={styles.item}>
+              <Link to="/login" className={styles.link}>
+                <Button
+                  text={t('Navigation.signIn')}
+                  type="bordered"
+                  big={false}
+                  onClick={handleSignout}
+                />
+              </Link>
+            </li>
+            <li className={styles.item}>
+              <Link to="/registration" className={styles.link}>
+                <Button
+                  text={t('Navigation.signUp')}
+                  type="bordered"
+                  big={false}
+                  onClick={handleSignout}
+                />
+              </Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

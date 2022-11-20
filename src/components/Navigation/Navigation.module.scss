@@ -7,12 +7,27 @@
 .list {
   display: flex;
 
-  gap: 1rem;
+  gap: .5rem;
+}
+
+.item {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.125rem;
+  text-transform: uppercase;
+
+  color: $color-light;
 }
 
 .link {
-  font-size: 1.125rem;
-  text-transform: uppercase;
+  color: inherit;
+}
+
+.name {
+  padding: .3rem;
 
   color: $color-light;
 }

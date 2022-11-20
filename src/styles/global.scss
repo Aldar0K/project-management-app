@@ -17,8 +17,8 @@ body {
 }
 
 h1 {
-  font-size: 4rem;
-  line-height: 4.5rem;
+  font-size: 3rem;
+  line-height: 3.25rem;
   font-weight: 700;
   text-transform: uppercase;
   color: $color-primary;
@@ -33,16 +33,16 @@ h2 {
 }
 
 h3 {
-  font-size: 1.125rem;
-  line-height: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.375rem;
   font-weight: 700;
   text-transform: uppercase;
   color: $color-primary;
 }
 
 h4 {
-  font-size: 1.125rem;
-  line-height: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.375rem;
   font-weight: 400;
   text-transform: uppercase;
   color: $color-additional;
@@ -50,8 +50,8 @@ h4 {
 
 p, 
 span {
-  font-size: .875rem;
-  line-height: 1rem;
+  font-size: 1rem;
+  line-height: 1.125rem;
   font-weight: 400;
   color: $color-additional;
 }
@@ -66,6 +66,8 @@ span {
 }
 
 .main {
+  margin-top: 4.685625rem;
+
   flex-grow: 1;
 }
 
@@ -73,5 +75,5 @@ span {
   margin: 0 auto;
   padding: 0 1rem;
 
-  max-width: $desktop-width;
+  max-width: $width-desktop;
 }
