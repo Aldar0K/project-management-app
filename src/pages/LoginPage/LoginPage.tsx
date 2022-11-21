@@ -1,10 +1,13 @@
 import Login from 'components/Authorization/login/Login';
 import React from 'react';
+import styles from '../EditProfilePage/styleContainer.module.scss';
 
 const LoginPage = () => {
   return (
     <main className="main">
-      <Login />
+      <div className={`container ${styles.container}`}>
+        <Login />
+      </div>
     </main>
   );
 };
