@@ -1,0 +1,28 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+
+  height: 100%;
+  width: 17.5rem;
+  padding: 0.5rem;
+
+  flex-direction: column;
+  gap: 1rem;
+
+  background-color: $color-additional;
+  border-radius: .5em;
+}
+
+.heading {
+  color: $color-light;
+
+  user-select: none;
+}
+
+.tasks {
+  display: flex;
+
+  flex-direction: column;
+  gap: .5rem;
+}

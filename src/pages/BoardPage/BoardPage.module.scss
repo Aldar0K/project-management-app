@@ -1,16 +1,9 @@
 .container {
   display: flex;
 
-  padding: .5rem 1rem;
+  padding: 1rem 1rem .5rem;
   // height: calc(100vh - 8.00625rem);
 
-  // flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.board {
-  display: flex;
-
-  overflow-y: hidden;
 }

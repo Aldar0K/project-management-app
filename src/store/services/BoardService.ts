@@ -1,21 +1,19 @@
-import { IBoard, IBoardData, IBoardParams } from 'models';
+import { IBoard, IBoardData, IBoardParams, IColumn, ITask } from 'models';
 import { commonApi } from './common.api';
 
 export const BoardAPI = commonApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllBoard: build.query<IBoard[], void>({
+    getAllBoards: build.query<IBoard[], void>({
       query: () => ({ url: `/boards/` }),
       providesTags: (result) => [
         'Board',
         ...(result ? result.map(({ _id }) => ({ type: 'Board' as const, _id: _id })) : []),
       ],
     }),
-
     getBoardById: build.query<IBoard, string>({
       query: (boardId) => ({ url: `boards/${boardId}` }),
       providesTags: (result, error, arg) => [{ type: 'Board' as const, _id: arg }],
     }),
-
     getBoardsByUserId: build.query<IBoard[], string>({
       query: (userId) => ({ url: `boardsSet/${userId}` }),
       providesTags: (result) => [
@@ -43,5 +41,23 @@ export const BoardAPI = commonApi.injectEndpoints({
       query: (boardId) => ({ url: `boards/${boardId}`, method: 'DELETE' }),
       invalidatesTags: (result, error, arg) => [{ type: 'Board' as const, _id: arg }],
     }),
+
+    // TODO move to ColumnServise.
+    getColumnsByBoardId: build.query<IColumn[], string>({
+      query: (boardId) => ({ url: `/boards/${boardId}/columns` }),
+      providesTags: (result) => [
+        'BoardColumns',
+        ...(result ? result.map(({ _id }) => ({ type: 'BoardColumns' as const, _id: _id })) : []),
+      ],
+    }),
+
+    // TODO move to TaskServise.
+    // getTasksByBoardId: build.query<ITask[], string>({
+    //   query: (boardId, columnId) => ({ url: `/boards/${boardId}/columns/${columnId}/tasks` }),
+    //   providesTags: (result) => [
+    //     'ColumnTasks',
+    //     ...(result ? result.map(({ _id }) => ({ type: 'ColumnTasks' as const, _id: _id })) : []),
+    //   ],
+    // }),
   }),
 });
