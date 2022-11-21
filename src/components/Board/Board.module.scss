@@ -7,10 +7,15 @@
   gap: 1rem;
 }
 
+.heading {
+  text-transform: none;
+  user-select: none;
+}
+
 .columns {
   display: flex;
 
-  height: calc(100vh - 12.75625rem);
+  height: calc(100vh - 13.25625rem);
 
   gap: 1rem;
 }

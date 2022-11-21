@@ -10,13 +10,13 @@
   flex-direction: column;
   gap: 1rem;
 
-  background-color: $color-additional;
+  // background-color: $color-additional;
+  box-shadow: .3125rem .375rem 1rem $color-background-dark;
   border-radius: .5em;
 }
 
 .heading {
-  color: $color-light;
-
+  text-transform: none;
   user-select: none;
 }
 
