@@ -43,7 +43,10 @@ const GlobalRoute = () => {
           element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />}
         />
         {/* <Route path="/main" element={<MainPage />} /> */}
-        <Route path="/boards/:id" element={<BoardPage />} />
+        <Route
+          path="/boards/:id"
+          element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<BoardPage />} />}
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

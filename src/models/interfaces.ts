@@ -57,7 +57,7 @@ export interface IBoardData {
 }
 
 export interface IBoardParams {
-  data: { title: string; owner: string; users: string[] };
+  body: { title: string; owner: string; users: string[] };
   id: string;
 }
 
