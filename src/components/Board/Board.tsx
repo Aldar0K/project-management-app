@@ -16,7 +16,7 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
   return (
     <>
       <div className={styles.container}>
-        <EditableBoardTitle level={2} text={title} boardId={boardId} />
+        <EditableBoardTitle level={2} text={title} boardId={boardId} owner={owner} users={users} />
         <ul className={styles.columns}>
           {/* Add filter method to filter columns by order? */}
           {columns && columns.map((column) => <Column column={column} key={column._id} />)}

@@ -41,7 +41,7 @@ export const BoardAPI = commonApi.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Board' as const, _id: arg.id }],
+      invalidatesTags: (result, error, _id) => [{ type: 'Board' as const, _id }],
     }),
     deleteBoardById: build.mutation<IBoard[], string>({
       query: (boardId) => ({ url: `boards/${boardId}`, method: 'DELETE' }),

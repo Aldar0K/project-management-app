@@ -1,24 +1,107 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useForm, FieldValues } from 'react-hook-form';
 
 import styles from './EditableBoardTitle.module.scss';
+import { BoardAPI } from 'store';
 import Heading from 'components/atoms/Heading';
+import Icon from 'components/atoms/Icon';
+import Input from 'components/atoms/Input';
+import ErrorModal from 'components/atoms/errorModal';
 
 interface EditableBoardTitleProps {
   level: 1 | 2 | 3 | 4;
   text: string;
   boardId: string;
+  owner: string;
+  users: string[];
 }
 
-const EditableBoardTitle: FC<EditableBoardTitleProps> = ({ level, text, boardId }) => {
-  const [edit, setEdit] = useState(false);
+const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
+  level,
+  text,
+  boardId,
+  owner,
+  users,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm();
 
-  const handleEdit = () => {};
-  const handleSubmit = () => {};
-  const handleCancel = () => {};
+  const [edit, setEdit] = useState(false);
+  const [updateBoardById, { isLoading, error }] = BoardAPI.useUpdateBoardByIdMutation();
+  const [isModalActive, setModalActive] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (error && 'data' in error) {
+      setErrorMessage(error.data.message);
+      setModalActive(true);
+    } else {
+      setModalActive(false);
+    }
+  }, [error]);
+
+  const handleEdit = () => {
+    clearErrors('title');
+    setValue('title', text);
+    setEdit(true);
+  };
+
+  const onSubmit = (data: FieldValues) => {
+    const { title } = data;
+
+    if (title.trim() !== text) {
+      updateBoardById({ id: boardId, body: { title, owner, users } });
+    }
+
+    setEdit(false);
+  };
+
+  const handleCancel = () => setEdit(false);
 
   return (
     <div className={styles.container}>
-      <Heading className={styles.heading} level={level} text={text} />
+      {edit ? (
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="text"
+            name="title"
+            register={register}
+            rules={{
+              required: true,
+            }}
+            showError={!!errors.title}
+          ></Input>
+          <div className={styles.controls}>
+            <button type="submit" className={styles.confirm}>
+              <Icon type="confirm" width="30" />
+            </button>
+            <button type="reset" className={styles.reset} onClick={handleCancel}>
+              <Icon type="cancel" width="30" />
+            </button>
+          </div>
+        </form>
+      ) : (
+        <div className={styles.title}>
+          <Heading
+            className={styles.heading}
+            level={level}
+            text={isLoading ? 'Loading...' : text}
+          />
+          <div className={styles.edit} onClick={handleEdit}>
+            <Icon type="edit" width="22" />
+          </div>
+        </div>
+      )}
+      {isModalActive && (
+        <ErrorModal onClose={() => setModalActive(false)}>
+          <h3>{errorMessage}</h3>
+        </ErrorModal>
+      )}
     </div>
   );
 };

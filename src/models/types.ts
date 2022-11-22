@@ -12,4 +12,6 @@ export type IconTypes =
   | 'telegram'
   | 'linkedin'
   | 'rss'
-  | 'edit';
+  | 'edit'
+  | 'confirm'
+  | 'cancel';
