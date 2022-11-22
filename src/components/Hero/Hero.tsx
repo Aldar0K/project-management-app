@@ -13,18 +13,6 @@ const Hero = () => {
   const { t } = useTranslation();
   const { token } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  const [, setErrorCatch] = React.useState(null);
-
-  const handleClick = () => {
-    // simulate an async function
-    setTimeout(() => {
-      // we asume that there is an error here and
-      // we throw an error
-      setErrorCatch(() => {
-        throw new Error('This is an error');
-      });
-    }, 3000);
-  };
 
   const handleStart = () => {
     navigate('/login');
@@ -32,9 +20,6 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
-      <button className="myButton" onClick={handleClick}>
-        Press this to simulate async
-      </button>
       <div className={`container ${styles.container}`}>
         <div className={styles.content}>
           <Heading className={styles.heading} text={t('WelcomePage.title')} level={1} />
