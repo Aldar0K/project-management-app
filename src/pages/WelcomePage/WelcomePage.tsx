@@ -3,6 +3,7 @@ import React from 'react';
 import Hero from 'components/Hero';
 import Team from 'components/Team';
 import Course from 'components/Course';
+import ErrorBoundary from 'utils/ErrorBoundary';
 
 const WelcomePage = () => {
   return (
