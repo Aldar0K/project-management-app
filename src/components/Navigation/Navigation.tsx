@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navigation.module.scss';
-import { removeUser, useAppDispatch, AuthorizationAPI, useAppSelector } from 'store';
+import { removeUser, useAppDispatch, useAppSelector } from 'store';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 
@@ -13,12 +13,7 @@ const Navigation = () => {
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
-  const { id, name } = useAppSelector((state) => state.user);
-  const [trigger] = AuthorizationAPI.useLazyGetUserByIdQuery();
-
-  useEffect(() => {
-    if (id) trigger(id);
-  }, [id, trigger]);
+  const { name } = useAppSelector((state) => state.user);
 
   const handleSignout = async () => {
     if (token) {
