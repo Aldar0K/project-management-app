@@ -1,7 +1,7 @@
 import BoardInstance from 'components/BoardItem/BoardInstance';
 import BoardPlus from 'components/BoardItem/BoardPlus';
-import CreateBoardModal from 'components/BoardItem/CreateBoardModal/CreateBoardModal';
-import React from 'react';
+import CreateBoardForm from 'components/BoardItem/CreateBoardForm/CreateBoardForm';
+import React, { useState } from 'react';
 import styles from './MainPage.module.scss';
 
 //mock data
@@ -24,20 +24,24 @@ const fakeApi = [
 ];
 
 const MainPage = () => {
+  const [createBoardModal, setCreateBoardModal] = useState(false);
   return (
     <div className="main">
       <div className={`container`}>
-        <ul className={styles.container}>
-          {fakeApi.map((board) => (
-            <li key={board._id}>
-              <BoardInstance board={board} />
+        {!createBoardModal ? (
+          <ul className={styles.container}>
+            {fakeApi.map((board) => (
+              <li key={board._id}>
+                <BoardInstance board={board} setModal={setCreateBoardModal} />
+              </li>
+            ))}
+            <li>
+              <BoardPlus setModal={setCreateBoardModal} />
             </li>
-          ))}
-          <li>
-            <BoardPlus />
-          </li>
-        </ul>
-        {/* <CreateBoardModal /> */}
+          </ul>
+        ) : (
+          <CreateBoardForm setCreateBoardModal={setCreateBoardModal} />
+        )}
       </div>
     </div>
   );
