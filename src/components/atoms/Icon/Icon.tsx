@@ -364,6 +364,22 @@ const Icon: React.FC<IconProps> = ({ type, width, height = width, color = COLOR_
           <path d="M4.293,18.293,10.586,12,4.293,5.707A1,1,0,0,1,5.707,4.293L12,10.586l6.293-6.293a1,1,0,1,1,1.414,1.414L13.414,12l6.293,6.293a1,1,0,1,1-1.414,1.414L12,13.414,5.707,19.707a1,1,0,0,1-1.414-1.414Z" />
         </svg>
       );
+    case 'delete':
+      return (
+        <svg
+          width={!!width ? width : 48}
+          height={!!height ? height : 48}
+          viewBox="0 0 48 48"
+          xmlns="http://www.w3.org/2000/svg"
+          fill={color}
+        >
+          <title />
+          <path d="M42,3H28a2,2,0,0,0-2-2H22a2,2,0,0,0-2,2H6A2,2,0,0,0,6,7H42a2,2,0,0,0,0-4Z" />
+          <path d="M39,9a2,2,0,0,0-2,2V43H11V11a2,2,0,0,0-4,0V45a2,2,0,0,0,2,2H39a2,2,0,0,0,2-2V11A2,2,0,0,0,39,9Z" />
+          <path d="M21,37V19a2,2,0,0,0-4,0V37a2,2,0,0,0,4,0Z" />
+          <path d="M31,37V19a2,2,0,0,0-4,0V37a2,2,0,0,0,4,0Z" />
+        </svg>
+      );
     default:
       return null;
   }

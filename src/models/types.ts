@@ -14,4 +14,5 @@ export type IconTypes =
   | 'rss'
   | 'edit'
   | 'confirm'
-  | 'cancel';
+  | 'cancel'
+  | 'delete';

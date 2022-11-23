@@ -92,9 +92,9 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
             level={level}
             text={isLoading ? 'Loading...' : text}
           />
-          <div className={styles.edit} onClick={handleEdit}>
+          <button className={styles.edit} onClick={handleEdit}>
             <Icon type="edit" width="22" />
-          </div>
+          </button>
         </div>
       )}
       {isModalActive && (

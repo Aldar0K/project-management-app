@@ -50,13 +50,15 @@
 
   padding: .6875rem;
   
+  background: transparent;
   border-radius: 100%;
 
   opacity: 0;
   transition: .3s all ease;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #d1ebf6;
   }
   &:active {
@@ -71,13 +73,13 @@
   padding: .4375rem;
 
   background: transparent;
-
   border-radius: 100%;
 
   transition: .3s all ease;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: #d1ebf6;
   }
   &:active {

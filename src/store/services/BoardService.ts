@@ -56,9 +56,19 @@ export const BoardAPI = commonApi.injectEndpoints({
         ...(result ? result.map(({ _id }) => ({ type: 'Column' as const, _id: _id })) : []),
       ],
     }),
+    deleteColumnByBoardIdAndColumnId: build.mutation<
+      IColumn,
+      { boardId: string; columnId: string }
+    >({
+      query: ({ boardId, columnId }) => ({
+        url: `/boards/${boardId}/columns/${columnId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg }],
+    }),
 
     // TODO move to TaskServise?
-    getTasksByBoardAndColumnIds: build.query<ITask[], { boardId: string; columnId: string }>({
+    getTasksByBoardIdAndColumnId: build.query<ITask[], { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) => ({ url: `/boards/${boardId}/columns/${columnId}/tasks` }),
       providesTags: (result) => [
         'Task',
