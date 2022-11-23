@@ -1,16 +1,30 @@
+@import 'styles/constants.scss';
+
 .container {
   display: flex;
 
-  flex: 1;
+  height: 100%;
 
   flex-direction: column;
   gap: .5rem;
+
+  scrollbar-color: $color-additional;
+  scrollbar-gutter: stable;
+}
+
+.columnsContainer {
+  height: 100%;
+
+  padding-bottom: 1rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .columns {
   display: flex;
 
-  height: calc(100vh - 12.75625rem);
+  height: 100%;
 
   gap: 1rem;
 }
