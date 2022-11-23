@@ -8,6 +8,7 @@ import Button from 'components/atoms/Button';
 import Icon from 'components/atoms/Icon';
 import Task from 'components/Task';
 import ErrorModal from 'components/atoms/errorModal';
+import ConfirmationModal from 'components/atoms/ConfirmationModal';
 
 interface ColumnProps {
   column: IColumn;
@@ -17,19 +18,18 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
   const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
   const [deleteColumnByBoardIdAndColumnId, { error }] =
     BoardAPI.useDeleteColumnByBoardIdAndColumnIdMutation();
-  const [isModalActive, setModalActive] = useState(false);
+  const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isConfirmationModalActive, setConfirmationModalActive] = useState(false);
 
   useEffect(() => {
     if (error && 'data' in error) {
       setErrorMessage(error.data.message);
-      setModalActive(true);
+      setErrorModalActive(true);
     } else {
-      setModalActive(false);
+      setErrorModalActive(false);
     }
   }, [error]);
-
-  const handleDelete = () => {};
 
   const confirmDelete = () => {
     deleteColumnByBoardIdAndColumnId({ boardId, columnId });
@@ -41,8 +41,8 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
         <Heading className={styles.heading} level={3} text={title} />
         <ul className={styles.tasks}>
           {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
-          {/* Add create new task button */}
           <div className={styles.controls}>
+            {/* Add create new task button */}
             <Button
               type="transparent-dark"
               text="Add new task"
@@ -51,16 +51,24 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
               iconWidth="12"
               onClick={() => {}}
             />
-            {/* <Button type="transparent-dark" text="Delete" big={false} onClick={() => {}} /> */}
-            <button className={styles.delete} onClick={handleDelete}>
+            <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
               <Icon type="delete" width="26" />
             </button>
           </div>
         </ul>
-        {isModalActive && (
-          <ErrorModal onClose={() => setModalActive(false)}>
+
+        {isErrorModalActive && (
+          <ErrorModal onClose={() => setErrorModalActive(false)}>
             <h3>{errorMessage}</h3>
           </ErrorModal>
+        )}
+
+        {isConfirmationModalActive && (
+          <ConfirmationModal
+            text="Delete column?"
+            onConfirm={confirmDelete}
+            onClose={() => setConfirmationModalActive(false)}
+          />
         )}
       </div>
     </>
