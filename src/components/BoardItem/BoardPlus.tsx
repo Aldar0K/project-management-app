@@ -2,9 +2,9 @@ import Button from 'components/atoms/Button';
 import React from 'react';
 import styles from './BoardItem.module.scss';
 
-const BoardPlus = () => {
+const BoardPlus = ({ setModal }: { setModal: (bool: boolean) => void }) => {
   return (
-    <div className={`${styles.board} ${styles.plus}`}>
+    <div onClick={() => setModal(true)} className={`${styles.board} ${styles.plus}`}>
       <Button
         text=""
         type="transparent-dark"
