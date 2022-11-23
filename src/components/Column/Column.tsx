@@ -6,9 +6,11 @@ import { BoardAPI } from 'store';
 import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import Icon from 'components/atoms/Icon';
-import Task from 'components/Task';
 import ErrorModal from 'components/atoms/errorModal';
 import ConfirmationModal from 'components/atoms/ConfirmationModal';
+import Modal from 'components/atoms/Modal';
+import Task from 'components/Task';
+import CreateTaskForm from 'components/CreateTaskForm';
 
 interface ColumnProps {
   column: IColumn;
@@ -18,9 +20,12 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
   const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
   const [deleteColumnByBoardIdAndColumnId, { error }] =
     BoardAPI.useDeleteColumnByBoardIdAndColumnIdMutation();
+
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
   const [isConfirmationModalActive, setConfirmationModalActive] = useState(false);
+  const [isCreateModalActive, setCreateModalActive] = useState(false);
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -49,7 +54,7 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
               big={false}
               iconType="add-cross"
               iconWidth="12"
-              onClick={() => {}}
+              onClick={() => setCreateModalActive(true)}
             />
             <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
               <Icon type="delete" width="26" />
@@ -57,10 +62,10 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
           </div>
         </ul>
 
-        {isErrorModalActive && (
-          <ErrorModal onClose={() => setErrorModalActive(false)}>
-            <h3>{errorMessage}</h3>
-          </ErrorModal>
+        {isCreateModalActive && (
+          <Modal onClose={() => setCreateModalActive(false)}>
+            <CreateTaskForm onCancel={() => setCreateModalActive(false)} />
+          </Modal>
         )}
 
         {isConfirmationModalActive && (
@@ -69,6 +74,12 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
             onConfirm={confirmDelete}
             onClose={() => setConfirmationModalActive(false)}
           />
+        )}
+
+        {isErrorModalActive && (
+          <ErrorModal onClose={() => setErrorModalActive(false)}>
+            <h3>{errorMessage}</h3>
+          </ErrorModal>
         )}
       </div>
     </>

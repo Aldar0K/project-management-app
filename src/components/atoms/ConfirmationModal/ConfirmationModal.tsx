@@ -19,8 +19,8 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({ text, onConfirm, onClo
         </button>
         <Heading level={2} text={text} className={styles.heading} />
         <div className={styles.controls}>
-          <Button type="bordered" big={false} text="Cancel" onClick={onClose} />
           <Button type="primary" big={false} text="Delete" onClick={onConfirm} />
+          <Button type="bordered" big={false} text="Cancel" onClick={onClose} />
         </div>
       </div>
     </div>

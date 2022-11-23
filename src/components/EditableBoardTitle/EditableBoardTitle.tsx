@@ -75,7 +75,7 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
               required: true,
             }}
             showError={!!errors.title}
-          ></Input>
+          />
           <div className={styles.controls}>
             <button type="submit" className={styles.confirm}>
               <Icon type="confirm" width="30" />
@@ -97,6 +97,7 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
           </button>
         </div>
       )}
+
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
           <h3>{errorMessage}</h3>
