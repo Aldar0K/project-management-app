@@ -28,8 +28,19 @@ const Navigation = () => {
         {token ? (
           <>
             <li className={styles.item}>
+              <Link to="/main" className={styles.link}>
+                <Button
+                  text={t('Navigation.main')}
+                  type="bordered"
+                  big={false}
+                  onClick={() => {}}
+                />
+              </Link>
+            </li>
+            <li className={styles.item}>
               <Heading text={name} level={3} className={styles.name} />
             </li>
+
             <li className={styles.item}>
               <Button
                 text={t('Navigation.signOut')}

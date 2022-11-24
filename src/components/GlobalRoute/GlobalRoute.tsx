@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import WelcomePage from 'pages/WelcomePage';
@@ -6,9 +6,10 @@ import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import EditProfilePage from 'pages/EditProfilePage';
-import BoardPage from 'pages/BoardPage';
 import { AuthorizationAPI, removeUser, useAppDispatch, useAppSelector } from 'store';
 import ProtectedRoute, { ProtectedRouteProps } from './ProtectedRoute';
+import MainPage from 'pages/MainPage';
+import BoardPage from 'pages/BoardPage';
 import ErrorBoundary from 'utils/ErrorBoundary';
 
 const GlobalRoute = () => {
@@ -37,17 +38,53 @@ const GlobalRoute = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<RegisterPage />} />
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary>
+              <WelcomePage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <ErrorBoundary>
+              <LoginPage />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            <ErrorBoundary>
+              <RegisterPage />
+            </ErrorBoundary>
+          }
+        />
         <Route
           path="/editProfile"
-          element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />}
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />
+            </ErrorBoundary>
+          }
         />
-        {/* <Route path="/main" element={<MainPage />} /> */}
+        <Route
+          path="/main"
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<MainPage />} />
+            </ErrorBoundary>
+          }
+        />
         <Route
           path="/boards/:id"
-          element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<BoardPage />} />}
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<BoardPage />} />
+            </ErrorBoundary>
+          }
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>

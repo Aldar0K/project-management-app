@@ -3,7 +3,8 @@
         "signIn": "Sign In",
         "signUp": "Sign Up",
         "signOut": "Sign out",
-        "profile": "Profile"
+        "profile": "Profile",
+        "main": "Main"
     },
     "Team": {
         "title": "Our team",
@@ -54,5 +55,8 @@
         "passMin": "Password must be at least 6 characters",
         "passReq": "Password is required"
         
+    },
+    "Global":{
+        "close": "Close"
     }
 }
