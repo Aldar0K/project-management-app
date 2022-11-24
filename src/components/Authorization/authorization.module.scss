@@ -19,9 +19,36 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.containerEdit {
+  position: relative;
+  gap: 32px;
+  width: 300px;
+  margin:50px auto 0;
+  background: #F5F1EF;
+  box-shadow: 5px 6px 60px rgba(128, 128, 128, 0.5);
+  border-radius: 16px;
+  text-align: center;
+}
 
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
+
+}
+
+.divButtonsDel{
+  position: absolute;
+  right:  32px;
+  bottom: 32px;
+}
 @media (max-width: 680px) {
   .container {
+  margin:20px auto 20px;
+}
+.containerEdit {
   margin:20px auto 20px;
 }
  }

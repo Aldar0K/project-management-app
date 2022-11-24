@@ -38,6 +38,16 @@ const Navigation = () => {
                 onClick={handleSignout}
               />
             </li>
+            <li className={styles.item}>
+              <Link to="/editProfile" className={styles.link}>
+                <Button
+                  text={t('EditProfile.editProfile')}
+                  type="bordered"
+                  big={false}
+                  onClick={() => {}}
+                />
+              </Link>
+            </li>
           </>
         ) : (
           <>
