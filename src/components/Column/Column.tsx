@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './Column.module.scss';
 import { IColumn } from 'models';
 import { BoardAPI } from 'store';
-import Heading from 'components/atoms/Heading';
 import Button from 'components/atoms/Button';
 import Icon from 'components/atoms/Icon';
 import ErrorModal from 'components/atoms/errorModal';
@@ -11,6 +10,7 @@ import ConfirmationModal from 'components/atoms/ConfirmationModal';
 import Modal from 'components/atoms/Modal';
 import Task from 'components/Task';
 import CreateTaskForm from 'components/CreateTaskForm';
+import EditableColumnTitle from 'components/EditableColumnTitle';
 
 interface ColumnProps {
   column: IColumn;
@@ -43,7 +43,14 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
   return (
     <>
       <div className={styles.container}>
-        <Heading className={styles.heading} level={3} text={title} />
+        {/* <Heading className={styles.heading} level={3} text={title} /> */}
+        <EditableColumnTitle
+          level={3}
+          text={title}
+          boardId={boardId}
+          columnId={columnId}
+          order={order}
+        />
         <div className={styles.tasksContainer}>
           <ul className={styles.tasks}>
             {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}

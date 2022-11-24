@@ -68,7 +68,13 @@ export interface IColumn {
   boardId: string;
 }
 
-// export interface IColumnData {
+export interface IColumnParams {
+  boardId: string;
+  columnId: string;
+  body: { title: string; order: number };
+}
+
+// export interface IColumnResponse {
 //   title: string;
 //   order: number;
 //   boardId: string;

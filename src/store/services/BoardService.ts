@@ -1,4 +1,12 @@
-import { IBoard, IBoardData, IBoardParams, IColumn, ITask, ITaskParams } from 'models';
+import {
+  IBoard,
+  IBoardData,
+  IBoardParams,
+  IColumn,
+  IColumnParams,
+  ITask,
+  ITaskParams,
+} from 'models';
 import { commonApi } from './common.api';
 
 export const BoardAPI = commonApi.injectEndpoints({
@@ -55,6 +63,14 @@ export const BoardAPI = commonApi.injectEndpoints({
         'Column',
         ...(result ? result.map(({ _id }) => ({ type: 'Column' as const, _id: _id })) : []),
       ],
+    }),
+    updateColumnByBoardIdAndColumnId: build.mutation<IColumn, IColumnParams>({
+      query: ({ boardId, columnId, body }) => ({
+        url: `/boards/${boardId}/columns/${columnId}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg.columnId }],
     }),
     deleteColumnByBoardIdAndColumnId: build.mutation<
       IColumn,
