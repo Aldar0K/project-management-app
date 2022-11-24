@@ -24,14 +24,16 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
         <ul className={styles.columns}>
           {/* Add filter method to filter columns by order? */}
           {columns && columns.map((column) => <Column column={column} key={column._id} />)}
-          <Button
-            type="transparent-dark"
-            text="Add new column"
-            big={false}
-            iconType="add-cross"
-            iconWidth="12"
-            onClick={() => setCreateModalActive(true)}
-          />
+          <li className={styles.createButton}>
+            <Button
+              type="transparent-dark"
+              text="Add new column"
+              big={false}
+              iconType="add-cross"
+              iconWidth="12"
+              onClick={() => setCreateModalActive(true)}
+            />
+          </li>
         </ul>
       </div>
 
