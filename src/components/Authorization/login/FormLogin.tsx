@@ -6,7 +6,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { AuthorizationAPI } from 'store/services/UserService';
 import { Decoder } from 'utils/Decoder';
 import styles from '../authorization.module.scss';
 
