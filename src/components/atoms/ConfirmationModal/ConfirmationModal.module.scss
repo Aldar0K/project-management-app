@@ -2,12 +2,13 @@
 
 .container {
   display: flex;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 5;
 
   justify-content: center;
   align-items: center;
@@ -29,12 +30,26 @@
   display: flex;
   position: fixed;
 
+  padding: 1.5rem 2rem;
+
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 
   background-color: $color-light;
   border-radius: 1rem;
+}
+
+.heading {
+  user-select: none;
+  text-transform: none;
+}
+
+.controls {
+  display: flex;
+
+  justify-content: space-around;
+  gap: 1rem;
 }
 
 .closeButton {

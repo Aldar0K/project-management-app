@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import WelcomePage from 'pages/WelcomePage';
 import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import EditProfilePage from 'pages/EditProfilePage';
+import BoardPage from 'pages/BoardPage';
 import { AuthorizationAPI, removeUser, useAppDispatch, useAppSelector } from 'store';
 import ProtectedRoute, { ProtectedRouteProps } from './ProtectedRoute';
 import ErrorBoundary from 'utils/ErrorBoundary';
@@ -36,14 +38,18 @@ const GlobalRoute = () => {
     <>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        {/* <Route path="/main" element={<MainPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegisterPage />} />
         <Route
           path="/editProfile"
           element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />}
         />
+        {/* <Route path="/main" element={<MainPage />} /> */}
+        <Route
+          path="/boards/:id"
+          element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<BoardPage />} />}
+        />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<RegisterPage />} />
       </Routes>
     </>
   );
