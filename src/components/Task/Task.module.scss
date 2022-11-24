@@ -14,29 +14,55 @@
   border-radius: .5em;
 
   transition: .3s all ease;
-  // overflow: auto;
   cursor: pointer;
 
   &:hover {
     box-shadow: 3px 3px 5px $color-background-dark;
 
-    & .icon {
-      opacity: 1;
-    }
+    // & .controls {
+    //   opacity: 1;
+    // }
   }
 }
 
 .heading {
-  // width: 12.4375rem;
+  width: 100%;
+  flex: 2;
 
   word-wrap: break-word;
   text-transform: none;
   user-select: none;
 }
 
-.icon {
+.controls {
   display: flex;
 
-  opacity: 0;
+  flex: 1;
+
+  justify-content: flex-end;
+  gap: .2rem;
+
+  // opacity: 0;
   transition: .3s all ease;
+}
+
+.edit,
+.delete {
+  display: flex;
+
+  padding: .6875rem;
+
+  background: transparent;
+  border-radius: 100%;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
 }
