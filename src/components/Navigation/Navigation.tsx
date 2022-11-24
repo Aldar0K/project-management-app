@@ -41,7 +41,7 @@ const Navigation = () => {
             <li className={styles.item}>
               <Link to="/editProfile" className={styles.link}>
                 <Button
-                  text={t('EditProfile.editProfile')}
+                  text={t('Navigation.profile')}
                   type="bordered"
                   big={false}
                   onClick={() => {}}

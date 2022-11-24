@@ -2,7 +2,8 @@
     "Navigation": {
         "signIn": "Вход",
         "signUp": "Регистрация",
-        "signOut": "Выйти"
+        "signOut": "Выйти",
+        "profile": "Профиль"
     },
     "Team": {
         "title": "Наша команда",

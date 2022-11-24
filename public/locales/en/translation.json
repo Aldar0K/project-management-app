@@ -2,7 +2,8 @@
     "Navigation": {
         "signIn": "Sign In",
         "signUp": "Sign Up",
-        "signOut": "Sign out"
+        "signOut": "Sign out",
+        "profile": "Profile"
     },
     "Team": {
         "title": "Our team",
