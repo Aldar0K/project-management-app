@@ -44,23 +44,25 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
     <>
       <div className={styles.container}>
         <Heading className={styles.heading} level={3} text={title} />
-        <ul className={styles.tasks}>
-          {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
-          <div className={styles.controls}>
-            {/* Add create new task button */}
-            <Button
-              type="transparent-dark"
-              text="Add new task"
-              big={false}
-              iconType="add-cross"
-              iconWidth="12"
-              onClick={() => setCreateModalActive(true)}
-            />
-            <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
-              <Icon type="delete" width="26" />
-            </button>
-          </div>
-        </ul>
+        <div className={styles.tasksContainer}>
+          <ul className={styles.tasks}>
+            {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
+          </ul>
+        </div>
+        <div className={styles.controls}>
+          {/* Add create new task button */}
+          <Button
+            type="transparent-dark"
+            text="Add new task"
+            big={false}
+            iconType="add-cross"
+            iconWidth="12"
+            onClick={() => setCreateModalActive(true)}
+          />
+          <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
+            <Icon type="delete" width="26" />
+          </button>
+        </div>
 
         {isCreateModalActive && (
           <Modal onClose={() => setCreateModalActive(false)}>
