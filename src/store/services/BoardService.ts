@@ -1,4 +1,4 @@
-import { IBoard, IBoardData, IBoardParams, IColumn, ITask } from 'models';
+import { IBoard, IBoardData, IBoardParams, IColumn, ITask, ITaskParams } from 'models';
 import { commonApi } from './common.api';
 
 export const BoardAPI = commonApi.injectEndpoints({
@@ -74,6 +74,14 @@ export const BoardAPI = commonApi.injectEndpoints({
         'Task',
         ...(result ? result.map(({ _id }) => ({ type: 'Task' as const, _id: _id })) : []),
       ],
+    }),
+    createTaskByBoardIdAndColumnId: build.mutation<ITask, ITaskParams>({
+      query: ({ boardId, columnId, body }) => ({
+        url: `/boards/${boardId}/columns/${columnId}/tasks`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Task'],
     }),
   }),
 });

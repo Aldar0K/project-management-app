@@ -5,11 +5,17 @@ import styles from './ConfirmationModal.module.scss';
 
 interface IConfirmationModalProps {
   text: string;
+  confirmButtonText: string;
   onConfirm: () => void;
   onClose: () => void;
 }
 
-const ConfirmationModal: FC<IConfirmationModalProps> = ({ text, onConfirm, onClose }) => {
+const ConfirmationModal: FC<IConfirmationModalProps> = ({
+  text,
+  confirmButtonText,
+  onConfirm,
+  onClose,
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.backdrop} onClick={onClose} />
@@ -19,8 +25,8 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({ text, onConfirm, onClo
         </button>
         <Heading level={2} text={text} className={styles.heading} />
         <div className={styles.controls}>
-          <Button type="primary" big={false} text="Delete" onClick={onConfirm} />
           <Button type="bordered" big={false} text="Cancel" onClick={onClose} />
+          <Button type="primary" big={false} text={confirmButtonText} onClick={onConfirm} />
         </div>
       </div>
     </div>

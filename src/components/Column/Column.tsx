@@ -64,13 +64,19 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
 
         {isCreateModalActive && (
           <Modal onClose={() => setCreateModalActive(false)}>
-            <CreateTaskForm onCancel={() => setCreateModalActive(false)} />
+            <CreateTaskForm
+              boardId={boardId}
+              columnId={columnId}
+              tasksLength={tasks ? tasks.length : 0}
+              onCancel={() => setCreateModalActive(false)}
+            />
           </Modal>
         )}
 
         {isConfirmationModalActive && (
           <ConfirmationModal
             text="Delete column?"
+            confirmButtonText="Delete"
             onConfirm={confirmDelete}
             onClose={() => setConfirmationModalActive(false)}
           />
