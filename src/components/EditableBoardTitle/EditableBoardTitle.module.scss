@@ -1,0 +1,88 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+
+  height: 2.75rem;
+
+  align-items: center;
+
+  &:hover {
+    & .heading {
+      color: $color-additional;
+    }
+
+    & .edit {
+      opacity: 1;
+    }
+  }
+}
+
+.form {
+  display: flex;
+
+  align-items: center;
+
+  gap: .5rem;
+}
+
+.controls {
+  display: flex;
+  
+  align-items: center;
+}
+
+.title {
+  display: flex;
+
+  align-items: center;
+  gap: .5rem;
+}
+
+.heading {
+  text-transform: none;
+  user-select: none;
+  transition: .3s all ease;
+}
+
+.edit {
+  display: flex;
+
+  padding: .6875rem;
+  
+  background: transparent;
+  border-radius: 100%;
+
+  opacity: 0;
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}
+
+.confirm,
+.reset {
+  display: flex;
+
+  padding: .4375rem;
+
+  background: transparent;
+  border-radius: 100%;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}

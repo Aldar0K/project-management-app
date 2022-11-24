@@ -7,8 +7,7 @@ interface IModalProps {
   onClose: () => void;
 }
 
-function ErrorModal(props: IModalProps) {
-  const { onClose, children } = props;
+const ErrorModal: FC<IModalProps> = ({ onClose, children }) => {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal}>
@@ -17,6 +16,6 @@ function ErrorModal(props: IModalProps) {
       </div>
     </div>
   );
-}
+};
 
 export default ErrorModal;

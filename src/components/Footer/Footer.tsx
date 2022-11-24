@@ -1,6 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import styles from './Footer.module.scss';
+import { COLOR_LIGHT } from '../../constants';
+import Icon from 'components/atoms/Icon';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -8,12 +11,8 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.container}`}>
-        <a className="rss-link" href="https://rs.school/react/" target="blank">
-          <img
-            src="https://rs.school/images/rs_school_js.svg"
-            alt="rs_school_js.svg"
-            width="100px"
-          />
+        <a className={styles.rss} href="https://rs.school/react/" target="blank">
+          <Icon type="rss" color={COLOR_LIGHT} />
         </a>
         <div className={styles.githubs}>
           <a className={styles.github} href="https://github.com/Lebedev-023046" target="blank">
