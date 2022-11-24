@@ -7,12 +7,14 @@ import RegisterPage from 'pages/RegisterPage';
 import EditProfilePage from 'pages/EditProfilePage';
 import { AuthorizationAPI, removeUser, useAppDispatch, useAppSelector } from 'store';
 import ProtectedRoute, { ProtectedRouteProps } from './ProtectedRoute';
+import ErrorBoundary from 'utils/ErrorBoundary';
 
 const GlobalRoute = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector((state) => state.user);
   const [trigger, { error }] = AuthorizationAPI.useLazyGetUserByIdQuery();
   const { token } = useAppSelector((state) => state.user);
+
   const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
     isAuthenticated: !!token,
   };
