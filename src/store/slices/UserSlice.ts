@@ -52,6 +52,7 @@ const userSlice = createSlice({
       state.token = '';
       state.id = '';
       state.password = '';
+      state.allUser = [];
     },
   },
 });

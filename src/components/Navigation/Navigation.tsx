@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { AuthorizationAPI } from '../../store/services/UserService';
 import styles from './Navigation.module.scss';
 import { removeUser, useAppDispatch, useAppSelector } from 'store';
 import Button from 'components/atoms/Button';
@@ -9,7 +9,7 @@ import Heading from 'components/atoms/Heading';
 
 const Navigation = () => {
   const { t } = useTranslation();
-
+  const { data: dataAll } = AuthorizationAPI.useGetAllUsersQuery();
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
