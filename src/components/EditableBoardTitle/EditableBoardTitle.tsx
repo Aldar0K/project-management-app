@@ -78,10 +78,10 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
           />
           <div className={styles.controls}>
             <button type="submit" className={styles.confirm}>
-              <Icon type="confirm" width="30" />
+              <Icon type="confirm" width="22" />
             </button>
             <button type="reset" className={styles.reset} onClick={handleCancel}>
-              <Icon type="cancel" width="30" />
+              <Icon type="cancel" width="22" />
             </button>
           </div>
         </form>

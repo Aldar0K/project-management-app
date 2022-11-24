@@ -30,6 +30,7 @@
   display: flex;
   
   align-items: center;
+  gap: .2rem;
 }
 
 .title {
@@ -70,7 +71,7 @@
 .reset {
   display: flex;
 
-  padding: .4375rem;
+  padding: .6875rem;
 
   background: transparent;
   border-radius: 100%;
