@@ -70,11 +70,15 @@
     color: $color-primary;
     border: .25em solid $color-primary;
 
-    &:hover{
-      background: #cfe9f4;
+    &:hover,
+    &:focus {
+      background-color: #d1ebf6;
+      color: #073b66;
     }
-    &:active{
-      background: #bedbe8;
+
+    &:active {
+      background-color: #c5e5f3;
+      color: #063357;
     }
 
     &:disabled {

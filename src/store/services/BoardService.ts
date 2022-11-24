@@ -64,6 +64,23 @@ export const BoardAPI = commonApi.injectEndpoints({
         ...(result ? result.map(({ _id }) => ({ type: 'Column' as const, _id: _id })) : []),
       ],
     }),
+    createColumnByBoardId: build.mutation<
+      IColumn,
+      {
+        boardId: string;
+        body: {
+          title: 'string';
+          order: number;
+        };
+      }
+    >({
+      query: ({ boardId, body }) => ({
+        url: `/boards/${boardId}/columns`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Column'],
+    }),
     updateColumnByBoardIdAndColumnId: build.mutation<IColumn, IColumnParams>({
       query: ({ boardId, columnId, body }) => ({
         url: `/boards/${boardId}/columns/${columnId}`,

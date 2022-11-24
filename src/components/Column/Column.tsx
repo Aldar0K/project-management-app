@@ -41,63 +41,60 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        {/* <Heading className={styles.heading} level={3} text={title} /> */}
-        <EditableColumnTitle
-          level={3}
-          text={title}
-          boardId={boardId}
-          columnId={columnId}
-          order={order}
-        />
-        <div className={styles.tasksContainer}>
-          <ul className={styles.tasks}>
-            {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
-          </ul>
-        </div>
-        <div className={styles.controls}>
-          {/* Add create new task button */}
-          <Button
-            type="transparent-dark"
-            text="Add new task"
-            big={false}
-            iconType="add-cross"
-            iconWidth="12"
-            onClick={() => setCreateModalActive(true)}
-          />
-          <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
-            <Icon type="delete" width="26" />
-          </button>
-        </div>
-
-        {isCreateModalActive && (
-          <Modal onClose={() => setCreateModalActive(false)}>
-            <CreateTaskForm
-              boardId={boardId}
-              columnId={columnId}
-              tasksLength={tasks ? tasks.length : 0}
-              onCancel={() => setCreateModalActive(false)}
-            />
-          </Modal>
-        )}
-
-        {isConfirmationModalActive && (
-          <ConfirmationModal
-            text="Delete column?"
-            confirmButtonText="Delete"
-            onConfirm={confirmDelete}
-            onClose={() => setConfirmationModalActive(false)}
-          />
-        )}
-
-        {isErrorModalActive && (
-          <ErrorModal onClose={() => setErrorModalActive(false)}>
-            <h3>{errorMessage}</h3>
-          </ErrorModal>
-        )}
+    <div className={styles.container}>
+      {/* <Heading className={styles.heading} level={3} text={title} /> */}
+      <EditableColumnTitle
+        level={3}
+        text={title}
+        boardId={boardId}
+        columnId={columnId}
+        order={order}
+      />
+      <div className={styles.tasksContainer}>
+        <ul className={styles.tasks}>
+          {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
+        </ul>
       </div>
-    </>
+      <div className={styles.controls}>
+        <Button
+          type="transparent-dark"
+          text="Add new task"
+          big={false}
+          iconType="add-cross"
+          iconWidth="12"
+          onClick={() => setCreateModalActive(true)}
+        />
+        <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
+          <Icon type="delete" width="26" />
+        </button>
+      </div>
+
+      {isCreateModalActive && (
+        <Modal onClose={() => setCreateModalActive(false)}>
+          <CreateTaskForm
+            boardId={boardId}
+            columnId={columnId}
+            tasksLength={tasks ? tasks.length : 0}
+            onCancel={() => setCreateModalActive(false)}
+          />
+        </Modal>
+      )}
+
+      {isConfirmationModalActive && (
+        <ConfirmationModal
+          text="Delete column?"
+          confirmButtonText="Delete"
+          onConfirm={confirmDelete}
+          onClose={() => setConfirmationModalActive(false)}
+        />
+      )}
+
+      {isErrorModalActive && (
+        <ErrorModal onClose={() => setErrorModalActive(false)}>
+          <h3>{errorMessage}</h3>
+        </ErrorModal>
+      )}
+    </div>
   );
 };
 
