@@ -26,7 +26,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <ErrorModal onClose={() => !this.state.hasError}>
-          <h3>An error that we did not know how to handle</h3>
+          <h3>something went wrong, we&aposll figure it out</h3>
         </ErrorModal>
       );
     }
