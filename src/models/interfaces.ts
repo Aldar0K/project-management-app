@@ -15,7 +15,7 @@ export interface IInitialState {
   token: string;
   id: string;
   password?: string;
-  allUser?: IUser[];
+  allUsers?: IUser[];
 }
 
 export interface IDecoder {

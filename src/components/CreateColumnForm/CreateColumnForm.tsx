@@ -20,7 +20,7 @@ const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, o
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [createColumnByBoardId, { error }] = BoardAPI.useCreateColumnByBoardIdMutation();
+  const [createColumnByBoardId, { isLoading, error }] = BoardAPI.useCreateColumnByBoardIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -34,10 +34,10 @@ const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, o
     }
   }, [error]);
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     const { title } = data;
 
-    createColumnByBoardId({
+    await createColumnByBoardId({
       boardId,
       body: {
         title,
@@ -64,7 +64,7 @@ const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, o
         />
         <div className={styles.controls}>
           <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
-          <Button type="primary" text="Create" big={true} onClick={() => {}} />
+          <Button type="primary" text="Create" big={true} onClick={() => {}} loading={isLoading} />
         </div>
       </form>
 

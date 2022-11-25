@@ -7,7 +7,7 @@ let initialStateWithToken: IInitialState = {
   login: '',
   token: '',
   id: '',
-  allUser: [],
+  allUsers: [],
 };
 
 if (localStorage.getItem('token')) {
@@ -17,7 +17,7 @@ if (localStorage.getItem('token')) {
     name: '',
     token: localStorage.getItem('token') as string,
     id: userDecodedInfo.id,
-    allUser: [],
+    allUsers: [],
     login: userDecodedInfo.login,
   };
 }
@@ -34,8 +34,8 @@ const userSlice = createSlice({
     setLogin(state, action) {
       state.login = action.payload;
     },
-    setAllUser(state, action) {
-      state.allUser = action.payload;
+    setAllUsers(state, action) {
+      state.allUsers = action.payload;
     },
     setUser(state, action) {
       return { ...action.payload };
@@ -52,11 +52,11 @@ const userSlice = createSlice({
       state.token = '';
       state.id = '';
       state.password = '';
-      state.allUser = [];
+      state.allUsers = [];
     },
   },
 });
 
-export const { setToken, setUser, setName, removeUser, setId, setAllUser, setLogin } =
+export const { setToken, setUser, setName, removeUser, setId, setAllUsers, setLogin } =
   userSlice.actions;
 export default userSlice.reducer;

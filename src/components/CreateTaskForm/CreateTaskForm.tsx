@@ -22,7 +22,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
     formState: { errors },
   } = useForm();
   const { id: userId } = useAppSelector((state) => state.user);
-  const [createTaskByBoardIdAndColumnId, { error }] =
+  const [createTaskByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useCreateTaskByBoardIdAndColumnIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
@@ -37,11 +37,10 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
     }
   }, [error]);
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  const onSubmit = async (data: FieldValues) => {
     const { title, description } = data;
 
-    createTaskByBoardIdAndColumnId({
+    await createTaskByBoardIdAndColumnId({
       boardId,
       columnId,
       body: {
@@ -83,7 +82,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
         {/* TODO add a selection of responsible users */}
         <div className={styles.controls}>
           <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
-          <Button type="primary" text="Create" big={true} onClick={() => {}} />
+          <Button type="primary" text="Create" big={true} onClick={() => {}} loading={isLoading} />
         </div>
       </form>
 

@@ -9,6 +9,7 @@ interface IConfirmationModalProps {
   confirmButtonText: string;
   onConfirm: () => void;
   onClose: () => void;
+  loading?: boolean;
 }
 
 const ConfirmationModal: FC<IConfirmationModalProps> = ({
@@ -16,6 +17,7 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
   confirmButtonText,
   onConfirm,
   onClose,
+  loading = false,
 }) => {
   const { t } = useTranslation();
   return (
@@ -28,7 +30,13 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
         <Heading level={2} text={text} className={styles.heading} />
         <div className={styles.controls}>
           <Button type="bordered" big={false} text={t('Global.close')} onClick={onClose} />
-          <Button type="primary" big={false} text={confirmButtonText} onClick={onConfirm} />
+          <Button
+            type="primary"
+            big={false}
+            text={confirmButtonText}
+            onClick={onConfirm}
+            loading={loading}
+          />
         </div>
       </div>
     </div>

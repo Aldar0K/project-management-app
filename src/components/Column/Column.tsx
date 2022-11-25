@@ -18,7 +18,7 @@ interface ColumnProps {
 
 const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, boardId } }) => {
   const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
-  const [deleteColumnByBoardIdAndColumnId, { error }] =
+  const [deleteColumnByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useDeleteColumnByBoardIdAndColumnIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
@@ -42,7 +42,6 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
 
   return (
     <div className={styles.container}>
-      {/* <Heading className={styles.heading} level={3} text={title} /> */}
       <EditableColumnTitle
         level={3}
         text={title}
@@ -86,6 +85,7 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
           confirmButtonText="Delete"
           onConfirm={confirmDelete}
           onClose={() => setConfirmationModalActive(false)}
+          loading={isLoading}
         />
       )}
 

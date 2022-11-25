@@ -15,7 +15,7 @@ interface TaskProps {
 const Task: React.FC<TaskProps> = ({
   task: { _id: taskId, boardId, columnId, description, order, title, userId, users },
 }) => {
-  const [deleteTaskByBoardIdAndColumnIdAndTaskId, { error }] =
+  const [deleteTaskByBoardIdAndColumnIdAndTaskId, { isLoading, error }] =
     BoardAPI.useDeleteTaskByBoardIdAndColumnIdAndTaskIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
@@ -54,6 +54,7 @@ const Task: React.FC<TaskProps> = ({
           confirmButtonText="Delete"
           onConfirm={confirmDelete}
           onClose={() => setConfirmationModalActive(false)}
+          loading={isLoading}
         />
       )}
 
