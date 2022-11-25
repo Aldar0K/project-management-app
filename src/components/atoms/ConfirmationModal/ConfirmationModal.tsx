@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import Button from '../Button';
 import Heading from '../Heading';
 import styles from './ConfirmationModal.module.scss';
@@ -20,6 +21,7 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
   loading = false,
 }) => {
   const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <div className={styles.backdrop} onClick={onClose} />

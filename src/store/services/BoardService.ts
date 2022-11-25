@@ -117,6 +117,30 @@ export const BoardAPI = commonApi.injectEndpoints({
       }),
       invalidatesTags: ['Task'],
     }),
+    updateTaskByBoardIdAndColumnIdAndTaskId: build.mutation<
+      ITask,
+      {
+        boardId: string;
+        columnId: string;
+        taskId: string;
+        body: {
+          title: string;
+          order: number;
+          description: string;
+          columnId: string;
+          userId: string;
+          users: string[];
+        };
+      }
+    >({
+      query: ({ boardId, columnId, taskId, body }) => ({
+        url: `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Task'],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.columnId }],
+    }),
     deleteTaskByBoardIdAndColumnIdAndTaskId: build.mutation<
       ITask,
       { boardId: string; columnId: string; taskId: string }

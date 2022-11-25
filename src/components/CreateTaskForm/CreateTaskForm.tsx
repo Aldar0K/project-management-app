@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import Select, { MultiValue, StylesConfig } from 'react-select';
@@ -9,6 +11,37 @@ import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
 import { COLOR_LIGHT, COLOR_PRIMARY } from '../../constants';
+
+const selectStyles: StylesConfig = {
+  control: (styles, { isFocused, isDisabled }) => {
+    return {
+      ...styles,
+      backgroundColor: COLOR_LIGHT,
+      border: 'none',
+      boxShadow: isFocused ? 'none' : 'inherit',
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
+    };
+  },
+  option: (styles, { isDisabled }) => {
+    return {
+      ...styles,
+      backgroundColor: COLOR_LIGHT,
+      color: COLOR_PRIMARY,
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
+    };
+  },
+  multiValueLabel: (styles) => ({
+    ...styles,
+    fontSize: '0.875rem',
+    color: COLOR_PRIMARY,
+    backgroundColor: COLOR_LIGHT,
+  }),
+  multiValueRemove: (styles) => ({
+    ...styles,
+    color: COLOR_PRIMARY,
+    backgroundColor: COLOR_LIGHT,
+  }),
+};
 
 interface ISelectOption {
   value: string;
@@ -31,57 +64,13 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
 
   const { id: userId, allUsers } = useAppSelector((state) => state.user);
   const [options, setOptions] = useState<ISelectOption[]>([]);
+  const [selected, setSelected] = useState<ISelectOption[]>([]);
 
   const [createTaskByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useCreateTaskByBoardIdAndColumnIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const handleSelectChange = (newValue: MultiValue<unknown>) => {
-    setOptions(newValue as unknown as ISelectOption[]);
-  };
-
-  const getOptions = () => {
-    const options = allUsers
-      ? allUsers.map((user) => ({
-          value: user._id,
-          label: user.name,
-        }))
-      : [];
-    return options;
-  };
-
-  const selectStyles: StylesConfig = {
-    control: (styles, { isFocused, isDisabled }) => {
-      return {
-        ...styles,
-        backgroundColor: COLOR_LIGHT,
-        border: 'none',
-        boxShadow: isFocused ? 'none' : 'inherit',
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      };
-    },
-    option: (styles, { isDisabled }) => {
-      return {
-        ...styles,
-        backgroundColor: COLOR_LIGHT,
-        color: COLOR_PRIMARY,
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
-      };
-    },
-    multiValueLabel: (styles) => ({
-      ...styles,
-      fontSize: '0.875rem',
-      color: COLOR_PRIMARY,
-      backgroundColor: COLOR_LIGHT,
-    }),
-    multiValueRemove: (styles) => ({
-      ...styles,
-      color: COLOR_PRIMARY,
-      backgroundColor: COLOR_LIGHT,
-    }),
-  };
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -92,9 +81,23 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
     }
   }, [error]);
 
+  useEffect(() => {
+    const options = allUsers
+      ? allUsers.map((user) => ({
+          value: user._id,
+          label: user.name,
+        }))
+      : [];
+    setOptions(options as ISelectOption[]);
+  }, []);
+
+  const handleSelectChange = (newValue: MultiValue<unknown>) => {
+    setSelected(newValue as ISelectOption[]);
+  };
+
   const onSubmit = async (data: FieldValues) => {
     const { title, description } = data;
-    const users = [...options].map((option) => option.value);
+    const users = [...selected].map((option) => option.value);
 
     await createTaskByBoardIdAndColumnId({
       boardId,
@@ -135,11 +138,10 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
           }}
           showError={!!errors.title}
         />
-        {/* TODO add a selection of responsible users */}
         <Select
           {...register('users')}
           className={styles.select}
-          options={getOptions()}
+          options={options}
           isMulti
           styles={selectStyles}
           onChange={handleSelectChange}
