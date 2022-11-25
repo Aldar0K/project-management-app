@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { AuthorizationAPI } from '../../store/services/UserService';
 import styles from './Navigation.module.scss';
 import { removeUser, useAppDispatch, useAppSelector } from 'store';
 import Button from 'components/atoms/Button';
@@ -9,7 +9,7 @@ import Heading from 'components/atoms/Heading';
 
 const Navigation = () => {
   const { t } = useTranslation();
-
+  const { data: dataAll } = AuthorizationAPI.useGetAllUsersQuery();
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
@@ -28,8 +28,19 @@ const Navigation = () => {
         {token ? (
           <>
             <li className={styles.item}>
+              <Link to="/main" className={styles.link}>
+                <Button
+                  text={t('Navigation.main')}
+                  type="bordered"
+                  big={false}
+                  onClick={() => {}}
+                />
+              </Link>
+            </li>
+            <li className={styles.item}>
               <Heading text={name} level={3} className={styles.name} />
             </li>
+
             <li className={styles.item}>
               <Button
                 text={t('Navigation.signOut')}
@@ -37,6 +48,16 @@ const Navigation = () => {
                 big={false}
                 onClick={handleSignout}
               />
+            </li>
+            <li className={styles.item}>
+              <Link to="/editProfile" className={styles.link}>
+                <Button
+                  text={t('Navigation.profile')}
+                  type="bordered"
+                  big={false}
+                  onClick={() => {}}
+                />
+              </Link>
             </li>
           </>
         ) : (

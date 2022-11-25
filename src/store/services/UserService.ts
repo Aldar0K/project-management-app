@@ -1,6 +1,6 @@
 import { IUser, IUserAuthorization, IToken, IUserUpdate } from 'models';
 import { Decoder } from '../../utils/Decoder';
-import { setId, setLogin, setName, setToken } from '../slices/UserSlice';
+import { setAllUser, setId, setLogin, setName, setToken } from '../slices/UserSlice';
 import { commonApi } from './common.api';
 
 export const AuthorizationAPI = commonApi.injectEndpoints({
@@ -75,7 +75,16 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
     }),
     getAllUsers: build.query<IUser[], void>({
       query: () => ({ url: `/users/` }),
-      // providesTags: (result) => ['User'],
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(setAllUser(result.data));
+        } catch (e) {
+          console.error('userApi getAllUsers error', e);
+        }
+      },
+      providesTags: (result) => ['Users'],
     }),
   }),
 });
