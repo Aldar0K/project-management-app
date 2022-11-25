@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import Select, { MultiValue, StylesConfig } from 'react-select';
 
 import styles from './CreateTaskForm.module.scss';
 import { BoardAPI, useAppSelector } from 'store';
@@ -7,6 +8,12 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
+import { COLOR_LIGHT, COLOR_PRIMARY } from '../../constants';
+
+interface ISelectOption {
+  value: string;
+  label: string;
+}
 
 interface CreateTaskFormProps {
   boardId: string;
@@ -21,12 +28,60 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { id: userId } = useAppSelector((state) => state.user);
+
+  const { id: userId, allUsers } = useAppSelector((state) => state.user);
+  const [options, setOptions] = useState<ISelectOption[]>([]);
+
   const [createTaskByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useCreateTaskByBoardIdAndColumnIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSelectChange = (newValue: MultiValue<unknown>) => {
+    setOptions(newValue as unknown as ISelectOption[]);
+  };
+
+  const getOptions = () => {
+    const options = allUsers
+      ? allUsers.map((user) => ({
+          value: user._id,
+          label: user.name,
+        }))
+      : [];
+    return options;
+  };
+
+  const selectStyles: StylesConfig = {
+    control: (styles, { isFocused, isDisabled }) => {
+      return {
+        ...styles,
+        backgroundColor: COLOR_LIGHT,
+        border: 'none',
+        boxShadow: isFocused ? 'none' : 'inherit',
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+      };
+    },
+    option: (styles, { isDisabled }) => {
+      return {
+        ...styles,
+        backgroundColor: COLOR_LIGHT,
+        color: COLOR_PRIMARY,
+        cursor: isDisabled ? 'not-allowed' : 'pointer',
+      };
+    },
+    multiValueLabel: (styles) => ({
+      ...styles,
+      fontSize: '0.875rem',
+      color: COLOR_PRIMARY,
+      backgroundColor: COLOR_LIGHT,
+    }),
+    multiValueRemove: (styles) => ({
+      ...styles,
+      color: COLOR_PRIMARY,
+      backgroundColor: COLOR_LIGHT,
+    }),
+  };
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -39,6 +94,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
 
   const onSubmit = async (data: FieldValues) => {
     const { title, description } = data;
+    const users = [...options].map((option) => option.value);
 
     await createTaskByBoardIdAndColumnId({
       boardId,
@@ -48,7 +104,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
         description,
         order: tasksLength + 1,
         userId,
-        users: [],
+        users,
       },
     });
 
@@ -80,6 +136,14 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
           showError={!!errors.title}
         />
         {/* TODO add a selection of responsible users */}
+        <Select
+          {...register('users')}
+          className={styles.select}
+          options={getOptions()}
+          isMulti
+          styles={selectStyles}
+          onChange={handleSelectChange}
+        />
         <div className={styles.controls}>
           <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
           <Button type="primary" text="Create" big={true} onClick={() => {}} loading={isLoading} />
