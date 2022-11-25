@@ -47,18 +47,18 @@ const CreateBoardForm = ({
         />
         <div className={styles.buttons}>
           <Button
-            type="primary"
-            text={`${t('MainPage.createBoardform.create')}`}
-            big={true}
-            onClick={() => {}}
-          />
-          <Button
-            type="primary"
+            type="bordered"
             text={`${t('MainPage.createBoardform.cancel')}`}
             big={true}
             onClick={() => {
               setCreateBoardModal(false);
             }}
+          />
+          <Button
+            type="primary"
+            text={`${t('MainPage.createBoardform.create')}`}
+            big={true}
+            onClick={() => {}}
           />
         </div>
       </form>
