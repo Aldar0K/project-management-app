@@ -8,7 +8,7 @@ import styles from './authorization.module.scss';
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import ErrorModal from 'components/atoms/errorModal/ErrorModal';
-import { AuthorizationAPI } from 'store/services/AuthorizationService';
+import { AuthorizationAPI } from 'store/services/UserService';
 import { setName, useAppDispatch } from 'store';
 import { useTranslation } from 'react-i18next';
 

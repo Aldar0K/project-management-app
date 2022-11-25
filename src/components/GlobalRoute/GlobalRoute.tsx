@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import WelcomePage from 'pages/WelcomePage';
 import ErrorPage from 'pages/ErrorPage';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
-import MainPage from 'pages/MainPage';
 import EditProfilePage from 'pages/EditProfilePage';
 import { AuthorizationAPI, removeUser, useAppDispatch, useAppSelector } from 'store';
 import ProtectedRoute, { ProtectedRouteProps } from './ProtectedRoute';
+import MainPage from 'pages/MainPage';
+import BoardPage from 'pages/BoardPage';
+import ErrorBoundary from 'utils/ErrorBoundary';
 
 const GlobalRoute = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector((state) => state.user);
   const [trigger, { error }] = AuthorizationAPI.useLazyGetUserByIdQuery();
   const { token } = useAppSelector((state) => state.user);
+
   const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
     isAuthenticated: !!token,
   };
@@ -37,7 +41,27 @@ const GlobalRoute = () => {
         <Route path="/" element={<WelcomePage />} />
         <Route
           path="/editProfile"
-          element={<ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />}
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<EditProfilePage />} />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/main"
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<MainPage />} />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/boards/:id"
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<BoardPage />} />
+            </ErrorBoundary>
+          }
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegisterPage />} />

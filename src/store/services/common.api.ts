@@ -9,6 +9,7 @@ import { IError } from 'models';
 
 import { RootState } from 'store/store';
 
+// TODO move to constants.
 export const BASE_URL = 'https://pma-backend-2-0.onrender.com';
 // export const BASE_URL = 'https://protected-dusk-84289.herokuapp.com';
 
@@ -31,6 +32,6 @@ export const commonApi = createApi({
     Record<string, unknown>,
     FetchBaseQueryMeta
   >,
-  tagTypes: ['User', 'Board', 'BoardColumns', 'Column', 'ColumnTasks', 'Task'],
+  tagTypes: ['User', 'Users', 'Board', 'Column', 'Task'],
   endpoints: (_) => ({}),
 });

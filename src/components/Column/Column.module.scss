@@ -1,0 +1,74 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+
+  height: 100%;
+  min-width: 17.5rem;
+  width: 17.5rem;
+
+  // padding: 0.5rem;
+
+  flex-direction: column;
+
+  border: 3.5px solid $color-background-dark;
+  // box-shadow: inset 0 0 6px $color-background-dark;
+  border-radius: .5em;
+}
+
+.heading {
+  padding: .5rem;
+
+  text-transform: none;
+  user-select: none;
+}
+
+.tasksContainer {
+  height: 100%;
+
+  padding: .5rem;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+}
+
+.tasks {
+  display: flex;
+
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.controls {
+  display: flex;
+
+  padding: .5rem;
+
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.delete {
+  display: flex;
+
+  padding: .6875rem;
+
+  background: transparent;
+  border-radius: 100%;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}

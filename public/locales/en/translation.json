@@ -2,7 +2,9 @@
     "Navigation": {
         "signIn": "Sign In",
         "signUp": "Sign Up",
-        "signOut": "Sign out"
+        "signOut": "Sign out",
+        "profile": "Profile",
+        "main": "Main"
     },
     "Team": {
         "title": "Our team",
@@ -46,7 +48,9 @@
         "editProfile": "Edit profile",
         "delUser": "Delete User",
         "upUser": "Update User",
-        "upMessage": "Your data has been successfully updated"
+        "upMessage": "Your data has been successfully updated",
+        "sure": "Are you sure you want to delete the user?",
+        "sureUp": "Are you sure you want to update the user?"
     },
     "Error": {
         "logMin": "Login must be at least 2 characters",
@@ -58,5 +62,8 @@
         "nameMax": "Name must not exceed 20 characters",
         "passMin": "Password must be at least 6 characters",
         "passReq": "Password is required"
+    },
+    "Global": {
+        "close": "Close"
     }
 }

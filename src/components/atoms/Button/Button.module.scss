@@ -91,10 +91,14 @@
     background: transparent;
     color: $color-light;
 
-    &:hover{
+    &:hover,
+    &:focus {
+      background-color: #105679;
       color: #cfe9f4;
     }
-    &:active{
+
+    &:active {
+      background-color: #156187;
       color: #bedbe8;
     }
   }
@@ -103,10 +107,14 @@
     background: transparent;
     color: $color-primary;
 
-    &:hover{
+    &:hover,
+    &:focus {
+      background-color: #d1ebf6;
       color: #073b66;
     }
-    &:active{
+
+    &:active {
+      background-color: #c5e5f3;
       color: #063357;
     }
   }
@@ -125,3 +133,30 @@
     gap: .5em;
   }
 }
+
+@media (max-width: 680px) {
+  .button {
+    font-weight: 600;
+    font-size: .8rem;
+    line-height: .8em;
+    border-radius: .5em;
+
+    &_bordered {
+      padding: .35em;
+  
+    }
+  
+    &_big {
+   
+      max-height: 2em;
+    }
+  
+    &_small {
+      max-height: 2em;
+    }
+    
+    &_icon {
+      gap: .3em;
+    }
+  }
+  }

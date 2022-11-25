@@ -10,4 +10,9 @@ export type IconTypes =
   | 'logo'
   | 'github'
   | 'telegram'
-  | 'linkedin';
+  | 'linkedin'
+  | 'rss'
+  | 'edit'
+  | 'confirm'
+  | 'cancel'
+  | 'delete';

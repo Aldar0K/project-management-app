@@ -58,11 +58,11 @@ const Team = () => {
                   <Icon type="telegram" width="30" />
                 </a>
               </li>
-              {/* <li className={styles.link}>
-                <a href="#" target="blank">
+              <li className={styles.link}>
+                <a href="https://www.linkedin.com/in/hanna-burko-5b4993228" target="blank">
                   <Icon type="linkedin" width="30" />
                 </a>
-              </li> */}
+              </li>
             </ul>
           </li>
           <li className={styles.member}>

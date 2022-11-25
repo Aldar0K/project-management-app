@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from 'components/atoms/Button';
+import ConfirmationModal from 'components/atoms/ConfirmationModal';
 import ErrorModal from 'components/atoms/errorModal';
 import Input from 'components/atoms/Input';
 import { IUserUpdate } from 'models';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +28,7 @@ const EditProfile = () => {
   const dicpatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
+  const [isConfirmModalActive, setConfirmModalActive] = useState(false);
   const [isMessage, setMessage] = useState('');
 
   setValue('name', nameState);
@@ -50,6 +52,9 @@ const EditProfile = () => {
   }, [errorDel]);
 
   const handleDeleteUser = async () => {
+    setConfirmModalActive(true);
+  };
+  const handleDeleteUserProps = async () => {
     if (token) {
       await deleteUser(id).unwrap();
       dicpatch(removeUser());
@@ -65,8 +70,7 @@ const EditProfile = () => {
     };
     await updateUser(userNewData).unwrap();
     setModalActive(true);
-    const a = t('EditProfile.editProfile');
-    setMessage(a);
+    setMessage(t('EditProfile.upMessage') as string);
   };
   const handleUpdateUser = async () => {};
 
@@ -79,49 +83,73 @@ const EditProfile = () => {
           <h3>{isMessage}</h3>
         </ErrorModal>
       )}
-
-      <form className={styles.container} onSubmit={handleSubmit(submitForm)}>
-        <h3> {t('EditProfile.editProfile')}</h3>
-        <Input
-          type="text"
-          name="name"
-          placeholder={t('RegistrationPage.name') as string}
-          register={register}
-          rules={{
-            required: true,
-            minLength: 2,
-          }}
-          showError={!!errors.name}
-          errorMessage={t('Error.nameMin') as string}
-          disabled={false}
-        />
-        <Input
-          type="text"
-          name="login"
-          placeholder={t('LoginPage.login') as string}
-          register={register}
-          rules={{
-            required: true,
-            minLength: 2,
-          }}
-          showError={!!errors.login}
-          errorMessage={t('Error.logMin') as string}
-          disabled={false}
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder={t('LoginPage.password') as string}
-          register={register}
-          rules={{
-            required: true,
-            minLength: 6,
-          }}
-          showError={!!errors.password}
-          errorMessage={t('Error.passMin') as string}
-          disabled={false}
-        />
-        <div className={styles.divButtons}>
+      {isConfirmModalActive && (
+        <ConfirmationModal
+          text={t('EditProfile.sure')}
+          confirmButtonText={t('EditProfile.delUser')}
+          onConfirm={handleDeleteUserProps}
+          onClose={() => setConfirmModalActive(false)}
+        ></ConfirmationModal>
+      )}
+      <div className={styles.containerEdit}>
+        <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
+          <h3> {t('EditProfile.editProfile')}</h3>
+          <Input
+            type="text"
+            name="name"
+            placeholder={t('RegistrationPage.name') as string}
+            register={register}
+            rules={{
+              required: true,
+            }}
+            showError={!!errors.name}
+            errorMessage={t('Error.nameMin') as string}
+            disabled={false}
+          />
+          <Input
+            type="text"
+            name="login"
+            placeholder={t('LoginPage.login') as string}
+            register={register}
+            rules={{
+              required: true,
+            }}
+            showError={!!errors.login}
+            errorMessage={t('Error.logMin') as string}
+            disabled={false}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder={t('LoginPage.password') as string}
+            register={register}
+            rules={{
+              required: true,
+              minLength: 6,
+            }}
+            showError={!!errors.password}
+            errorMessage={t('Error.passMin') as string}
+            disabled={false}
+          />
+          <div className={styles.divButtons}>
+            {/* <Button
+            text={t('EditProfile.delUser')}
+            type="primary"
+            big={false}
+            onClick={handleDeleteUser}
+          /> */}
+            {/* <button type="button" onClick={handleDeleteUser}>
+            {t('EditProfile.delUser')}
+          </button> */}
+            <Button
+              text={t('EditProfile.upUser')}
+              type="secondary"
+              big={false}
+              onClick={handleUpdateUser}
+            />
+          </div>
+        </form>
+        <div className={styles.divButtonsDel}>
           {' '}
           <Button
             text={t('EditProfile.delUser')}
@@ -129,14 +157,8 @@ const EditProfile = () => {
             big={false}
             onClick={handleDeleteUser}
           />
-          <Button
-            text={t('EditProfile.upUser')}
-            type="secondary"
-            big={false}
-            onClick={handleUpdateUser}
-          />
         </div>
-      </form>
+      </div>
     </div>
   );
 };

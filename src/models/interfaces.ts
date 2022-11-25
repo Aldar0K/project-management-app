@@ -43,7 +43,8 @@ export interface IError {
 
 // Boards
 export interface IBoard {
-  _id?: string;
+  // _id?: string;
+  _id: string;
   title: string;
   owner: string;
   users: string[];
@@ -56,6 +57,42 @@ export interface IBoardData {
 }
 
 export interface IBoardParams {
-  data: { title: string; owner: string; users: string[] };
+  body: { title: string; owner: string; users: string[] };
   id: string;
+}
+
+export interface IColumn {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+}
+
+// export interface IColumnData {
+//   title: string;
+//   order: number;
+//   boardId: string;
+// }
+
+export interface ITask {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+  columnId: string;
+  description: string;
+  userId: string;
+  users: string[];
+}
+
+export interface ITaskParams {
+  boardId: string;
+  columnId: string;
+  body: {
+    title: string;
+    order: number;
+    description: string;
+    userId: string;
+    users: string[];
+  };
 }

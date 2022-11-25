@@ -7,16 +7,20 @@ interface IModalProps {
   onClose: () => void;
 }
 
-function ErrorModal(props: IModalProps) {
-  const { onClose, children } = props;
+const ErrorModal: FC<IModalProps> = ({ onClose, children }) => {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal}>
-        <div className={styles.textDiv}> {children}</div>
-        <Button text="Close" type="primary" big={false} onClick={onClose} />
+        <div className={styles.textDiv}>
+          {' '}
+          {children}
+          <div className={styles.divButtons}>
+            <Button text="Close" type="primary" big={true} onClick={onClose} />
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default ErrorModal;

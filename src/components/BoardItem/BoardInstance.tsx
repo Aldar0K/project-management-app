@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './BoardItem.module.scss';
 import { Link } from 'react-router-dom';
 import getImgPath from 'utils/randomImg';
+import Icon from 'components/atoms/Icon';
 
 interface IBoardInstanceProps {
   board: {
@@ -22,20 +23,12 @@ const BoardInstance = ({ board }: IBoardInstanceProps) => {
         <div className={styles.topInfo}>
           <h3 className={styles.title}>{board.title}</h3>
           <div className={styles.controls}>
-            <button
-              className={`${styles.buttonControl} ${styles.edit}`}
-              onClick={(e) => {
-                e.preventDefault();
-                console.log('edit');
-              }}
-            ></button>
-            <button
-              className={`${styles.buttonControl} ${styles.delete}`}
-              onClick={(e) => {
-                e.preventDefault();
-                console.log('delete');
-              }}
-            ></button>
+            <div className={styles.scale}>
+              <Icon type="edit" width="23"></Icon>
+            </div>
+            <div className={styles.scale}>
+              <Icon type="delete" width="23"></Icon>
+            </div>
           </div>
         </div>
         <div className={styles.descr}>{board.description}</div>
