@@ -74,7 +74,7 @@ export const AuthorizationAPI = commonApi.injectEndpoints({
       invalidatesTags: [{ type: 'User' }],
     }),
     getAllUsers: build.query<IUser[], void>({
-      query: () => ({ url: `/users/` }),
+      query: () => ({ url: `/users` }),
 
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
