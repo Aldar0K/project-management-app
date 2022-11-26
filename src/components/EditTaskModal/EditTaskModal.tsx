@@ -57,7 +57,16 @@ interface EditTaskModalProps {
 }
 
 const EditTaskModal: FC<EditTaskModalProps> = ({
-  task: { _id: taskId, description, title, users: taskUsers, boardId, columnId, userId, order },
+  task: {
+    _id: taskId,
+    title: oldTitle,
+    description: oldDescription,
+    users: taskUsers,
+    boardId,
+    columnId,
+    userId,
+    order,
+  },
   onCancel,
 }) => {
   const { t } = useTranslation();
@@ -68,8 +77,8 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      title,
-      description,
+      title: oldTitle,
+      description: oldDescription,
     },
   });
 
@@ -125,19 +134,21 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
     const { title, description } = data;
     const users = selected.length ? [...selected].map((option) => option.value) : taskUsers;
 
-    await updateTaskByBoardIdAndColumnId({
-      boardId,
-      columnId,
-      taskId,
-      body: {
-        title,
-        userId,
-        description,
+    if (title.trim() !== oldTitle || description.trim() !== oldDescription || selected.length) {
+      await updateTaskByBoardIdAndColumnId({
+        boardId,
         columnId,
-        order,
-        users,
-      },
-    });
+        taskId,
+        body: {
+          title,
+          userId,
+          description,
+          columnId,
+          order,
+          users,
+        },
+      });
+    }
 
     onCancel();
   };
@@ -149,7 +160,7 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
         <button className={styles.closeButton} onClick={onCancel}>
           X
         </button>
-        <Heading level={2} text={title} className={styles.heading} />
+        <Heading level={2} text={oldTitle} className={styles.heading} />
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="text"
