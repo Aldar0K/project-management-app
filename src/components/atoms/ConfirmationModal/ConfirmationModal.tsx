@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import Button from '../Button';
 import Heading from '../Heading';
 import styles from './ConfirmationModal.module.scss';
@@ -9,6 +10,7 @@ interface IConfirmationModalProps {
   confirmButtonText: string;
   onConfirm: () => void;
   onClose: () => void;
+  loading?: boolean;
 }
 
 const ConfirmationModal: FC<IConfirmationModalProps> = ({
@@ -16,8 +18,10 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
   confirmButtonText,
   onConfirm,
   onClose,
+  loading = false,
 }) => {
   const { t } = useTranslation();
+
   return (
     <div className={styles.container}>
       <div className={styles.backdrop} onClick={onClose} />
@@ -27,8 +31,14 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
         </button>
         <Heading level={2} text={text} className={styles.heading} />
         <div className={styles.controls}>
-          <Button type="bordered" big={false} text={t('Global.close')} onClick={onClose} />
-          <Button type="primary" big={false} text={confirmButtonText} onClick={onConfirm} />
+          <Button type="bordered" big={false} text={t('Common.close')} onClick={onClose} />
+          <Button
+            type="primary"
+            big={false}
+            text={confirmButtonText}
+            onClick={onConfirm}
+            loading={loading}
+          />
         </div>
       </div>
     </div>

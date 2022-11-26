@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import styles from './EditableBoardTitle.module.scss';
+import styles from './EditableColumnTitle.module.scss';
 import { BoardAPI } from 'store';
 
 import Icon from 'components/atoms/Icon';
@@ -10,20 +10,20 @@ import Input from 'components/atoms/Input';
 import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
 
-interface EditableBoardTitleProps {
+interface EditableColumnTitleProps {
   level: 1 | 2 | 3 | 4;
   text: string;
   boardId: string;
-  owner: string;
-  users: string[];
+  columnId: string;
+  order: number;
 }
 
-const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
+const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
   level,
   text,
   boardId,
-  owner,
-  users,
+  columnId,
+  order,
 }) => {
   const { t } = useTranslation();
 
@@ -36,7 +36,8 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
   } = useForm();
 
   const [edit, setEdit] = useState(false);
-  const [updateBoardById, { isLoading, error }] = BoardAPI.useUpdateBoardByIdMutation();
+  const [updateColumnByBoardIdAndColumnId, { isLoading, error }] =
+    BoardAPI.useUpdateColumnByBoardIdAndColumnIdMutation();
   const [isModalActive, setModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -59,7 +60,7 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
     const { title } = data;
 
     if (title.trim() !== text) {
-      updateBoardById({ id: boardId, body: { title, owner, users } });
+      updateColumnByBoardIdAndColumnId({ boardId, columnId, body: { title, order } });
     }
 
     setEdit(false);
@@ -116,4 +117,4 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
   );
 };
 
-export default EditableBoardTitle;
+export default EditableColumnTitle;
