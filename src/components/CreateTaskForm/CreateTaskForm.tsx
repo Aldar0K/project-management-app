@@ -3,14 +3,16 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import Select, { MultiValue, StylesConfig } from 'react-select';
+import { useTranslation } from 'react-i18next';
 
-import styles from './CreateTaskForm.module.scss';
 import { BoardAPI, useAppSelector } from 'store';
+import styles from './CreateTaskForm.module.scss';
+import { COLOR_LIGHT, COLOR_PRIMARY } from '../../constants';
+
 import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
-import { COLOR_LIGHT, COLOR_PRIMARY } from '../../constants';
 
 const selectStyles: StylesConfig = {
   control: (styles, { isFocused, isDisabled }) => {
@@ -56,6 +58,8 @@ interface CreateTaskFormProps {
 }
 
 const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLength, onCancel }) => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -63,6 +67,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
   } = useForm();
 
   const { id: userId, allUsers } = useAppSelector((state) => state.user);
+
   const [options, setOptions] = useState<ISelectOption[]>([]);
   const [selected, setSelected] = useState<ISelectOption[]>([]);
 
@@ -116,39 +121,54 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
 
   return (
     <div className={styles.container}>
-      <Heading level={2} text="Add new task" className={styles.heading} />
+      <Heading level={2} text={t('Board.addTask')} className={styles.heading} />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
           name="title"
-          placeholder="Task title"
+          placeholder={t('Board.titlePlaceholder') as string}
           register={register}
           rules={{
             required: true,
           }}
           showError={!!errors.title}
+          errorMessage={t('Board.titleError') as string}
         />
         <Input
           type="text"
           name="description"
-          placeholder="Task description"
+          placeholder={t('Board.descPlaceholder') as string}
           register={register}
           rules={{
             required: true,
           }}
           showError={!!errors.title}
+          errorMessage={t('Board.descError') as string}
         />
         <Select
           {...register('users')}
           className={styles.select}
+          placeholder={t('Board.usersPlaceholder') as string}
           options={options}
           isMulti
           styles={selectStyles}
           onChange={handleSelectChange}
         />
         <div className={styles.controls}>
-          <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
-          <Button type="primary" text="Create" big={true} onClick={() => {}} loading={isLoading} />
+          <Button
+            type="bordered"
+            isSubmit={false}
+            text={t('Common.cancel')}
+            big={true}
+            onClick={onCancel}
+          />
+          <Button
+            type="primary"
+            text={t('Common.create')}
+            big={true}
+            onClick={() => {}}
+            loading={isLoading}
+          />
         </div>
       </form>
 

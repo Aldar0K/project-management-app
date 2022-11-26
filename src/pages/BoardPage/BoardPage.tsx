@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import styles from './BoardPage.module.scss';
-import { useAppSelector } from 'store';
 import { BoardAPI } from 'store/services/BoardService';
 import { IError } from 'models';
 import Heading from 'components/atoms/Heading';
@@ -16,26 +16,22 @@ interface IParams {
 
 const BoardPage = () => {
   const { id: boardId } = useParams<keyof IParams>() as IParams;
-  const { token } = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { data: board, error, isLoading } = BoardAPI.useGetBoardByIdQuery(boardId);
-
-  useEffect(() => {
-    if (!token) {
-      navigate('/');
-    }
-  }, []);
 
   return (
     <main className="main">
       <div className={`container ${styles.container}`}>
         {board && <Board board={board} />}
 
-        {isLoading && <Heading level={2} text="Loading..." />}
+        {isLoading && <Heading level={2} text={t('Common.loading')} />}
 
         {error && (
-          <Heading level={2} text={`Something went wrong (${(error as IError).data.message})`} />
+          <Heading
+            level={2}
+            text={`${t('Common.serverError')} (${(error as IError).data.message})`}
+          />
         )}
       </div>
     </main>

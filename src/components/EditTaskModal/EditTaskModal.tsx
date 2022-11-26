@@ -3,15 +3,16 @@
 import React, { FC, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import Select, { MultiValue, StylesConfig } from 'react-select';
+import { useTranslation } from 'react-i18next';
 
 import styles from './EditTaskModal.module.scss';
 import { ITask } from 'models';
 import { BoardAPI, useAppSelector } from 'store';
 import { COLOR_LIGHT, COLOR_PRIMARY } from '../../constants';
 
-import Heading from 'components/atoms/Heading';
-import Button from 'components/atoms/Button';
 import Input from 'components/atoms/Input';
+import Button from 'components/atoms/Button';
+import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
 
 const selectStyles: StylesConfig = {
@@ -59,6 +60,8 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
   task: { _id: taskId, description, title, users: taskUsers, boardId, columnId, userId, order },
   onCancel,
 }) => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -120,7 +123,7 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
 
   const onSubmit = async (data: FieldValues) => {
     const { title, description } = data;
-    const users = [...selected].map((option) => option.value);
+    const users = selected.length ? [...selected].map((option) => option.value) : taskUsers;
 
     await updateTaskByBoardIdAndColumnId({
       boardId,
@@ -151,26 +154,29 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
           <Input
             type="text"
             name="title"
-            placeholder="Title"
+            placeholder={t('Board.titlePlaceholder') as string}
             register={register}
             rules={{
               required: true,
             }}
             showError={!!errors.title}
+            errorMessage={t('Board.titleError') as string}
           />
           <Input
             type="text"
             name="description"
-            placeholder="Description"
+            placeholder={t('Board.descPlaceholder') as string}
             register={register}
             rules={{
               required: true,
             }}
             showError={!!errors.title}
+            errorMessage={t('Board.descError') as string}
           />
           <Select
             {...register('users')}
             className={styles.select}
+            placeholder={t('Board.usersPlaceholder') as string}
             options={options}
             defaultValue={getDefaultValue()}
             isMulti
@@ -178,10 +184,16 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
             onChange={handleSelectChange}
           />
           <div className={styles.controls}>
-            <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
+            <Button
+              type="bordered"
+              isSubmit={false}
+              text={t('Common.cancel')}
+              big={true}
+              onClick={onCancel}
+            />
             <Button
               type="primary"
-              text="Update"
+              text={t('Common.update')}
               big={true}
               onClick={() => {}}
               loading={isLoading}

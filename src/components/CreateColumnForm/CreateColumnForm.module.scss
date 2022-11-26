@@ -3,8 +3,7 @@
 .container {
   display: flex;
 
-  min-width: 21.875rem;
-  padding: 1.5rem 0;
+  padding: 1.5rem 2.5rem;
 
   flex-direction: column;
   align-items: center;
@@ -12,6 +11,9 @@
 }
 
 .heading {
+  width: 17.5rem;
+  
+  text-align: center;
   text-transform: none;
   user-select: none;
 }
@@ -19,8 +21,7 @@
 .form {
   display: flex;
 
-  min-width: 18.75rem;
-  padding: 0 2rem;
+  width: 17.5rem;
 
   flex-direction: column;
   gap: 1.5rem;

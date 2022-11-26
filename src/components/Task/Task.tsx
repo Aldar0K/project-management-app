@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Task.module.scss';
 import { ITask } from 'models';
 import { BoardAPI } from 'store';
-import Heading from 'components/atoms/Heading';
+
 import Icon from 'components/atoms/Icon';
-import ConfirmationModal from 'components/atoms/ConfirmationModal';
+import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
 import EditTaskModal from 'components/EditTaskModal';
+import ConfirmationModal from 'components/atoms/ConfirmationModal';
 
 interface TaskProps {
   task: ITask;
 }
 
 const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnId, title } }) => {
+  const { t } = useTranslation();
+
   const [deleteTaskByBoardIdAndColumnIdAndTaskId, { isLoading, error }] =
     BoardAPI.useDeleteTaskByBoardIdAndColumnIdAndTaskIdMutation();
 
@@ -40,10 +44,18 @@ const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnI
     <li className={styles.container}>
       <Heading className={styles.heading} level={4} text={title} />
       <div className={styles.controls}>
-        <button className={styles.edit} onClick={() => setIsEditTaskModalActive(true)}>
+        <button
+          className={styles.edit}
+          title={t('Common.edit') as string}
+          onClick={() => setIsEditTaskModalActive(true)}
+        >
           <Icon type="edit" width="22" />
         </button>
-        <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
+        <button
+          className={styles.delete}
+          title={t('Common.delete') as string}
+          onClick={() => setConfirmationModalActive(true)}
+        >
           <Icon type="delete" width="22" />
         </button>
       </div>
@@ -54,8 +66,8 @@ const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnI
 
       {isConfirmationModalActive && (
         <ConfirmationModal
-          text="Delete task?"
-          confirmButtonText="Delete"
+          text={t('Board.confirmDeleteTask')}
+          confirmButtonText={t('Common.delete')}
           onConfirm={confirmDelete}
           onClose={() => setConfirmationModalActive(false)}
           loading={isLoading}

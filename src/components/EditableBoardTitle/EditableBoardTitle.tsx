@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import styles from './EditableBoardTitle.module.scss';
 import { BoardAPI } from 'store';
-import Heading from 'components/atoms/Heading';
+
 import Icon from 'components/atoms/Icon';
 import Input from 'components/atoms/Input';
+import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
 
 interface EditableBoardTitleProps {
@@ -23,6 +25,8 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
   owner,
   users,
 }) => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -77,10 +81,15 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
             showError={!!errors.title}
           />
           <div className={styles.controls}>
-            <button type="submit" className={styles.confirm}>
+            <button type="submit" className={styles.confirm} title={t('Common.confirm') as string}>
               <Icon type="confirm" width="22" />
             </button>
-            <button type="reset" className={styles.reset} onClick={handleCancel}>
+            <button
+              type="reset"
+              className={styles.reset}
+              onClick={handleCancel}
+              title={t('Common.cancel') as string}
+            >
               <Icon type="cancel" width="22" />
             </button>
           </div>
@@ -92,7 +101,7 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
             level={level}
             text={isLoading ? 'Loading...' : text}
           />
-          <button className={styles.edit} onClick={handleEdit}>
+          <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
             <Icon type="edit" width="22" />
           </button>
         </div>

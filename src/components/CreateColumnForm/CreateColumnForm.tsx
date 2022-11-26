@@ -7,6 +7,7 @@ import Input from 'components/atoms/Input';
 import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import ErrorModal from 'components/atoms/errorModal';
+import { useTranslation } from 'react-i18next';
 
 interface CreateColumnFormProps {
   boardId: string;
@@ -15,11 +16,14 @@ interface CreateColumnFormProps {
 }
 
 const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, onCancel }) => {
+  const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [createColumnByBoardId, { isLoading, error }] = BoardAPI.useCreateColumnByBoardIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
@@ -50,21 +54,34 @@ const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, o
 
   return (
     <div className={styles.container}>
-      <Heading level={2} text="Add new column" className={styles.heading} />
+      <Heading level={2} text={t('Board.addColumn')} className={styles.heading} />
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="text"
           name="title"
-          placeholder="Task title"
+          placeholder={t('Board.titlePlaceholder') as string}
           register={register}
           rules={{
             required: true,
           }}
           showError={!!errors.title}
+          errorMessage={t('Board.titleError') as string}
         />
         <div className={styles.controls}>
-          <Button type="bordered" isSubmit={false} text="Cancel" big={true} onClick={onCancel} />
-          <Button type="primary" text="Create" big={true} onClick={() => {}} loading={isLoading} />
+          <Button
+            type="bordered"
+            isSubmit={false}
+            text={t('Common.cancel')}
+            big={true}
+            onClick={onCancel}
+          />
+          <Button
+            type="primary"
+            text={t('Common.create')}
+            big={true}
+            onClick={() => {}}
+            loading={isLoading}
+          />
         </div>
       </form>
 

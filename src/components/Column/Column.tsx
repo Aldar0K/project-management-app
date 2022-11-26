@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Column.module.scss';
 import { IColumn } from 'models';
 import { BoardAPI } from 'store';
-import Button from 'components/atoms/Button';
-import Icon from 'components/atoms/Icon';
-import ErrorModal from 'components/atoms/errorModal';
-import ConfirmationModal from 'components/atoms/ConfirmationModal';
-import Modal from 'components/atoms/Modal';
+
 import Task from 'components/Task';
+import Icon from 'components/atoms/Icon';
+import Modal from 'components/atoms/Modal';
+import Button from 'components/atoms/Button';
+import ErrorModal from 'components/atoms/errorModal';
 import CreateTaskForm from 'components/CreateTaskForm';
 import EditableColumnTitle from 'components/EditableColumnTitle';
+import ConfirmationModal from 'components/atoms/ConfirmationModal';
 
 interface ColumnProps {
   column: IColumn;
 }
 
 const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, boardId } }) => {
+  const { t } = useTranslation();
+
   const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
   const [deleteColumnByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useDeleteColumnByBoardIdAndColumnIdMutation();
@@ -57,13 +61,17 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
       <div className={styles.controls}>
         <Button
           type="transparent-dark"
-          text="Add new task"
+          text={t('Board.addTask')}
           big={false}
           iconType="add-cross"
           iconWidth="12"
           onClick={() => setCreateModalActive(true)}
         />
-        <button className={styles.delete} onClick={() => setConfirmationModalActive(true)}>
+        <button
+          className={styles.delete}
+          onClick={() => setConfirmationModalActive(true)}
+          title={t('Common.delete') as string}
+        >
           <Icon type="delete" width="26" />
         </button>
       </div>
@@ -81,8 +89,8 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
 
       {isConfirmationModalActive && (
         <ConfirmationModal
-          text="Delete column?"
-          confirmButtonText="Delete"
+          text={t('Board.confirmDeleteColumn')}
+          confirmButtonText={t('Common.delete')}
           onConfirm={confirmDelete}
           onClose={() => setConfirmationModalActive(false)}
           loading={isLoading}

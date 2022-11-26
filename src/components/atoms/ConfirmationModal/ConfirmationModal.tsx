@@ -31,7 +31,7 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
         </button>
         <Heading level={2} text={text} className={styles.heading} />
         <div className={styles.controls}>
-          <Button type="bordered" big={false} text={t('Global.close')} onClick={onClose} />
+          <Button type="bordered" big={false} text={t('Common.close')} onClick={onClose} />
           <Button
             type="primary"
             big={false}
