@@ -3,6 +3,7 @@ import styles from './BoardItem.module.scss';
 import { Link } from 'react-router-dom';
 import getImgPath from 'utils/randomImg';
 import Icon from 'components/atoms/Icon';
+import Heading from 'components/atoms/Heading';
 
 interface IBoardInstanceProps {
   board: {
@@ -21,14 +22,17 @@ const BoardInstance = ({ board }: IBoardInstanceProps) => {
       </div>
       <div className={styles.info}>
         <div className={styles.topInfo}>
-          <h3 className={styles.title}>{board.title}</h3>
+          <Heading level={3} text={board.title} className={styles.title} />
           <div className={styles.controls}>
-            <div className={styles.scale}>
-              <Icon type="edit" width="23"></Icon>
-            </div>
-            <div className={styles.scale}>
-              <Icon type="delete" width="23"></Icon>
-            </div>
+            <button
+              className={styles.delete}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+              title="delete"
+            >
+              <Icon type="delete" width="26" />
+            </button>
           </div>
         </div>
         <div className={styles.descr}>{board.description}</div>
