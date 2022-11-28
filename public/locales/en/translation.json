@@ -52,6 +52,17 @@
         "sure": "Are you sure you want to delete the user?",
         "sureUp": "Are you sure you want to update the user?"
     },
+    "Board": {
+        "addColumn": "Add new column",
+        "addTask": "Add new task",
+        "titlePlaceholder": "Title",
+        "titleError": "Title is required",
+        "descPlaceholder": "Description",
+        "descError": "Description is required",
+        "usersPlaceholder": "Select the responsible",
+        "confirmDeleteColumn": "Delete column?",
+        "confirmDeleteTask": "Delete task?"
+    },
     "Error": {
         "logMin": "Login must be at least 2 characters",
         "logMax": "Login must not exceed 20 characters",
@@ -63,7 +74,15 @@
         "passMin": "Password must be at least 6 characters",
         "passReq": "Password is required"
     },
-    "Global": {
-        "close": "Close"
+    "Common": {
+        "close": "Close",
+        "loading": "Loading...",
+        "serverError": "Something went wrong",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "create": "Create",
+        "edit": "Edit",
+        "delete": "Delete",
+        "update": "Update"
     }
 }

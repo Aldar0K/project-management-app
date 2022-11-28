@@ -1,4 +1,12 @@
-import { IBoard, IBoardData, IBoardParams, IColumn, ITask, ITaskParams } from 'models';
+import {
+  IBoard,
+  IBoardData,
+  IBoardParams,
+  IColumn,
+  IColumnParams,
+  ITask,
+  ITaskParams,
+} from 'models';
 import { commonApi } from './common.api';
 
 export const BoardAPI = commonApi.injectEndpoints({
@@ -56,6 +64,31 @@ export const BoardAPI = commonApi.injectEndpoints({
         ...(result ? result.map(({ _id }) => ({ type: 'Column' as const, _id: _id })) : []),
       ],
     }),
+    createColumnByBoardId: build.mutation<
+      IColumn,
+      {
+        boardId: string;
+        body: {
+          title: 'string';
+          order: number;
+        };
+      }
+    >({
+      query: ({ boardId, body }) => ({
+        url: `/boards/${boardId}/columns`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Column'],
+    }),
+    updateColumnByBoardIdAndColumnId: build.mutation<IColumn, IColumnParams>({
+      query: ({ boardId, columnId, body }) => ({
+        url: `/boards/${boardId}/columns/${columnId}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg.columnId }],
+    }),
     deleteColumnByBoardIdAndColumnId: build.mutation<
       IColumn,
       { boardId: string; columnId: string }
@@ -64,7 +97,8 @@ export const BoardAPI = commonApi.injectEndpoints({
         url: `/boards/${boardId}/columns/${columnId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg }],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg }],
+      invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg.columnId }],
     }),
 
     // TODO move to TaskServise?
@@ -82,6 +116,40 @@ export const BoardAPI = commonApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['Task'],
+    }),
+    updateTaskByBoardIdAndColumnIdAndTaskId: build.mutation<
+      ITask,
+      {
+        boardId: string;
+        columnId: string;
+        taskId: string;
+        body: {
+          title: string;
+          order: number;
+          description: string;
+          columnId: string;
+          userId: string;
+          users: string[];
+        };
+      }
+    >({
+      query: ({ boardId, columnId, taskId, body }) => ({
+        url: `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        method: 'PUT',
+        body,
+      }),
+      invalidatesTags: ['Task'],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.columnId }],
+    }),
+    deleteTaskByBoardIdAndColumnIdAndTaskId: build.mutation<
+      ITask,
+      { boardId: string; columnId: string; taskId: string }
+    >({
+      query: ({ boardId, columnId, taskId }) => ({
+        url: `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.taskId }],
     }),
   }),
 });

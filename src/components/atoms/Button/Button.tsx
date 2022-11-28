@@ -7,6 +7,7 @@ import { IconTypes } from 'models/types';
 interface ButtonProps {
   text: string;
   type: 'primary' | 'secondary' | 'bordered' | 'transparent-dark' | 'transparent-light';
+  isSubmit?: boolean;
   big: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -20,6 +21,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   text = 'button',
   type = 'primary',
+  isSubmit = true,
   big = false,
   loading = false,
   disabled = false,
@@ -38,6 +40,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled || loading}
           className={`${styles.button} ${styles.button_primary} ${sizeClass} ${withIconClass}`}
+          type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
@@ -51,6 +54,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled || loading}
           className={`${styles.button} ${styles.button_secondary} ${sizeClass} ${withIconClass}`}
+          type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
@@ -64,6 +68,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled || loading}
           className={`${styles.button} ${styles.button_bordered} ${sizeClass} ${withIconClass}`}
+          type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
@@ -77,6 +82,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled || loading}
           className={`${styles.button} ${styles.button_transparentDark} ${sizeClass} ${withIconClass}`}
+          type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
@@ -90,6 +96,7 @@ const Button: React.FC<ButtonProps> = ({
         <button
           disabled={disabled || loading}
           className={`${styles.button} ${styles.button_transparentLight} ${sizeClass} ${withIconClass}`}
+          type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (

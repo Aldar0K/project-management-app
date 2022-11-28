@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import Button from '../Button';
+import { useTranslation } from 'react-i18next';
+
 import styles from './errorMod.module.scss';
+import Button from '../Button';
 
 interface IModalProps {
   children: React.ReactNode | JSX.Element;
@@ -8,6 +10,8 @@ interface IModalProps {
 }
 
 const ErrorModal: FC<IModalProps> = ({ onClose, children }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal}>
@@ -15,7 +19,7 @@ const ErrorModal: FC<IModalProps> = ({ onClose, children }) => {
           {' '}
           {children}
           <div className={styles.divButtons}>
-            <Button text="Close" type="primary" big={true} onClick={onClose} />
+            <Button text={t('Common.close')} type="primary" big={true} onClick={onClose} />
           </div>
         </div>
       </div>

@@ -27,20 +27,6 @@
   gap: 1.5rem;
 }
 
-.select {
-  width: 17.5rem;
-
-  background: $color-light;
-  border: 0.25em solid $color-primary;
-  border-radius: 0.5em;
-
-  font-size: 0.875rem;
-  line-height: 1rem;
-  color: $color-primary;
-
-  user-select: none;
-}
-
 .controls {
   display: flex;
   
