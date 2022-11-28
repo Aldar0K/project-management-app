@@ -28,20 +28,17 @@ const MainPage = () => {
   return (
     <div className="main">
       <div className={`container`}>
-        {!createBoardModal ? (
-          <ul className={styles.container}>
-            {fakeApi.map((board) => (
-              <li key={board._id}>
-                <BoardInstance board={board} setModal={setCreateBoardModal} />
-              </li>
-            ))}
-            <li>
-              <BoardPlus setModal={setCreateBoardModal} />
+        <ul className={styles.container}>
+          {fakeApi.map((board) => (
+            <li key={board._id}>
+              <BoardInstance board={board} setModal={setCreateBoardModal} />
             </li>
-          </ul>
-        ) : (
-          <CreateBoardForm setCreateBoardModal={setCreateBoardModal} />
-        )}
+          ))}
+          <li>
+            <BoardPlus setModal={setCreateBoardModal} />
+          </li>
+        </ul>
+        {createBoardModal && <CreateBoardForm setCreateBoardModal={setCreateBoardModal} />}
       </div>
     </div>
   );
