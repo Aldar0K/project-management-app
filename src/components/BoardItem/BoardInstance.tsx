@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import getImgPath from 'utils/randomImg';
 import Icon from 'components/atoms/Icon';
 import Heading from 'components/atoms/Heading';
+import { useTranslation } from 'react-i18next';
 
 interface IBoardInstanceProps {
   board: {
@@ -15,6 +16,7 @@ interface IBoardInstanceProps {
 }
 
 const BoardInstance = ({ board }: IBoardInstanceProps) => {
+  const { t } = useTranslation();
   return (
     <Link to={`/boards/${board._id}`} className={`${styles.board} ${styles.instance}`}>
       <div className={styles.img}>
@@ -29,7 +31,7 @@ const BoardInstance = ({ board }: IBoardInstanceProps) => {
               onClick={(e) => {
                 e.preventDefault();
               }}
-              title="delete"
+              title={t('Common.delete') as string}
             >
               <Icon type="delete" width="26" />
             </button>
