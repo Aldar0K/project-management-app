@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Draggable } from 'react-beautiful-dnd';
 
 import styles from './Column.module.scss';
 import { IColumn } from 'models';
@@ -16,14 +17,19 @@ import ConfirmationModal from 'components/atoms/ConfirmationModal';
 
 interface ColumnProps {
   column: IColumn;
+  index: number;
 }
 
-const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, boardId } }) => {
+const Column: React.FC<ColumnProps> = ({
+  column: { _id: columnId, title, order, boardId },
+  index,
+}) => {
   const { t } = useTranslation();
 
-  const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
   const [deleteColumnByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useDeleteColumnByBoardIdAndColumnIdMutation();
+
+  const { data: tasks } = BoardAPI.useGetTasksByBoardIdAndColumnIdQuery({ boardId, columnId });
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -45,36 +51,47 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
   };
 
   return (
-    <div className={styles.container}>
-      <EditableColumnTitle
-        level={3}
-        text={title}
-        boardId={boardId}
-        columnId={columnId}
-        order={order}
-      />
-      <div className={styles.tasksContainer}>
-        <ul className={styles.tasks}>
-          {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
-        </ul>
-      </div>
-      <div className={styles.controls}>
-        <Button
-          type="transparent-dark"
-          text={t('Board.addTask')}
-          big={false}
-          iconType="add-cross"
-          iconWidth="12"
-          onClick={() => setCreateModalActive(true)}
-        />
-        <button
-          className={styles.delete}
-          onClick={() => setConfirmationModalActive(true)}
-          title={t('Common.delete') as string}
-        >
-          <Icon type="delete" width="26" />
-        </button>
-      </div>
+    <>
+      <Draggable draggableId={columnId} index={index}>
+        {(provided) => (
+          <li
+            className={styles.container}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+          >
+            <EditableColumnTitle
+              level={3}
+              text={title}
+              boardId={boardId}
+              columnId={columnId}
+              order={order}
+            />
+            <div className={styles.tasksContainer}>
+              <ul className={styles.tasks}>
+                {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
+              </ul>
+            </div>
+            <div className={styles.controls}>
+              <Button
+                type="transparent-dark"
+                text={t('Board.addTask')}
+                big={false}
+                iconType="add-cross"
+                iconWidth="12"
+                onClick={() => setCreateModalActive(true)}
+              />
+              <button
+                className={styles.delete}
+                onClick={() => setConfirmationModalActive(true)}
+                title={t('Common.delete') as string}
+              >
+                <Icon type="delete" width="26" />
+              </button>
+            </div>
+          </li>
+        )}
+      </Draggable>
 
       {isCreateModalActive && (
         <Modal onClose={() => setCreateModalActive(false)}>
@@ -102,7 +119,7 @@ const Column: React.FC<ColumnProps> = ({ column: { _id: columnId, title, order, 
           <h3>{errorMessage}</h3>
         </ErrorModal>
       )}
-    </div>
+    </>
   );
 };
 

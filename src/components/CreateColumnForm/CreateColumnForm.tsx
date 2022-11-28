@@ -45,7 +45,7 @@ const CreateColumnForm: FC<CreateColumnFormProps> = ({ boardId, columnsLength, o
       boardId,
       body: {
         title,
-        order: columnsLength + 1,
+        order: columnsLength,
       },
     });
 

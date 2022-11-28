@@ -101,6 +101,11 @@ export const BoardAPI = commonApi.injectEndpoints({
       invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg.columnId }],
     }),
 
+    updateColumnsSet: build.mutation<IColumn[], { _id: string; order: number }[]>({
+      query: (body) => ({ url: `/columnsSet`, method: 'PATCH', body }),
+      invalidatesTags: ['Column'],
+    }),
+
     // TODO move to TaskServise?
     getTasksByBoardIdAndColumnId: build.query<ITask[], { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) => ({ url: `/boards/${boardId}/columns/${columnId}/tasks` }),
