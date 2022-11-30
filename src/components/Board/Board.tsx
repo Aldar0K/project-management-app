@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 
 import styles from './Board.module.scss';
-import { IBoard, IColumn, IError } from 'models';
-import { BoardAPI } from 'store';
+import { IBoard, IError, ITask } from 'models';
+import { BoardAPI, useAppSelector } from 'store';
 
 import Button from 'components/atoms/Button';
 import Column from 'components/Column';
@@ -19,42 +19,136 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, users } }) => {
   const { t } = useTranslation();
+  const state = useAppSelector((state) => state);
 
   const [isCreateModalActive, setCreateModalActive] = useState(false);
 
-  const { data: rawColumns, error, isLoading } = BoardAPI.useGetColumnsByBoardIdQuery(boardId);
-  const [columns, setColumns] = useState<IColumn[]>([]);
+  const { data: columns, error, isLoading } = BoardAPI.useGetColumnsByBoardIdQuery(boardId);
 
   // TODO add a loading animation and an error handler for column order update errors.
-  const [updateColumnSet, { isLoading: isUpdateLoading, error: updateError }] =
+  const [updateColumnsSet, { isLoading: isUpdateColumnsLoading, error: updateColumnsError }] =
     BoardAPI.useUpdateColumnsSetMutation();
 
-  useEffect(() => {
-    if (rawColumns) {
-      const sortedByOrderColumns = [...rawColumns].sort(
-        (column1, column2) => column1.order - column2.order
-      );
-      setColumns(sortedByOrderColumns);
-    }
-  }, [rawColumns]);
+  const [updateTasksSet, { isLoading: isUpdateTasksLoading, error: updateTasksError }] =
+    BoardAPI.useUpdateTasksSetMutation();
 
   const handleDragEnd = (result: DropResult) => {
-    if (!result.destination || result.destination.index === result.source.index) {
+    const { type, source, destination, draggableId } = result;
+
+    if (
+      !destination ||
+      !columns ||
+      (destination.index === source.index && destination.droppableId === source.droppableId)
+    ) {
       return;
     }
 
-    const newColumns = [...columns];
-    const [removed] = newColumns.splice(result.source.index, 1);
-    newColumns.splice(result.destination.index, 0, removed);
-    setColumns(newColumns);
+    if (type === 'COLUMN') {
+      const newColumns = [...columns];
+      const [reorderedColumn] = newColumns.splice(source.index, 1);
+      newColumns.splice(destination.index, 0, reorderedColumn);
 
-    const newColummnSet = newColumns.map((column, index) => {
-      return {
-        _id: column._id,
-        order: index,
-      };
-    });
-    updateColumnSet(newColummnSet);
+      const newColummnsSet = newColumns.map((column, index) => {
+        return {
+          _id: column._id,
+          order: index,
+        };
+      });
+      updateColumnsSet({ boardId, body: newColummnsSet });
+    }
+
+    if (type === 'TASK') {
+      // Getting all tasks from a hash.
+      const allTasks: ITask[] = [];
+      const columnIds: string[] = columns.map((item) => item._id);
+      columnIds.forEach((columnId) => {
+        const result = BoardAPI.endpoints.getTasksByBoardIdAndColumnId.select({
+          boardId,
+          columnId,
+        })(state);
+        if (result.isSuccess) {
+          result.data.forEach((data) => allTasks.push(data));
+        }
+      });
+
+      if (source.droppableId === destination.droppableId) {
+        // If we change the data for one column.
+        const newTasks = allTasks
+          .filter((task) => task.columnId === source.droppableId)
+          .sort((task1, task2) => task1.order - task2.order);
+
+        const [reorderedTask] = newTasks.splice(source.index, 1);
+        newTasks.splice(destination.index, 0, reorderedTask);
+
+        const newTasksSet = newTasks.map((task, index) => {
+          return {
+            _id: task._id,
+            order: index,
+            columnId: source.droppableId,
+          };
+        });
+
+        updateTasksSet({
+          boardId,
+          columnId: source.droppableId,
+          body: newTasksSet,
+          newTasks,
+        });
+      } else {
+        // If we change the data for two columns.
+        // Updating target column.
+        const targetColumnTasks = allTasks
+          .filter((task) => task.columnId === destination.droppableId)
+          .sort((task1, task2) => task1.order - task2.order);
+
+        const [draggableTask] = allTasks.filter((task) => task._id === draggableId);
+
+        if (destination.index === targetColumnTasks.length) {
+          // If we add a task to the end of the column.
+          targetColumnTasks.push(draggableTask);
+        } else {
+          const [reorderedTask] = targetColumnTasks.splice(destination.index, 1);
+          targetColumnTasks.splice(destination.index, 0, draggableTask);
+          targetColumnTasks.splice(destination.index + 1, 0, reorderedTask);
+        }
+
+        const newTasksSet = targetColumnTasks.map((task, index) => {
+          return {
+            _id: task._id,
+            order: index,
+            columnId: destination.droppableId,
+          };
+        });
+
+        updateTasksSet({
+          boardId,
+          columnId: destination.droppableId,
+          body: newTasksSet,
+          newTasks: targetColumnTasks,
+        });
+
+        // Updating source column.
+        const sourceColumnTasks = allTasks
+          .filter((task) => task.columnId === source.droppableId)
+          .filter((task) => task._id !== draggableId)
+          .sort((task1, task2) => task1.order - task2.order);
+
+        const oldTasksSet = sourceColumnTasks.map((task, index) => {
+          return {
+            _id: task._id,
+            order: index,
+            columnId: source.droppableId,
+          };
+        });
+
+        updateTasksSet({
+          boardId,
+          columnId: source.droppableId,
+          body: oldTasksSet,
+          newTasks: sourceColumnTasks,
+        });
+      }
+    }
   };
 
   return (
@@ -62,14 +156,18 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
       <EditableBoardTitle level={2} text={title} boardId={boardId} owner={owner} users={users} />
       <div className={styles.columnsContainer}>
         <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="columns" direction="horizontal">
-            {(provided) => (
-              <ul className={styles.columns} {...provided.droppableProps} ref={provided.innerRef}>
+          <Droppable droppableId="columns" type="COLUMN" direction="horizontal">
+            {(droppableColumnProvided: DroppableProvided) => (
+              <ul
+                className={styles.columns}
+                {...droppableColumnProvided.droppableProps}
+                ref={droppableColumnProvided.innerRef}
+              >
                 {columns &&
                   columns.map((column, index) => (
                     <Column column={column} key={column._id} index={index} />
                   ))}
-                {provided.placeholder}
+                {droppableColumnProvided.placeholder}
               </ul>
             )}
           </Droppable>

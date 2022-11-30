@@ -1,28 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IBoard } from 'models';
+import { ITask } from 'models';
 
-const initialState: IBoard = {
-  _id: '',
+interface IBoardState {
+  id: string;
+  title: string;
+  columns: {
+    id: string;
+    title: string;
+    order: number;
+    tasks: ITask[];
+  }[];
+  owner?: string;
+  users?: string[];
+}
+
+const initialState: IBoardState = {
+  id: '',
   title: '',
+  columns: [],
   owner: '',
   users: [],
 };
 
 const boardSlice = createSlice({
-  name: 'user',
+  name: 'board',
   initialState,
   reducers: {
-    setAllBoards(state, action) {
-      return { ...action.payload };
+    // TODO type the reducer or split all setters.
+    setBoard: (state, action) => {
+      state = action.payload;
     },
-    removeBoard(state) {
-      state._id = '';
+    setColumns: (state, action) => {
+      state.columns = action.payload;
+    },
+    clearBoard: (state) => {
+      state.id = '';
       state.title = '';
+      state.columns = [];
       state.owner = '';
       state.users = [];
     },
   },
 });
 
-export const { setAllBoards, removeBoard } = boardSlice.actions;
+export const { setBoard, clearBoard } = boardSlice.actions;
 export default boardSlice.reducer;

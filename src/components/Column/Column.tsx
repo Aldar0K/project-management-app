@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided, Droppable, DroppableProvided } from 'react-beautiful-dnd';
 
 import styles from './Column.module.scss';
 import { IColumn } from 'models';
@@ -53,12 +53,12 @@ const Column: React.FC<ColumnProps> = ({
   return (
     <>
       <Draggable draggableId={columnId} index={index}>
-        {(provided) => (
+        {(draggableColumnProvided: DraggableProvided) => (
           <li
             className={styles.container}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
+            {...draggableColumnProvided.draggableProps}
+            ref={draggableColumnProvided.innerRef}
+            {...draggableColumnProvided.dragHandleProps}
           >
             <EditableColumnTitle
               level={3}
@@ -68,9 +68,23 @@ const Column: React.FC<ColumnProps> = ({
               order={order}
             />
             <div className={styles.tasksContainer}>
-              <ul className={styles.tasks}>
-                {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
-              </ul>
+              <Droppable
+                droppableId={columnId}
+                type="TASK"
+                direction="vertical"
+                ignoreContainerClipping={true}
+              >
+                {(droppableTaskProvided: DroppableProvided) => (
+                  <ul
+                    className={styles.tasks}
+                    {...droppableTaskProvided.droppableProps}
+                    ref={droppableTaskProvided.innerRef}
+                  >
+                    {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
+                    {droppableTaskProvided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
             </div>
             <div className={styles.controls}>
               <Button

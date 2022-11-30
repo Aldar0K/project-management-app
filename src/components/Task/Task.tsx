@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
 
 import styles from './Task.module.scss';
 import { ITask } from 'models';
@@ -15,7 +16,10 @@ interface TaskProps {
   task: ITask;
 }
 
-const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnId, title } }) => {
+const Task: React.FC<TaskProps> = ({
+  task,
+  task: { _id: taskId, boardId, columnId, title, order },
+}) => {
   const { t } = useTranslation();
 
   const [deleteTaskByBoardIdAndColumnIdAndTaskId, { isLoading, error }] =
@@ -41,24 +45,35 @@ const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnI
   };
 
   return (
-    <li className={styles.container}>
-      <Heading className={styles.heading} level={4} text={title} />
-      <div className={styles.controls}>
-        <button
-          className={styles.edit}
-          title={t('Common.edit') as string}
-          onClick={() => setIsEditTaskModalActive(true)}
-        >
-          <Icon type="edit" width="22" />
-        </button>
-        <button
-          className={styles.delete}
-          title={t('Common.delete') as string}
-          onClick={() => setConfirmationModalActive(true)}
-        >
-          <Icon type="delete" width="22" />
-        </button>
-      </div>
+    <>
+      <Draggable key={taskId} draggableId={taskId} index={order}>
+        {(draggableTaskProvided: DraggableProvided) => (
+          <li
+            className={styles.container}
+            {...draggableTaskProvided.draggableProps}
+            {...draggableTaskProvided.dragHandleProps}
+            ref={draggableTaskProvided.innerRef}
+          >
+            <Heading className={styles.heading} level={4} text={title} />
+            <div className={styles.controls}>
+              <button
+                className={styles.edit}
+                title={t('Common.edit') as string}
+                onClick={() => setIsEditTaskModalActive(true)}
+              >
+                <Icon type="edit" width="22" />
+              </button>
+              <button
+                className={styles.delete}
+                title={t('Common.delete') as string}
+                onClick={() => setConfirmationModalActive(true)}
+              >
+                <Icon type="delete" width="22" />
+              </button>
+            </div>
+          </li>
+        )}
+      </Draggable>
 
       {isEditTaskModalActive && (
         <EditTaskModal task={task} onCancel={() => setIsEditTaskModalActive(false)} />
@@ -79,7 +94,7 @@ const Task: React.FC<TaskProps> = ({ task, task: { _id: taskId, boardId, columnI
           <h3>{errorMessage}</h3>
         </ErrorModal>
       )}
-    </li>
+    </>
   );
 };
 
