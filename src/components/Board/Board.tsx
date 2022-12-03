@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd';
 
 import styles from './Board.module.scss';
-import { IBoard, IError, ITask } from 'models';
+import { IBoard, ITask } from 'models';
 import { BoardAPI, useAppSelector } from 'store';
 
 import Button from 'components/atoms/Button';
@@ -12,6 +12,7 @@ import EditableBoardTitle from 'components/EditableBoardTitle';
 import Modal from 'components/atoms/Modal';
 import CreateColumnForm from 'components/CreateColumnForm';
 import Heading from 'components/atoms/Heading';
+import ErrorModal from 'components/atoms/errorModal';
 
 interface BoardProps {
   board: IBoard;
@@ -23,14 +24,40 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
 
   const [isCreateModalActive, setCreateModalActive] = useState(false);
 
-  const { data: columns, error, isLoading } = BoardAPI.useGetColumnsByBoardIdQuery(boardId);
+  const {
+    data: columns,
+    error: getColumnsError,
+    isLoading: getColumnsIsLoading,
+  } = BoardAPI.useGetColumnsByBoardIdQuery(boardId);
 
-  // TODO add a loading animation and an error handler for column order update errors.
-  const [updateColumnsSet, { isLoading: isUpdateColumnsLoading, error: updateColumnsError }] =
-    BoardAPI.useUpdateColumnsSetMutation();
+  const [updateColumnsSet, { error: updateColumnsError }] = BoardAPI.useUpdateColumnsSetMutation();
+  const [updateTasksSet, { error: updateTasksError }] = BoardAPI.useUpdateTasksSetMutation();
 
-  const [updateTasksSet, { isLoading: isUpdateTasksLoading, error: updateTasksError }] =
-    BoardAPI.useUpdateTasksSetMutation();
+  const [isErrorModalActive, setErrorModalActive] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (getColumnsError && 'data' in getColumnsError) {
+      setErrorMessage(getColumnsError.data.message);
+      setErrorModalActive(true);
+    } else {
+      setErrorModalActive(false);
+    }
+
+    if (updateColumnsError && 'data' in updateColumnsError) {
+      setErrorMessage(updateColumnsError.data.message);
+      setErrorModalActive(true);
+    } else {
+      setErrorModalActive(false);
+    }
+
+    if (updateTasksError && 'data' in updateTasksError) {
+      setErrorMessage(updateTasksError.data.message);
+      setErrorModalActive(true);
+    } else {
+      setErrorModalActive(false);
+    }
+  }, [getColumnsError, updateColumnsError, updateTasksError]);
 
   const handleDragEnd = (result: DropResult) => {
     const { type, source, destination, draggableId } = result;
@@ -194,13 +221,12 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
         </Modal>
       )}
 
-      {isLoading && <Heading level={2} text={t('Common.loading')} />}
+      {getColumnsIsLoading && <Heading level={2} text={t('Common.loading')} />}
 
-      {error && (
-        <Heading
-          level={2}
-          text={`${t('Common.serverError')} (${(error as IError).data.message})`}
-        />
+      {isErrorModalActive && (
+        <ErrorModal onClose={() => setErrorModalActive(false)}>
+          <h3>{errorMessage}</h3>
+        </ErrorModal>
       )}
     </div>
   );
