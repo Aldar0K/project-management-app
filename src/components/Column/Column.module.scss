@@ -11,8 +11,8 @@
 
   flex-direction: column;
 
+  background-color: $color-light;
   border: 3.5px solid $color-background-dark;
-  // box-shadow: inset 0 0 6px $color-background-dark;
   border-radius: .5em;
 }
 
@@ -42,7 +42,15 @@
 .tasks {
   display: flex;
 
+  height: 100%;
+
   flex-direction: column;
+
+  transition: .3s all ease;
+
+  &_draggingOver {
+    background-color: #bcdeeb;
+  }
 }
 
 .controls {

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Draggable, DraggableProvided, Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import {
+  Draggable,
+  DraggableProvided,
+  Droppable,
+  DroppableProvided,
+  DroppableStateSnapshot,
+} from 'react-beautiful-dnd';
 
 import styles from './Column.module.scss';
 import { IColumn } from 'models';
@@ -74,9 +80,16 @@ const Column: React.FC<ColumnProps> = ({
                 direction="vertical"
                 ignoreContainerClipping={true}
               >
-                {(droppableTaskProvided: DroppableProvided) => (
+                {(
+                  droppableTaskProvided: DroppableProvided,
+                  droppableTaskSnapshot: DroppableStateSnapshot
+                ) => (
                   <ul
-                    className={styles.tasks}
+                    className={
+                      droppableTaskSnapshot.isDraggingOver
+                        ? `${styles.tasks} ${styles.tasks_draggingOver}`
+                        : styles.tasks
+                    }
                     {...droppableTaskProvided.droppableProps}
                     ref={droppableTaskProvided.innerRef}
                   >

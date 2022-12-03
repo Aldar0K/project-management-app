@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 
 import styles from './Task.module.scss';
 import { ITask } from 'models';
@@ -47,9 +47,16 @@ const Task: React.FC<TaskProps> = ({
   return (
     <>
       <Draggable key={taskId} draggableId={taskId} index={order}>
-        {(draggableTaskProvided: DraggableProvided) => (
+        {(
+          draggableTaskProvided: DraggableProvided,
+          draggableTaskSnapshot: DraggableStateSnapshot
+        ) => (
           <li
-            className={styles.container}
+            className={
+              draggableTaskSnapshot.isDragging
+                ? `${styles.container} ${styles.container_dragging}`
+                : styles.container
+            }
             {...draggableTaskProvided.draggableProps}
             {...draggableTaskProvided.dragHandleProps}
             ref={draggableTaskProvided.innerRef}
