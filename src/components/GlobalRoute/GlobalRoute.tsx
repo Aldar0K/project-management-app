@@ -38,30 +38,7 @@ const GlobalRoute = () => {
   return (
     <>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ErrorBoundary>
-              <WelcomePage />
-            </ErrorBoundary>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <ErrorBoundary>
-              <LoginPage />
-            </ErrorBoundary>
-          }
-        />
-        <Route
-          path="/registration"
-          element={
-            <ErrorBoundary>
-              <RegisterPage />
-            </ErrorBoundary>
-          }
-        />
+        <Route path="/" element={<WelcomePage />} />
         <Route
           path="/editProfile"
           element={
@@ -86,6 +63,9 @@ const GlobalRoute = () => {
             </ErrorBoundary>
           }
         />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegisterPage />} />
+        <Route path="/main" element={<MainPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

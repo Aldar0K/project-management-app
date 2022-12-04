@@ -24,7 +24,15 @@
         "text": "We have created a convenient application for planning your projects. Track the progress of tasks, complete them on time, distribute the work among your team members correctly!",
         "button": "Get started"
     },
-    "MainPage": {},
+    "MainPage": {
+        "createBoardform": {
+            "createBoard": "Create Board",
+            "title": "Title",
+            "description": "Description",
+            "create": "Create",
+            "cancel": "Cancel"
+        }
+    },
     "LoginPage": {
         "signIn": "Sign In",
         "login": "Login",
@@ -41,8 +49,8 @@
         "delUser": "Delete User",
         "upUser": "Update User",
         "upMessage": "Your data has been successfully updated",
-        "sure":"Are you sure you want to delete the user?",
-        "sureUp":"Are you sure you want to update the user?"
+        "sure": "Are you sure you want to delete the user?",
+        "sureUp": "Are you sure you want to update the user?"
     },
     "Board": {
         "addColumn": "Add new column",
@@ -55,7 +63,7 @@
         "confirmDeleteColumn": "Delete column?",
         "confirmDeleteTask": "Delete task?"
     },
-    "Error":{
+    "Error": {
         "logMin": "Login must be at least 2 characters",
         "logMax": "Login must not exceed 20 characters",
         "nameReq": "Name is required",
@@ -66,7 +74,7 @@
         "passMin": "Password must be at least 6 characters",
         "passReq": "Password is required"
     },
-    "Common":{
+    "Common": {
         "close": "Close",
         "loading": "Loading...",
         "serverError": "Something went wrong",
