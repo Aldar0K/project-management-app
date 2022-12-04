@@ -4,7 +4,7 @@ import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beau
 
 import styles from './Task.module.scss';
 import { ITask } from 'models';
-import { BoardAPI } from 'store';
+import { AuthorizationAPI, BoardAPI } from 'store';
 
 import Icon from 'components/atoms/Icon';
 import Heading from 'components/atoms/Heading';
@@ -18,18 +18,27 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({
   task,
-  task: { _id: taskId, boardId, columnId, title, order },
+  task: { _id: taskId, boardId, columnId, title, order, users: userIds },
 }) => {
   const { t } = useTranslation();
+
+  const { data: allUsers } = AuthorizationAPI.useGetAllUsersQuery();
+  const [userNames, setUserNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (userIds && allUsers) {
+      const users = allUsers.filter((user) => userIds.includes(user._id as string));
+      const userNames = users.map((user) => user.name as string);
+
+      setUserNames(userNames);
+    }
+  }, [allUsers, userIds]);
 
   const [deleteTaskByBoardIdAndColumnIdAndTaskId, { isLoading, error }] =
     BoardAPI.useDeleteTaskByBoardIdAndColumnIdAndTaskIdMutation();
 
   const [isErrorModalActive, setErrorModalActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const [isEditTaskModalActive, setIsEditTaskModalActive] = useState(false);
-  const [isConfirmationModalActive, setConfirmationModalActive] = useState(false);
 
   useEffect(() => {
     if (error && 'data' in error) {
@@ -39,6 +48,9 @@ const Task: React.FC<TaskProps> = ({
       setErrorModalActive(false);
     }
   }, [error]);
+
+  const [isEditTaskModalActive, setIsEditTaskModalActive] = useState(false);
+  const [isConfirmationModalActive, setConfirmationModalActive] = useState(false);
 
   const confirmDelete = () => {
     deleteTaskByBoardIdAndColumnIdAndTaskId({ boardId, columnId, taskId });
@@ -78,6 +90,15 @@ const Task: React.FC<TaskProps> = ({
                 <Icon type="delete" width="22" />
               </button>
             </div>
+            {userNames.length > 0 && (
+              <ul className={styles.responsible}>
+                {userNames.map((userName) => (
+                  <li className={styles.responsible_user} key={userName}>
+                    {userName}
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         )}
       </Draggable>

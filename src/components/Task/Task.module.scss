@@ -2,15 +2,16 @@
 
 .container {
   display: flex;
+  position: relative;
 
   padding: .5rem;
   margin-bottom: .5rem;
 
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  column-gap: 1rem;
-  row-gap: .5rem;
+  flex-direction: column;
+  // justify-content: space-between;
+  // align-items: center;
+  // flex-wrap: wrap;
+  gap: .5rem;
 
   background-color: $color-light;
   border: 2px solid $color-primary;
@@ -22,9 +23,9 @@
   &:hover {
     box-shadow: 3px 3px 5px $color-background-dark;
 
-    // & .controls {
-    //   opacity: 1;
-    // }
+    & .controls {
+      opacity: 1;
+    }
   }
 
   &_dragging {
@@ -34,7 +35,8 @@
 
 .heading {
   width: 100%;
-  flex: 2;
+
+  min-height: 2.75rem;
 
   word-wrap: break-word;
   text-transform: none;
@@ -43,13 +45,16 @@
 
 .controls {
   display: flex;
+  position: absolute;
 
-  flex: 1;
+  top: .5rem;
+  right: .5rem;
 
-  justify-content: flex-end;
   gap: .2rem;
 
-  // opacity: 0;
+  background: $color-light;
+
+  opacity: 0;
   transition: .3s all ease;
 }
 
@@ -72,4 +77,23 @@
   &:active {
     background-color: #c5e5f3;
   }
+}
+
+.responsible {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  column-gap: .5rem;
+  row-gap: .2rem;
+}
+
+.responsible_user {
+  padding: .3rem;
+
+  background-color: $color-additional;
+  border-radius: .5rem;
+
+  font-size: .875rem;
+  color: $color-light;
 }
