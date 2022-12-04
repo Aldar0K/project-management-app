@@ -9,9 +9,10 @@ import Heading from 'components/atoms/Heading';
 
 const Navigation = () => {
   const { t } = useTranslation();
-  const { data: dataAll } = AuthorizationAPI.useGetAllUsersQuery();
   const { token } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  AuthorizationAPI.useGetAllUsersQuery();
 
   const { name } = useAppSelector((state) => state.user);
 
