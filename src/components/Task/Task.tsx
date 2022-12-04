@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 
 import styles from './Task.module.scss';
-import { ITask } from 'models';
 import { AuthorizationAPI, BoardAPI } from 'store';
+import { ITask } from 'models';
 
 import Icon from 'components/atoms/Icon';
 import Heading from 'components/atoms/Heading';
@@ -14,11 +14,13 @@ import ConfirmationModal from 'components/atoms/ConfirmationModal';
 
 interface TaskProps {
   task: ITask;
+  index: number;
 }
 
 const Task: React.FC<TaskProps> = ({
   task,
-  task: { _id: taskId, boardId, columnId, title, order, users: userIds },
+  task: { _id: taskId, boardId, columnId, title, users: userIds },
+  index,
 }) => {
   const { t } = useTranslation();
 
@@ -58,7 +60,7 @@ const Task: React.FC<TaskProps> = ({
 
   return (
     <>
-      <Draggable key={taskId} draggableId={taskId} index={order}>
+      <Draggable key={taskId} draggableId={taskId} index={index}>
         {(
           draggableTaskProvided: DraggableProvided,
           draggableTaskSnapshot: DraggableStateSnapshot

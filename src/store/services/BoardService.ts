@@ -181,7 +181,8 @@ export const BoardAPI = commonApi.injectEndpoints({
         url: `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.taskId }],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.taskId }],
+      invalidatesTags: ['Task'],
     }),
     updateTasksSet: build.mutation<
       ITask[],

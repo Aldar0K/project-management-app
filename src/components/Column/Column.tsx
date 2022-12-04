@@ -93,7 +93,8 @@ const Column: React.FC<ColumnProps> = ({
                     {...droppableTaskProvided.droppableProps}
                     ref={droppableTaskProvided.innerRef}
                   >
-                    {tasks && tasks.map((task) => <Task task={task} key={task._id} />)}
+                    {tasks &&
+                      tasks.map((task, index) => <Task task={task} key={task._id} index={index} />)}
                     {droppableTaskProvided.placeholder}
                   </ul>
                 )}

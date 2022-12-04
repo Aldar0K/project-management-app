@@ -134,6 +134,7 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
           // If we add a task to the end of the column.
           targetColumnTasks.push(draggableTask);
         } else {
+          // If we don't add a task to the end of the column.
           const [reorderedTask] = targetColumnTasks.splice(destination.index, 1);
           targetColumnTasks.splice(destination.index, 0, draggableTask);
           targetColumnTasks.splice(destination.index + 1, 0, reorderedTask);
