@@ -10,6 +10,8 @@
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+
+  user-select: none;
 }
 
 .content {
@@ -22,11 +24,7 @@
   justify-self: center;
   align-items: flex-start;
   gap: .75rem;
-
-  user-select: none;
 }
-
-
 
 .image img {
   width: 100%;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './BoardItem.module.scss';
 import { Link } from 'react-router-dom';
 import getImgPath from 'utils/randomImg';
@@ -10,12 +10,10 @@ interface IBoardInstanceProps {
   board: {
     _id: string;
     title: string;
-    description: string;
   };
-  setModal: (bool: boolean) => void;
 }
 
-const BoardInstance = ({ board }: IBoardInstanceProps) => {
+const BoardInstance: FC<IBoardInstanceProps> = ({ board }) => {
   const { t } = useTranslation();
   return (
     <Link to={`/boards/${board._id}`} className={`${styles.board} ${styles.instance}`}>
@@ -37,7 +35,7 @@ const BoardInstance = ({ board }: IBoardInstanceProps) => {
             </button>
           </div>
         </div>
-        <div className={styles.descr}>{board.description}</div>
+        {/* <div className={styles.descr}>{board.description}</div> */}
       </div>
     </Link>
   );

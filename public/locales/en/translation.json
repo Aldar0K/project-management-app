@@ -53,6 +53,7 @@
         "sureUp": "Are you sure you want to update the user?"
     },
     "Board": {
+        "addBoard": "Create new board",
         "addColumn": "Add new column",
         "addTask": "Add new task",
         "titlePlaceholder": "Title",
