@@ -48,4 +48,8 @@
 
 .title {
   color: $color-light;
+
+  @media (max-width: 360px) {
+    display: none;
+  }
 }

@@ -30,6 +30,10 @@
 
       background-color: rgba(0, 0, 0, 0.5);
     }
+
+    @media (max-width: 430px) {
+      gap: 3.3rem;
+    }
   }
 }
 
@@ -57,7 +61,13 @@
   }
 
   @media (max-width: $width-tablet) {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 2.2rem;
+  }
+  @media (max-width: $width-mobile-small) {
+    font-size: 2rem;
   }
 }
 
