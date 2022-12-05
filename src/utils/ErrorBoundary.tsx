@@ -1,6 +1,7 @@
-import ErrorModal from 'components/atoms/errorModal';
+import Button from 'components/atoms/Button';
+import { t } from 'i18next';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-
+import styles from '../components/atoms/errorModal/errorMod.module.scss';
 interface Props {
   children?: ReactNode;
 }
@@ -25,9 +26,24 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <ErrorModal onClose={() => !this.state.hasError}>
-          <h3>something went wrong, we&aposll figure it out</h3>
-        </ErrorModal>
+        <>
+          <div className={styles.modalOverlay}>
+            <div className={styles.modal}>
+              <div className={styles.textDiv}>
+                {' '}
+                <h3>{t('EditProfile.wrong')}</h3>
+                <div className={styles.divButtons}>
+                  <Button
+                    text={t('EditProfile.again')}
+                    type="primary"
+                    big={true}
+                    onClick={() => this.setState({ hasError: false })}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
       );
     }
 

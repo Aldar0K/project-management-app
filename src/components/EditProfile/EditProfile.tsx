@@ -76,8 +76,6 @@ const EditProfile = () => {
 
   return (
     <div>
-      {isLoadingDel && <h1>Loading...</h1>}
-      {isLoading && <h1>Loading...</h1>}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
           <h3>{isMessage}</h3>
@@ -89,6 +87,7 @@ const EditProfile = () => {
           confirmButtonText={t('EditProfile.delUser')}
           onConfirm={handleDeleteUserProps}
           onClose={() => setConfirmModalActive(false)}
+          loading={isLoadingDel}
         ></ConfirmationModal>
       )}
       <div className={styles.containerEdit}>
@@ -132,16 +131,8 @@ const EditProfile = () => {
             disabled={false}
           />
           <div className={styles.divButtons}>
-            {/* <Button
-            text={t('EditProfile.delUser')}
-            type="primary"
-            big={false}
-            onClick={handleDeleteUser}
-          /> */}
-            {/* <button type="button" onClick={handleDeleteUser}>
-            {t('EditProfile.delUser')}
-          </button> */}
             <Button
+              loading={isLoading}
               text={t('EditProfile.upUser')}
               type="secondary"
               big={false}
@@ -152,6 +143,7 @@ const EditProfile = () => {
         <div className={styles.divButtonsDel}>
           {' '}
           <Button
+            loading={isLoadingDel}
             text={t('EditProfile.delUser')}
             type="primary"
             big={false}
