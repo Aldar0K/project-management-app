@@ -12,10 +12,10 @@
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: $width-mobile) {
+  @media (max-width: $width-tablet) {
     flex-direction: column-reverse;
     align-items: center;
-    gap: 1rem;
+    gap: .5rem;
   }
 }
 
@@ -44,7 +44,7 @@
   align-items: center;
   gap: .5rem;
 
-  @media (max-width: $width-mobile) {
+  @media (max-width: $width-tablet) {
     justify-content: center;
   }
 }

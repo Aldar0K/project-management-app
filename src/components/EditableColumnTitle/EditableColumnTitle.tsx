@@ -24,6 +24,7 @@ const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
   boardId,
   columnId,
   order,
+  ...rest
 }) => {
   const { t } = useTranslation();
 
@@ -69,7 +70,7 @@ const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
   const handleCancel = () => setEdit(false);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} {...rest}>
       {edit ? (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <Input

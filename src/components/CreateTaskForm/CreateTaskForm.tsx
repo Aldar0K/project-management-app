@@ -110,7 +110,7 @@ const CreateTaskForm: FC<CreateTaskFormProps> = ({ boardId, columnId, tasksLengt
       body: {
         title,
         description,
-        order: tasksLength + 1,
+        order: tasksLength,
         userId,
         users,
       },

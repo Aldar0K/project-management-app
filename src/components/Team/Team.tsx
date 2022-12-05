@@ -5,6 +5,7 @@ import styles from './Team.module.scss';
 import aldarImg from './images/aldar.png';
 import dmitryImg from './images/dmitry.png';
 import annaImg from './images/anna.jpg';
+
 import Heading from 'components/atoms/Heading';
 import Text from 'components/atoms/Text';
 import Icon from 'components/atoms/Icon';

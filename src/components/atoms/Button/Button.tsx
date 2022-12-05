@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './Button.module.scss';
 import Icon from 'components/atoms/Icon';
 import { IconTypes } from 'models/types';
@@ -39,28 +38,57 @@ const Button: React.FC<ButtonProps> = ({
       return (
         <button
           disabled={disabled || loading}
-          className={`${styles.button} ${styles.button_primary} ${sizeClass} ${withIconClass}`}
+          className={
+            loading
+              ? `${styles.loading} ${styles.button} ${styles.button_primary} ${sizeClass} ${withIconClass}`
+              : `${styles.button} ${styles.button_primary} ${sizeClass} ${withIconClass} ${styles.hidden}`
+          }
           type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
             <Icon type={iconType} width={iconWidth} height={iconHeight} color={iconColor} />
           )}
-          {loading ? 'Loading...' : text}
+          <div className={styles.buttonText}>{text}</div>
+          <svg className={styles.spinner} viewBox="0 0 50 50">
+            <circle
+              className={styles.path}
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              strokeWidth="5"
+            ></circle>
+          </svg>
         </button>
       );
     case 'secondary':
       return (
         <button
           disabled={disabled || loading}
-          className={`${styles.button} ${styles.button_secondary} ${sizeClass} ${withIconClass}`}
+          className={
+            loading
+              ? `${styles.loading} ${styles.button} ${styles.button_secondary} ${sizeClass} ${withIconClass} `
+              : `${styles.button} ${styles.button_secondary} ${sizeClass} ${withIconClass} ${styles.hidden}`
+          }
           type={isSubmit ? 'submit' : 'button'}
           onClick={onClick}
         >
           {iconType && (
             <Icon type={iconType} width={iconWidth} height={iconHeight} color={iconColor} />
           )}
-          {loading ? 'Loading...' : text}
+
+          <div className={styles.buttonText}>{text}</div>
+          <svg className={styles.spinner} viewBox="0 0 50 50">
+            <circle
+              className={styles.path}
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              strokeWidth="5"
+            ></circle>
+          </svg>
         </button>
       );
     case 'bordered':

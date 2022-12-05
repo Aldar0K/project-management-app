@@ -14,8 +14,12 @@ const Hero = () => {
   const { token } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const handleStart = () => {
+  const goToLogin = () => {
     navigate('/login');
+  };
+
+  const goToMain = () => {
+    navigate('/main');
   };
 
   return (
@@ -24,13 +28,10 @@ const Hero = () => {
         <div className={styles.content}>
           <Heading className={styles.heading} text={t('WelcomePage.title')} level={1} />
           <Text className={styles.text} type="big" text={t('WelcomePage.text')} />
-          {!token && (
-            <Button
-              type="primary"
-              big={false}
-              onClick={handleStart}
-              text={t('WelcomePage.button')}
-            />
+          {token ? (
+            <Button type="primary" big={false} onClick={goToMain} text={t('WelcomePage.button')} />
+          ) : (
+            <Button type="primary" big={false} onClick={goToLogin} text={t('WelcomePage.button')} />
           )}
         </div>
         <div className={styles.image}>

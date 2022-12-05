@@ -12,13 +12,11 @@ const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    </Suspense>
-  </React.StrictMode>
+  <Suspense fallback={<div>Loading...</div>}>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </Suspense>
 );

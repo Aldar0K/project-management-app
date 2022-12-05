@@ -1,7 +1,9 @@
+import ErrorModal from 'components/atoms/errorModal';
+import Heading from 'components/atoms/Heading';
 import BoardInstance from 'components/BoardItem/BoardInstance';
 import BoardPlus from 'components/BoardItem/BoardPlus';
-import CreateBoardForm from 'components/BoardItem/CreateBoardForm/CreateBoardForm';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BoardAPI } from 'store';
 import styles from './MainPage.module.scss';
 
 //mock data
@@ -24,23 +26,48 @@ const fakeApi = [
 ];
 
 const MainPage = () => {
-  const [createBoardModal, setCreateBoardModal] = useState(false);
+  const { data: boards, isLoading, error } = BoardAPI.useGetAllBoardsQuery();
+
+  const [isErrorModalActive, setErrorModalActive] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (error && 'data' in error) {
+      setErrorMessage(error.data.message);
+      setErrorModalActive(true);
+    } else {
+      setErrorModalActive(false);
+    }
+  }, [error]);
+
   return (
-    <div className="main">
-      <div className={`container`}>
-        <ul className={styles.container}>
-          {fakeApi.map((board) => (
-            <li key={board._id}>
-              <BoardInstance board={board} setModal={setCreateBoardModal} />
-            </li>
-          ))}
-          <li>
-            <BoardPlus setModal={setCreateBoardModal} />
-          </li>
-        </ul>
-        {createBoardModal && <CreateBoardForm setCreateBoardModal={setCreateBoardModal} />}
+    <>
+      <div className="main">
+        <div className={`container`}>
+          {isLoading ? (
+            <Heading level={2} text="Loading..." />
+          ) : (
+            <ul className={styles.container}>
+              {boards &&
+                boards.map((board) => (
+                  <li key={board._id}>
+                    <BoardInstance board={board} />
+                  </li>
+                ))}
+              <li>
+                <BoardPlus />
+              </li>
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+
+      {isErrorModalActive && (
+        <ErrorModal onClose={() => setErrorModalActive(false)}>
+          <h3>{errorMessage}</h3>
+        </ErrorModal>
+      )}
+    </>
   );
 };
 

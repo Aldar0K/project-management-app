@@ -38,7 +38,14 @@ const GlobalRoute = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary>
+              <WelcomePage />
+            </ErrorBoundary>
+          }
+        />
         <Route
           path="/editProfile"
           element={
@@ -65,7 +72,14 @@ const GlobalRoute = () => {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegisterPage />} />
-        <Route path="/main" element={<MainPage />} />
+        <Route
+          path="/main"
+          element={
+            <ErrorBoundary>
+              <ProtectedRoute {...defaultProtectedRouteProps} outlet={<MainPage />} />
+            </ErrorBoundary>
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

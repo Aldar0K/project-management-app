@@ -11,9 +11,9 @@
         "dmitry": "Дмитрий",
         "aldar": "Алдар",
         "anna": "Анна",
-        "dmitryImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
-        "aldarImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?",
-        "annaImpact": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic perferendis delectus, dolores adipisci provident cupiditate maiores sit iusto eligendi quis minus omnis pariatur doloremque illo rerum quo aspernatur praesentium dignissimos?"
+        "dmitryImpact": "Во время разработки приложения я настроил бэкэнд, внедрил конфигурацию локализации и реализовал отображение главной страницы приложения.",
+        "aldarImpact": "Руководил процессом создания приложения. Создал структуру проекта, добавил базовые стили и компоненты. Ответственен за приветственную страницу и страницу доски",
+        "annaImpact": "При разработке приложения я создала роуты и имплементацию обработки ошибок. Реализовала авторизацию и работу с профилем. Создала основу логики Redux, в том числе RTK Query."
     },
     "Course": {
         "title": "Курс",
@@ -50,9 +50,12 @@
         "upUser": "Обновить ",
         "upMessage": "Ваши данные успешно обновлены",
         "sure": "Вы уверены что хотите удалить пользователя?",
-        "sureUp": "Вы уверены что хотите обновить пользователя?"
+        "sureUp": "Вы уверены что хотите обновить пользователя?",
+        "again": "Попробовать снова?",
+        "wrong": "Что-то пошло не так мы разбираемся..."
     },
     "Board": {
+        "addBoard": "Добавить доску",
         "addColumn": "Добавить колонку",
         "addTask": "Добавить задачу",
         "titlePlaceholder": "Название",

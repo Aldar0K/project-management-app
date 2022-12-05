@@ -57,12 +57,12 @@ const FormRegistration: FC = () => {
     };
     dicpatch(setName(data.name));
     await authorizationUser(userLogData).unwrap();
-    navigate('/', { replace: true });
+    navigate('/main', { replace: true });
   };
 
   return (
     <div>
-      {isLoading && <h1>Loading...</h1>}
+      {/* {isLoading && <h1>Loading...</h1>} */}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
           <h3>{isErrorMessage}</h3>
@@ -118,7 +118,13 @@ const FormRegistration: FC = () => {
           showError={!!errors.confirmPassword}
           disabled={false}
         />
-        <Button text={t('Navigation.signUp')} type="primary" big={true} onClick={() => {}} />
+        <Button
+          loading={isLoading}
+          text={t('Navigation.signUp')}
+          type="primary"
+          big={true}
+          onClick={() => {}}
+        />
         <Link to="/login">
           <Button
             text={t('RegistrationPage.return')}
