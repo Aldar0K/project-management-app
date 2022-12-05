@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navigation.module.scss';
 import { AuthorizationAPI } from '../../store/services/UserService';
 import { removeUser, useAppDispatch, useAppSelector } from 'store';
 
-import Button from 'components/atoms/Button';
 import Heading from 'components/atoms/Heading';
 import Modal from 'components/atoms/Modal';
 import CreateBoardForm from 'components/CreateBoardForm';
@@ -20,17 +19,8 @@ const Navigation = () => {
 
   AuthorizationAPI.useGetAllUsersQuery();
 
-  const { name } = useAppSelector((state) => state.user);
-
+  const [active, setActive] = useState(false);
   const [isCreateModalActive, setCreateModalActive] = useState(false);
-
-  const goToMain = () => {
-    navigate('/main');
-  };
-
-  const goToProfile = () => {
-    navigate('/editProfile');
-  };
 
   const handleAddBoard = () => {
     navigate('/main');
@@ -46,71 +36,69 @@ const Navigation = () => {
 
   return (
     <nav className={styles.container}>
-      <ul className={styles.list}>
+      <ul
+        className={`${styles.list} ${active ? styles.list_active : ''}`}
+        onClick={() => setActive(false)}
+      >
         {token ? (
           <>
             <li className={styles.item}>
-              <Button text={t('Navigation.main')} type="bordered" big={false} onClick={goToMain} />
+              <NavLink to="/main">
+                {(state) => (
+                  <Heading
+                    level={3}
+                    text={t('Navigation.main')}
+                    className={`${styles.link} ${state.isActive ? styles.link_active : ''}`}
+                  />
+                )}
+              </NavLink>
+            </li>
+            <li className={styles.item} onClick={handleAddBoard}>
+              <Heading level={3} text={t('Board.addBoard')} className={styles.link} />
             </li>
             <li className={styles.item}>
-              <Button
-                text={t('Board.addBoard')}
-                type="bordered"
-                big={false}
-                onClick={handleAddBoard}
-              />
+              <NavLink to="/editProfile">
+                {(state) => (
+                  <Heading
+                    level={3}
+                    text={t('Navigation.profile')}
+                    className={`${styles.link} ${state.isActive ? styles.link_active : ''}`}
+                  />
+                )}
+              </NavLink>
             </li>
-            <li className={styles.item}>
-              <Heading text={name} level={3} className={styles.name} />
+            <li className={styles.item} onClick={handleSignout}>
+              <Heading level={3} text={t('Navigation.signOut')} className={styles.link} />
             </li>
-            <li className={styles.item}>
-              <Button
-                text={t('Navigation.profile')}
-                type="bordered"
-                big={false}
-                onClick={goToProfile}
-              />
-            </li>
-            <li className={styles.item}>
-              <Button
-                text={t('Navigation.signOut')}
-                type="bordered"
-                big={false}
-                onClick={handleSignout}
-              />
-            </li>
-
-            {isCreateModalActive && (
-              <Modal onClose={() => setCreateModalActive(false)}>
-                <CreateBoardForm onCancel={() => setCreateModalActive(false)} />
-              </Modal>
-            )}
           </>
         ) : (
           <>
-            <li className={styles.item}>
+            <li className={styles.item} onClick={handleSignout}>
               <Link to="/login" className={styles.link}>
-                <Button
-                  text={t('Navigation.signIn')}
-                  type="bordered"
-                  big={false}
-                  onClick={handleSignout}
-                />
+                <Heading level={3} text={t('Navigation.signIn')} className={styles.link} />
               </Link>
             </li>
-            <li className={styles.item}>
+            <li className={styles.item} onClick={handleSignout}>
               <Link to="/registration" className={styles.link}>
-                <Button
-                  text={t('Navigation.signUp')}
-                  type="bordered"
-                  big={false}
-                  onClick={handleSignout}
-                />
+                <Heading level={3} text={t('Navigation.signUp')} className={styles.link} />
               </Link>
             </li>
           </>
         )}
       </ul>
+
+      <div
+        className={`${styles.menuIcon} ${active ? styles.menuIcon_active : ''}`}
+        onClick={() => setActive(!active)}
+      >
+        <span></span>
+      </div>
+
+      {isCreateModalActive && (
+        <Modal onClose={() => setCreateModalActive(false)}>
+          <CreateBoardForm onCancel={() => setCreateModalActive(false)} />
+        </Modal>
+      )}
     </nav>
   );
 };
