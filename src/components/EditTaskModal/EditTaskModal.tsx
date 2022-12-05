@@ -86,6 +86,21 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
   const [options, setOptions] = useState<ISelectOption[]>([]);
   const [selected, setSelected] = useState<ISelectOption[]>([]);
 
+  useEffect(() => {
+    const options = allUsers
+      ? allUsers.map((user) => ({
+          value: user._id,
+          label: user.name,
+        }))
+      : [];
+    setOptions(options as ISelectOption[]);
+
+    const selected = options.filter((option) =>
+      taskUsers.includes((option as ISelectOption).value)
+    );
+    setSelected(selected as ISelectOption[]);
+  }, []);
+
   const [updateTaskByBoardIdAndColumnId, { isLoading, error }] =
     BoardAPI.useUpdateTaskByBoardIdAndColumnIdAndTaskIdMutation();
 
@@ -100,16 +115,6 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
       setErrorModalActive(false);
     }
   }, [error]);
-
-  useEffect(() => {
-    const options = allUsers
-      ? allUsers.map((user) => ({
-          value: user._id,
-          label: user.name,
-        }))
-      : [];
-    setOptions(options as ISelectOption[]);
-  }, []);
 
   const getDefaultValue = () => {
     const options = allUsers
@@ -132,23 +137,21 @@ const EditTaskModal: FC<EditTaskModalProps> = ({
 
   const onSubmit = async (data: FieldValues) => {
     const { title, description } = data;
-    const users = selected.length ? [...selected].map((option) => option.value) : taskUsers;
+    const users = [...selected].map((option) => option.value);
 
-    if (title.trim() !== oldTitle || description.trim() !== oldDescription || selected.length) {
-      await updateTaskByBoardIdAndColumnId({
-        boardId,
+    await updateTaskByBoardIdAndColumnId({
+      boardId,
+      columnId,
+      taskId,
+      body: {
+        title,
+        userId,
+        description,
         columnId,
-        taskId,
-        body: {
-          title,
-          userId,
-          description,
-          columnId,
-          order,
-          users,
-        },
-      });
-    }
+        order,
+        users,
+      },
+    });
 
     onCancel();
   };

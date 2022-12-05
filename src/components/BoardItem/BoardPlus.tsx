@@ -1,12 +1,28 @@
 import Icon from 'components/atoms/Icon';
-import React from 'react';
+import Modal from 'components/atoms/Modal';
+import CreateBoardForm from 'components/CreateBoardForm';
+import React, { useState } from 'react';
 import styles from './BoardItem.module.scss';
 
-const BoardPlus = ({ setModal }: { setModal: (bool: boolean) => void }) => {
+const BoardPlus = () => {
+  const [isCreateModalActive, setCreateModalActive] = useState(false);
+
+  const handleAddBoard = () => {
+    setCreateModalActive(true);
+  };
+
   return (
-    <div onClick={() => setModal(true)} className={`${styles.board} ${styles.plus}`}>
-      <Icon type="add-cross" width="80" height="80"></Icon>
-    </div>
+    <>
+      <div className={`${styles.board} ${styles.plus}`} onClick={handleAddBoard}>
+        <Icon type="add-cross" width="80" height="80"></Icon>
+      </div>
+
+      {isCreateModalActive && (
+        <Modal onClose={() => setCreateModalActive(false)}>
+          <CreateBoardForm onCancel={() => setCreateModalActive(false)} />
+        </Modal>
+      )}
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ import { commonApi } from './services/common.api';
 export const store = configureStore({
   reducer: {
     user: userSlice,
-    boardSlice: boardSlice,
+    board: boardSlice,
     [commonApi.reducerPath]: commonApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(commonApi.middleware),

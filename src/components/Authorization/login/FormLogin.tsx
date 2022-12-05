@@ -42,7 +42,7 @@ const FormLogin: FC = () => {
     const response = await authorizationUser(userLogData).unwrap();
     id = Decoder(response.token).id;
     trigger(id);
-    navigate('/', { replace: true });
+    navigate('/main', { replace: true });
   };
 
   return (

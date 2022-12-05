@@ -55,12 +55,17 @@ export const BoardAPI = commonApi.injectEndpoints({
     }),
     deleteBoardById: build.mutation<IBoard[], string>({
       query: (boardId) => ({ url: `boards/${boardId}`, method: 'DELETE' }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Board' as const, _id: arg }],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Board' as const, _id: arg }],
+      invalidatesTags: ['BoardList'],
     }),
 
-    // TODO move to ColumnServise?
     getColumnsByBoardId: build.query<IColumn[], string>({
       query: (boardId) => ({ url: `/boards/${boardId}/columns` }),
+      transformResponse: async (response: Promise<Array<IColumn>>) => {
+        return (await response).sort(
+          (column1: IColumn, column2: IColumn) => column1.order - column2.order
+        );
+      },
       providesTags: (result) => [
         'Column',
         ...(result ? result.map(({ _id }) => ({ type: 'Column' as const, _id: _id })) : []),
@@ -102,10 +107,38 @@ export const BoardAPI = commonApi.injectEndpoints({
       // invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg }],
       invalidatesTags: (result, error, arg) => [{ type: 'Column' as const, _id: arg.columnId }],
     }),
+    updateColumnsSet: build.mutation<
+      IColumn[],
+      { boardId: string; body: { _id: string; order: number }[] }
+    >({
+      query: ({ body }) => ({ url: `/columnsSet`, method: 'PATCH', body }),
+      async onQueryStarted({ boardId, body: columnsSet }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          BoardAPI.util.updateQueryData('getColumnsByBoardId', boardId, (drafts: IColumn[]) => {
+            columnsSet.forEach((columnPatch) => {
+              const draft = drafts.find((column) => column._id === columnPatch._id);
+              if (draft) {
+                draft.order = columnPatch.order;
+              }
+            });
+            drafts.sort((column1, column2) => column1.order - column2.order);
+          })
+        );
 
-    // TODO move to TaskServise?
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+      invalidatesTags: ['Column'],
+    }),
+
     getTasksByBoardIdAndColumnId: build.query<ITask[], { boardId: string; columnId: string }>({
       query: ({ boardId, columnId }) => ({ url: `/boards/${boardId}/columns/${columnId}/tasks` }),
+      transformResponse: async (response: Promise<Array<ITask>>) => {
+        return (await response).sort((task1: ITask, task2: ITask) => task1.order - task2.order);
+      },
       providesTags: (result) => [
         'Task',
         ...(result ? result.map(({ _id }) => ({ type: 'Task' as const, _id: _id })) : []),
@@ -151,7 +184,35 @@ export const BoardAPI = commonApi.injectEndpoints({
         url: `/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.taskId }],
+      // invalidatesTags: (result, error, arg) => [{ type: 'Task' as const, _id: arg.taskId }],
+      invalidatesTags: ['Task'],
+    }),
+    updateTasksSet: build.mutation<
+      ITask[],
+      {
+        boardId: string;
+        columnId: string;
+        body: { _id: string; order: number; columnId: string }[];
+        newTasks: ITask[];
+      }
+    >({
+      query: ({ body }) => ({ url: `/tasksSet`, method: 'PATCH', body }),
+      async onQueryStarted({ boardId, columnId, newTasks }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          BoardAPI.util.updateQueryData(
+            'getTasksByBoardIdAndColumnId',
+            { boardId, columnId },
+            () => newTasks
+          )
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+      invalidatesTags: ['Task'],
     }),
   }),
 });

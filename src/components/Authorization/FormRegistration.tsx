@@ -57,7 +57,7 @@ const FormRegistration: FC = () => {
     };
     dicpatch(setName(data.name));
     await authorizationUser(userLogData).unwrap();
-    navigate('/', { replace: true });
+    navigate('/main', { replace: true });
   };
 
   return (

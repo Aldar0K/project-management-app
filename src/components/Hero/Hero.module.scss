@@ -1,3 +1,5 @@
+@import 'styles/constants.scss';
+
 .hero {
   width: 100%;
 }
@@ -10,11 +12,26 @@
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+
+  user-select: none;
+
+  @media (max-width: 1010px) {
+    padding: 3rem 1rem 4rem;
+
+    height: auto;
+
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  @media (max-width: $width-tablet) {
+    padding: 2rem 1rem 3rem;
+  }
 }
 
 .content {
   display: flex;
 
+  flex: 1;
   max-width: 40rem;
   width: 100%;
 
@@ -23,10 +40,43 @@
   align-items: flex-start;
   gap: .75rem;
 
-  user-select: none;
+  @media (max-width: 1010px) {
+    flex: 1;
+
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
+.heading {
+  @media (max-width: 1130px) {
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+  }
+  @media (max-width: 1010px) {
+    text-align: center;
+  }
+  @media (max-width: $width-tablet) {
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+  }
+}
 
+.text {
+  @media (max-width: 1010px) {
+    text-align: center;
+  }
+}
+
+.image {
+  flex: 1;
+  max-width: 600px;
+
+  @media (max-width: 1010px) {
+    justify-content: center;
+  }
+}
 
 .image img {
   width: 100%;
