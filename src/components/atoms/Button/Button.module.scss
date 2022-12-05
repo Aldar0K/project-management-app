@@ -3,10 +3,10 @@
 .button {
   display: flex;
   padding: 1em;
-
+  position:relative;  
   justify-content: center;
   align-items: center;
-
+ 
   font-style: normal;
   font-weight: 700;
   font-size: 1rem;
@@ -137,3 +137,85 @@
     gap: .5em;
   }
 }
+// код мой
+.buttonText{
+
+}
+.hidden{
+  .spinner{
+  visibility:hidden;
+}}
+
+button.loading {
+  position:relative;  
+  .buttonText{
+    visibility:hidden;
+  }
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -15px 0 0 -15px;
+  width: 30px;
+  height: 30px;
+  
+  & .path {
+    stroke: hsl(210, 70, 75);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+  
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+
+@media (max-width: 680px) {
+  .button {
+    font-weight: 600;
+    font-size: .8rem;
+    line-height: .8em;
+    border-radius: .5em;
+
+    &_bordered {
+      padding: .35em;
+  
+    }
+  
+    &_big {
+   
+      max-height: 2em;
+    }
+  
+    &_small {
+      max-height: 2em;
+    }
+    
+    &_icon {
+      gap: .3em;
+    }
+  }
+  }

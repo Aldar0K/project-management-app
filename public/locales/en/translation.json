@@ -46,11 +46,13 @@
     },
     "EditProfile": {
         "editProfile": "Edit profile",
-        "delUser": "Delete User",
-        "upUser": "Update User",
+        "delUser": "Delete",
+        "upUser": "Update",
         "upMessage": "Your data has been successfully updated",
         "sure": "Are you sure you want to delete the user?",
-        "sureUp": "Are you sure you want to update the user?"
+        "sureUp": "Are you sure you want to update the user?",
+        "again": "Try again?",
+        "wrong": "something went wrong, we'll figure it out"
     },
     "Board": {
         "addBoard": "Create new board",
