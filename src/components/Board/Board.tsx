@@ -161,20 +161,22 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
           .filter((task) => task._id !== draggableId)
           .sort((task1, task2) => task1.order - task2.order);
 
-        const oldTasksSet = sourceColumnTasks.map((task, index) => {
-          return {
-            _id: task._id,
-            order: index,
-            columnId: source.droppableId,
-          };
-        });
+        if (sourceColumnTasks.length > 0) {
+          const oldTasksSet = sourceColumnTasks.map((task, index) => {
+            return {
+              _id: task._id,
+              order: index,
+              columnId: source.droppableId,
+            };
+          });
 
-        updateTasksSet({
-          boardId,
-          columnId: source.droppableId,
-          body: oldTasksSet,
-          newTasks: sourceColumnTasks,
-        });
+          updateTasksSet({
+            boardId,
+            columnId: source.droppableId,
+            body: oldTasksSet,
+            newTasks: sourceColumnTasks,
+          });
+        }
       }
     }
   };
