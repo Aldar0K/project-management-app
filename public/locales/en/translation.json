@@ -8,9 +8,9 @@
     },
     "Team": {
         "title": "Our team",
-        "dmitryTitle": "Dmitry",
-        "aldarTitle": "Aldar",
-        "annaTitle": "Anna",
+        "dmitry": "Dmitry",
+        "aldar": "Aldar",
+        "anna": "Anna",
         "dmitryImpact": "During the development of the application, I set up the backend, implemented the localization configuration, and implemented the main page view of the application.",
         "aldarImpact": "Managed the process of creating the application. Built the project structure, add basic styles and components. Responsible for the Welcome page and the Board page",
         "annaImpact": "When developing the application, I created routes and an implementation of error handling. Implemented authorization and work with the profile. Created the basic of the Redux logic, including RTK Query."
