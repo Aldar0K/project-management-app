@@ -47,7 +47,7 @@ const FormLogin: FC = () => {
 
   return (
     <div>
-      {isLoading && <h1>Loading...</h1>}
+      {/* {isLoading && <Loading />} */}
       {isModalActive && (
         <ErrorModal onClose={() => setModalActive(false)}>
           <h3>{isErrorMessage}</h3>
@@ -81,7 +81,13 @@ const FormLogin: FC = () => {
           errorMessage={t('Error.passMin') as string}
           disabled={false}
         />
-        <Button text={t('LoginPage.signIn')} type="primary" big={true} onClick={() => {}} />
+        <Button
+          loading={isLoading}
+          text={t('LoginPage.signIn')}
+          type="primary"
+          big={true}
+          onClick={() => {}}
+        />
         <Link to="/registration">
           <Button text={t('LoginPage.create')} type="secondary" big={true} onClick={() => {}} />{' '}
         </Link>

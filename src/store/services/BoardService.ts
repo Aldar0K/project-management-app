@@ -16,14 +16,15 @@ export const BoardAPI = commonApi.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ _id }) => ({ type: 'Board' as const, _id })),
-              { type: 'Board', id: 'LIST' },
+              ...result.map(({ _id }) => ({ type: 'BoardList' as const, _id })),
+              // { type: 'Board', id: 'LIST' },
             ]
-          : [{ type: 'Board', id: 'LIST' }],
+          : // : [{ type: 'Board', id: 'LIST' }],
+            ['BoardList'],
     }),
     getBoardById: build.query<IBoard, string>({
       query: (boardId) => ({ url: `boards/${boardId}` }),
-      providesTags: (result, error, id) => [{ type: 'Board', id }],
+      providesTags: (result, error, arg) => [{ type: 'Board', id: arg }],
     }),
     getBoardsByUserId: build.query<IBoard[], string>({
       query: (userId) => ({ url: `boardsSet/${userId}` }),
@@ -33,7 +34,8 @@ export const BoardAPI = commonApi.injectEndpoints({
               ...result.map(({ _id }) => ({ type: 'Board' as const, _id })),
               { type: 'Board', id: 'LIST' },
             ]
-          : [{ type: 'Board', id: 'LIST' }],
+          : // : [{ type: 'Board', id: 'LIST' }],
+            ['Board'],
     }),
     createBoard: build.mutation<IBoard, IBoardData>({
       query: (body) => ({
@@ -41,7 +43,7 @@ export const BoardAPI = commonApi.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Board'],
+      invalidatesTags: ['BoardList'],
     }),
     updateBoardById: build.mutation<IBoard, IBoardParams>({
       query: ({ id, body }) => ({
@@ -49,7 +51,7 @@ export const BoardAPI = commonApi.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: (result, error, _id) => [{ type: 'Board' as const, _id }],
+      invalidatesTags: (result, error, arg) => [{ type: 'Board' as const, id: arg.id }],
     }),
     deleteBoardById: build.mutation<IBoard[], string>({
       query: (boardId) => ({ url: `boards/${boardId}`, method: 'DELETE' }),
