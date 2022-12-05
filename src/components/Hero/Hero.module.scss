@@ -16,12 +16,15 @@
   user-select: none;
 
   @media (max-width: 1010px) {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem 4rem;
 
     height: auto;
 
     flex-direction: column;
     gap: 1.5rem;
+  }
+  @media (max-width: $width-tablet) {
+    padding: 2rem 1rem 3rem;
   }
 }
 
