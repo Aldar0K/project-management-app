@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import styles from './Navigation.module.scss';
@@ -74,14 +74,26 @@ const Navigation = () => {
         ) : (
           <>
             <li className={styles.item} onClick={handleSignout}>
-              <Link to="/login" className={styles.link}>
-                <Heading level={3} text={t('Navigation.signIn')} className={styles.link} />
-              </Link>
+              <NavLink to="/login">
+                {(state) => (
+                  <Heading
+                    level={3}
+                    text={t('Navigation.signIn')}
+                    className={`${styles.link} ${state.isActive ? styles.link_active : ''}`}
+                  />
+                )}
+              </NavLink>
             </li>
             <li className={styles.item} onClick={handleSignout}>
-              <Link to="/registration" className={styles.link}>
-                <Heading level={3} text={t('Navigation.signUp')} className={styles.link} />
-              </Link>
+              <NavLink to="/registration">
+                {(state) => (
+                  <Heading
+                    level={3}
+                    text={t('Navigation.signUp')}
+                    className={`${styles.link} ${state.isActive ? styles.link_active : ''}`}
+                  />
+                )}
+              </NavLink>
             </li>
           </>
         )}

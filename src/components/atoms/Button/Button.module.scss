@@ -137,10 +137,7 @@
     gap: .5em;
   }
 }
-// код мой
-.buttonText{
 
-}
 .hidden{
   .spinner{
   visibility:hidden;
@@ -191,31 +188,3 @@ button.loading {
     stroke-dashoffset: -124;
   }
 }
-
-
-@media (max-width: 680px) {
-  .button {
-    font-weight: 600;
-    font-size: .8rem;
-    line-height: .8em;
-    border-radius: .5em;
-
-    &_bordered {
-      padding: .35em;
-  
-    }
-  
-    &_big {
-   
-      max-height: 2em;
-    }
-  
-    &_small {
-      max-height: 2em;
-    }
-    
-    &_icon {
-      gap: .3em;
-    }
-  }
-  }
