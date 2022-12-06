@@ -18,17 +18,17 @@
 .container {
   display: flex;
 
-  padding: .5rem 1rem;
+  padding: .8rem 1rem;
 
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 
   transition: 0.2s;
 
   user-select: none;
 
   &_scroll {
-    padding: 0 1rem;
+    padding: .4rem 1rem;
   }
 
   @media (max-width: $width-tablet) {
