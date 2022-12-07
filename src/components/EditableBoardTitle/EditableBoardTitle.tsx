@@ -95,7 +95,7 @@ const EditableBoardTitle: FC<EditableBoardTitleProps> = ({
           </div>
         </form>
       ) : (
-        <div className={styles.title}>
+        <div className={styles.title} onClick={handleEdit}>
           <Heading
             className={styles.heading}
             level={level}
