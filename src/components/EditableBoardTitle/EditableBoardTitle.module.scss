@@ -7,8 +7,6 @@
 
   align-items: center;
 
-  overflow: hidden;
-
   &:hover {
     & .heading {
       color: $color-additional;
@@ -40,6 +38,8 @@
 
   align-items: center;
   gap: .5rem;
+
+  overflow: hidden;
 
   cursor: pointer;
 }
