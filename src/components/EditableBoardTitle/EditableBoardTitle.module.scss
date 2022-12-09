@@ -36,17 +36,23 @@
 .title {
   display: flex;
 
+  max-width: 100%;
+
   align-items: center;
   gap: .5rem;
-
-  overflow: hidden;
 
   cursor: pointer;
 }
 
 .heading {
+  max-width: 100%;
+
   text-transform: none;
   user-select: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  overflow: hidden;
   transition: .3s all ease;
 }
 
