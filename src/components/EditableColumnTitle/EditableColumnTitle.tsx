@@ -103,9 +103,11 @@ const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
             level={level}
             text={isLoading ? 'Loading...' : text}
           />
-          <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
-            <Icon type="edit" width="22" />
-          </button>
+          <div className={styles.editWrapper}>
+            <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
+              <Icon type="edit" width="22" />
+            </button>
+          </div>
         </div>
       )}
 
