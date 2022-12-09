@@ -43,21 +43,25 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
     } else {
       setErrorModalActive(false);
     }
+  }, [getColumnsError]);
 
+  useEffect(() => {
     if (updateColumnsError && 'data' in updateColumnsError) {
       setErrorMessage(updateColumnsError.data.message);
       setErrorModalActive(true);
     } else {
       setErrorModalActive(false);
     }
+  }, [updateColumnsError]);
 
+  useEffect(() => {
     if (updateTasksError && 'data' in updateTasksError) {
       setErrorMessage(updateTasksError.data.message);
       setErrorModalActive(true);
     } else {
       setErrorModalActive(false);
     }
-  }, [getColumnsError, updateColumnsError, updateTasksError]);
+  }, [updateTasksError]);
 
   const handleDragEnd = (result: DropResult) => {
     const { type, source, destination, draggableId } = result;
