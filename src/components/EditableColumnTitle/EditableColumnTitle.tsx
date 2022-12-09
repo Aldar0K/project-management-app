@@ -101,7 +101,7 @@ const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
           <Heading
             className={styles.heading}
             level={level}
-            text={isLoading ? 'Loading...' : text}
+            text={isLoading ? t('Common.loading') : text}
           />
           <div className={styles.editWrapper}>
             <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
