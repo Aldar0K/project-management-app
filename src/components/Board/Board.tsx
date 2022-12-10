@@ -43,21 +43,25 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
     } else {
       setErrorModalActive(false);
     }
+  }, [getColumnsError]);
 
+  useEffect(() => {
     if (updateColumnsError && 'data' in updateColumnsError) {
       setErrorMessage(updateColumnsError.data.message);
       setErrorModalActive(true);
     } else {
       setErrorModalActive(false);
     }
+  }, [updateColumnsError]);
 
+  useEffect(() => {
     if (updateTasksError && 'data' in updateTasksError) {
       setErrorMessage(updateTasksError.data.message);
       setErrorModalActive(true);
     } else {
       setErrorModalActive(false);
     }
-  }, [getColumnsError, updateColumnsError, updateTasksError]);
+  }, [updateTasksError]);
 
   const handleDragEnd = (result: DropResult) => {
     const { type, source, destination, draggableId } = result;
@@ -98,6 +102,14 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
         }
       });
 
+      // Creating data stores for updateTasksSet request.
+      const TasksSet: {
+        _id: string;
+        order: number;
+        columnId: string;
+      }[] = [];
+      const updatedColumns: Record<string, ITask[]> = {};
+
       if (source.droppableId === destination.droppableId) {
         // If we change the data for one column.
         const newTasks = allTasks
@@ -115,12 +127,8 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
           };
         });
 
-        updateTasksSet({
-          boardId,
-          columnId: source.droppableId,
-          body: newTasksSet,
-          newTasks,
-        });
+        TasksSet.push(...newTasksSet);
+        updatedColumns[source.droppableId] = newTasks;
       } else {
         // If we change the data for two columns.
         // Updating target column.
@@ -148,12 +156,8 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
           };
         });
 
-        updateTasksSet({
-          boardId,
-          columnId: destination.droppableId,
-          body: newTasksSet,
-          newTasks: targetColumnTasks,
-        });
+        TasksSet.push(...newTasksSet);
+        updatedColumns[destination.droppableId] = targetColumnTasks;
 
         // Updating source column.
         const sourceColumnTasks = allTasks
@@ -161,23 +165,23 @@ const Board: React.FC<BoardProps> = ({ board: { _id: boardId, title, owner, user
           .filter((task) => task._id !== draggableId)
           .sort((task1, task2) => task1.order - task2.order);
 
-        if (sourceColumnTasks.length > 0) {
-          const oldTasksSet = sourceColumnTasks.map((task, index) => {
-            return {
-              _id: task._id,
-              order: index,
-              columnId: source.droppableId,
-            };
-          });
-
-          updateTasksSet({
-            boardId,
+        const oldTasksSet = sourceColumnTasks.map((task, index) => {
+          return {
+            _id: task._id,
+            order: index,
             columnId: source.droppableId,
-            body: oldTasksSet,
-            newTasks: sourceColumnTasks,
-          });
-        }
+          };
+        });
+
+        TasksSet.push(...oldTasksSet);
+        updatedColumns[source.droppableId] = sourceColumnTasks;
       }
+
+      updateTasksSet({
+        boardId,
+        body: TasksSet,
+        updatedColumns,
+      });
     }
   };
 

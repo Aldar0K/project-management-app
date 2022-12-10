@@ -97,15 +97,17 @@ const EditableColumnTitle: FC<EditableColumnTitleProps> = ({
           </div>
         </form>
       ) : (
-        <div className={styles.title}>
+        <div className={styles.title} onClick={handleEdit}>
           <Heading
             className={styles.heading}
             level={level}
-            text={isLoading ? 'Loading...' : text}
+            text={isLoading ? t('Common.loading') : text}
           />
-          <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
-            <Icon type="edit" width="22" />
-          </button>
+          <div className={styles.editWrapper}>
+            <button className={styles.edit} onClick={handleEdit} title={t('Common.edit') as string}>
+              <Icon type="edit" width="22" />
+            </button>
+          </div>
         </div>
       )}
 

@@ -1,13 +1,9 @@
 @import 'styles/constants.scss';
 
-.container {
-  padding: .3rem 0;
-}
-
 .list {
   display: flex;
 
-  gap: 1.25rem;
+  gap: 1rem;
   
   @media (max-width: $width-tablet) {
     display: none;
@@ -28,7 +24,7 @@
       justify-content: center;
       gap: 3.75rem;
 
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.75);
     }
 
     @media (max-width: 430px) {
@@ -40,24 +36,36 @@
 .item {
   display: flex;
 
-  justify-content: center;
-  align-items: center;
-  
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  
-  color: $color-light;
+  cursor: pointer;
 }
 
 .link,
 .name {
+  padding: .4rem;
+
   font-size: 1.25rem;
+  line-height: 1.125em;
   color: $color-light;
 
   text-transform: none;
+  transition: .3s all ease;
+
+  &:hover {
+    background-color: $color-light;
+    border-radius: .5em;
+
+    color: $color-primary;
+  }
 
   &_active {
-    color: #bfdeec;
+    color: #8bcae7;
+
+    &:hover {
+      background-color: transparent;
+      border-radius: 0;
+  
+      color: #8bcae7;
+    }
   }
 
   @media (max-width: $width-tablet) {

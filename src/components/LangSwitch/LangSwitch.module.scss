@@ -1,7 +1,7 @@
 @import 'styles/constants.scss';
 
 .container {
-  padding: .3rem 0;
+  padding: .1rem 0;
 }
 
 .select,
@@ -13,10 +13,11 @@
 }
 
 .select {
-  padding: .7em;
+  height: 2rem;
+
+  padding: .2rem;
 
   background: $color-light;
-  border: 0.25em solid $color-primary;
 
   font-size: 1rem;
 

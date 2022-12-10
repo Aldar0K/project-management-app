@@ -191,25 +191,30 @@ export const BoardAPI = commonApi.injectEndpoints({
       ITask[],
       {
         boardId: string;
-        columnId: string;
         body: { _id: string; order: number; columnId: string }[];
-        newTasks: ITask[];
+        updatedColumns: Record<string, ITask[]>;
       }
     >({
       query: ({ body }) => ({ url: `/tasksSet`, method: 'PATCH', body }),
-      async onQueryStarted({ boardId, columnId, newTasks }, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          BoardAPI.util.updateQueryData(
-            'getTasksByBoardIdAndColumnId',
-            { boardId, columnId },
-            () => newTasks
-          )
-        );
+      async onQueryStarted({ boardId, updatedColumns }, { dispatch, queryFulfilled }) {
+        const patchResults = [];
+
+        for (const columnId in updatedColumns) {
+          patchResults.push(
+            dispatch(
+              BoardAPI.util.updateQueryData(
+                'getTasksByBoardIdAndColumnId',
+                { boardId, columnId },
+                () => updatedColumns[columnId]
+              )
+            )
+          );
+        }
 
         try {
           await queryFulfilled;
         } catch {
-          patchResult.undo();
+          patchResults.forEach((patchResult) => patchResult.undo());
         }
       },
       invalidatesTags: ['Task'],
