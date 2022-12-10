@@ -1,0 +1,114 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+
+  padding: .5rem;
+
+  align-items: center;
+
+  &:hover {
+    & .heading {
+      color: $color-additional;
+    }
+
+    & .editWrapper {
+      opacity: 1;
+    }
+  }
+}
+
+.form {
+  display: flex;
+
+  flex: 1;
+
+  align-items: center;
+  gap: .5rem;
+}
+
+.controls {
+  display: flex;
+
+  align-items: center;
+  gap: .2rem;
+}
+
+.title {
+  display: flex;
+  position: relative;
+
+  min-height: 2.75rem;
+  width: 100%;
+
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+
+  cursor: pointer;
+}
+
+.heading {
+  max-width: 100%;
+
+  word-wrap: break-word;
+  text-transform: none;
+
+  user-select: none;
+  transition: .3s all ease;
+}
+
+.editWrapper {
+  display: flex;
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  background-color: $color-light;
+
+  opacity: 0;
+  transition: 0.3s all ease;
+}
+
+.edit {
+  display: flex;
+
+  padding: .6875rem;
+  
+  background: transparent;
+
+  transition: .3s all ease;
+  cursor: pointer;
+  
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+    border-radius: 100%;
+  }
+  &:active {
+    background-color: #c5e5f3;
+    border-radius: 100%;
+  }
+}
+
+.confirm,
+.reset {
+  display: flex;
+
+  padding: 0.6875rem;
+
+  background: transparent;
+  border-radius: 100%;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}

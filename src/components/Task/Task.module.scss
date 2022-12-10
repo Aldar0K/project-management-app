@@ -1,0 +1,96 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+  position: relative;
+
+  padding: .5rem;
+  margin-bottom: .5rem;
+
+  flex-direction: column;
+  gap: .5rem;
+
+  background-color: $color-light;
+  border: 2px solid $color-primary;
+  border-radius: .5em;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 3px 3px 5px $color-background-dark;
+
+    & .controls {
+      opacity: 1;
+    }
+  }
+
+  &_dragging {
+    background-color: #cee5ee;
+  }
+}
+
+.heading {
+  width: 100%;
+
+  min-height: 2.75rem;
+
+  word-wrap: break-word;
+  text-transform: none;
+  user-select: none;
+}
+
+.controls {
+  display: flex;
+  position: absolute;
+
+  top: .5rem;
+  right: .5rem;
+
+  gap: .2rem;
+
+  background: $color-light;
+
+  opacity: 0;
+  transition: .3s all ease;
+}
+
+.edit,
+.delete {
+  display: flex;
+
+  padding: .6875rem;
+
+  background: transparent;
+  border-radius: 100%;
+
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}
+
+.responsible {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  column-gap: .5rem;
+  row-gap: .2rem;
+}
+
+.responsible_user {
+  padding: .3rem;
+
+  background-color: $color-additional;
+  border-radius: .5rem;
+
+  font-size: .875rem;
+  color: $color-light;
+}

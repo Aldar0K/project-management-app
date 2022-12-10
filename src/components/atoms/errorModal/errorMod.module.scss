@@ -1,0 +1,44 @@
+@import 'styles/constants.scss';
+
+
+.modalOverlay {
+  overflow-y: hidden;
+  min-height: 100%;
+  min-width: 100%;
+   position: absolute;
+   z-index: 9;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+ }
+ 
+ .modal {
+  display: flex;
+  position: fixed;
+  
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  justify-content: center;
+  align-items: center;
+ }
+
+ .textDiv{
+  position: relative;
+  padding: 7%;
+  background: $color-light;
+  box-shadow: 5px 6px 60px rgba(128, 128, 128, 0.5);
+  border-radius: 16px;
+ }
+
+ .divButtons{
+ margin:32px auto 0;
+}

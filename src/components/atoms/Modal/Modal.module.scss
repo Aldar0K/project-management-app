@@ -1,0 +1,72 @@
+@import 'styles/constants.scss';
+
+.container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.backdrop {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.body {
+  display: flex;
+  position: fixed;
+
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: $color-light;
+  border-radius: 1rem;
+}
+
+.closeButton {
+  display: flex;
+
+  position: absolute;
+  right: -2rem;
+  top: -2rem;
+
+  height: 2rem;
+  width: 2rem;
+
+  align-items: center;
+  justify-content: center;
+
+  background: $color-light;
+  color: $color-primary;
+  border-radius: 100%;
+  
+  font-size: 1.25rem;
+  color: $color-primary;
+
+  cursor: pointer;
+  user-select: none;
+  transition: .3s all ease;;
+
+  &:hover {
+    background: $color-additional;
+    color: $color-light;
+  }
+  &:active {
+    background: $color-primary;
+    color: $color-light;
+  }
+}

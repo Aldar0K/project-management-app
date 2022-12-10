@@ -1,0 +1,104 @@
+@import '../../styles/global.scss';
+
+.board {
+  display: flex;
+  flex-direction: column;
+  width: 24rem;
+  height: 100%;
+  padding: .8rem;
+  color: $color-primary;
+  transition: .3s;
+  border: 4px solid $color-primary;
+  box-shadow: 5px 5px 5px 3px rgb(46 46 46 / 20%);
+  border-radius: 10px;
+  // cursor: pointer;
+
+  // &:hover {
+  //   scale: 1.05;
+  //   box-shadow: 3px 3px 3px 1px rgba(25, 24, 24, 0.5);
+  // }
+}
+
+.img {
+  width: 100%;
+  height: 10rem;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.imgInstance {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: .5rem 2rem;
+  width: 100%;
+}
+
+.topInfo {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 1;
+}
+
+.descr {
+  padding-top: 1rem;
+  word-break: break-all;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: .4rem;
+}
+
+.button {
+  background: none;
+}
+
+.buttonControl {
+  width: 20px;
+  height: 20px;
+  transition: .3s;
+}
+
+
+
+.delete {
+  display: flex;
+  padding: .6875rem;
+  background: transparent;
+  border-radius: 100%;
+  transition: .3s all ease;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    scale: 1.1;
+    background-color: #d1ebf6;
+  }
+  &:active {
+    background-color: #c5e5f3;
+  }
+}
+
+.plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.title {
+  text-transform: none;
+  align-self: center;
+}

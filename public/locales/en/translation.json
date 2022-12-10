@@ -1,0 +1,91 @@
+{
+    "Navigation": {
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "signOut": "Sign out",
+        "profile": "Profile",
+        "main": "Main"
+    },
+    "Team": {
+        "title": "Our team",
+        "dmitry": "Dmitry",
+        "aldar": "Aldar",
+        "anna": "Anna",
+        "dmitryImpact": "During the development of the application, I set up the backend, implemented the localization configuration, and implemented the main page view of the application.",
+        "aldarImpact": "Managed the process of creating the application. Built the project structure, add basic styles and components. Responsible for the Welcome page and the Board page",
+        "annaImpact": "When developing the application, I created routes and an implementation of error handling. Implemented authorization and work with the profile. Created the basic of the Redux logic, including RTK Query."
+    },
+    "Course": {
+        "title": "Course",
+        "text": "This app was designed and implemented as part of the React framework course by Rolling Scopes School"
+    },
+    "WelcomePage": {
+        "title": "Orgapp simplifies teamwork!",
+        "text": "We have created a convenient application for planning your projects. Track the progress of tasks, complete them on time, distribute the work among your team members correctly!",
+        "button": "Get started"
+    },
+    "MainPage": {
+        "createBoardform": {
+            "createBoard": "Create Board",
+            "title": "Title",
+            "description": "Descripvbtion",
+            "create": "Create",
+            "cancel": "Cancel"
+        }
+    },
+    "LoginPage": {
+        "signIn": "Sign In",
+        "login": "Login",
+        "create": "Create a new account",
+        "password": "Password"
+    },
+    "RegistrationPage": {
+        "name": "Name",
+        "return": "Return to login",
+        "confirmPassword": "Confirm password"
+    },
+    "EditProfile": {
+        "editProfile": "Edit profile",
+        "delUser": "Delete",
+        "upUser": "Update",
+        "upMessage": "Your data has been successfully updated",
+        "sure": "Are you sure you want to delete the user?",
+        "sureUp": "Are you sure you want to update the user?",
+        "again": "Try again?",
+        "wrong": "something went wrong, we'll figure it out"
+    },
+    "Board": {
+        "addBoard": "Create new board",
+        "addColumn": "Add new column",
+        "addTask": "Add new task",
+        "titlePlaceholder": "Title",
+        "titleError": "Title is required",
+        "descPlaceholder": "Description",
+        "descError": "Description is required",
+        "usersPlaceholder": "Select the responsible",
+        "confirmDeleteColumn": "Delete column?",
+        "confirmDeleteTask": "Delete task?"
+    },
+    "Error": {
+        "logMin": "Login must be at least 2 characters",
+        "logMax": "Login must not exceed 20 characters",
+        "nameReq": "Name is required",
+        "logReq": "login is required",
+        "passNoConf": "Passwords do not match",
+        "nameMin": "Name must be at least 2 characters",
+        "nameMax": "Name must not exceed 20 characters",
+        "passMin": "Password must be at least 6 characters",
+        "passReq": "Password is required"
+    },
+    "Common": {
+        "close": "Close",
+        "loading": "Loading...",
+        "serverError": "Something went wrong",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "create": "Create",
+        "edit": "Edit",
+        "delete": "Delete",
+        "update": "Update"
+    }
+}

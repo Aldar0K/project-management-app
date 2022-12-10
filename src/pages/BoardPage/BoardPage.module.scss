@@ -1,0 +1,11 @@
+@import 'styles/constants.scss';
+
+.container {
+  padding: .5rem 1rem 0;
+
+  height: calc(100vh - 7.17rem);
+
+  @media (max-width: $width-tablet) {
+    height: calc(100vh - 11.045rem);
+  }
+}
